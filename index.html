@@ -38,6 +38,12 @@
 </head>
 
 <body class="text-center">
+  <div>
+      <input type="text" id="user" placeholder="Usuario" required><br>
+      <input type="password" id="pass" placeholder="Contraseña" required><br>
+      <button onclick="loginuser(user.value, pass.value);">Iniciar Sesión</button>
+  </div>
+<!--
   <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
@@ -46,7 +52,7 @@
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
     </div>
   </div>
-
+-->
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>
 </body>
