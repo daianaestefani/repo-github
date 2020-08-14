@@ -101,7 +101,7 @@ button {
 }
 /*SEUDOCLASE INSTANTE QUE HACE CLICK*/
 button:active{ /*REDUCE EL TAMAÑO*/
-    transform: scale(0.5);
+    transform: scale(0.8);
 }
 
 button:hover {
