@@ -10,6 +10,6 @@ function loginuser(user,pass){
     }   else {
             localStorage.setItem("usuario",user.trim());
             localStorage.setItem("contraseña",pass.trim());
-            location.href="principalhome.html";
+            location.href="principalmenu.html";
     }
 }
