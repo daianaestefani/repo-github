@@ -1,126 +1,76 @@
 <!DOCTYPE html>
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <title>eMercado - Todo lo que busques está aquí</title>
-    <!-- archivos-css-comunes -->
-    <link
-      rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/"/>
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-      rel="stylesheet"/>
 
-    <!-- Bootstrap core CSS -->
-    <link href="./css/loginEstilo.css" rel="stylesheet" rel="stylesheet" type="text/css" media="all"/>
-    <!-- font-awesome icons -->
-    <link href="./css/font-awesome.min.css" rel="stylesheet" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="icon" type="image/ico" href="img/casita.ico"/> <!--icono en la pestaña-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>eMercado - Todo lo que busques está aquí</title>
 
-    <!-- Fuentes de la web misma -->
-    <link
-      href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-      rel="stylesheet"/>
-  </head>
-  <body>
-   <div id="page" class="page">
-     <div class="form-menu bg bg1"
-      style="background-color: rgba(255, 255, 255, 0.5); margin-top: 0px; background-image: url('img/fondoLogin.jpg');">
-        <!--texto principal, -->
-        <h1
-          class="editContent medium-editor-element"
-          style="
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-            font-family: Raleway, sans-serif;
-            outline: none;
-            outline-offset: -2px;
-            cursor: inherit;"
-          contenteditable="true"
-          spellcheck="true"
-          data-medium-editor-element="true"
-          role="textbox"
-          aria-multiline="true"
-          data-medium-editor-editor-index="55"
-          medium-editor-index="1209065b-22e8-43f6-7eb4-5dc13dfb22a5"
-          data-medium-focused="true">
-          eMERCADO tu e-commerce favorito
-        </h1>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/loginEstilo.css" rel="stylesheet">
+  <style>
+    html, body{
+      height: 100%;
+    }
+    body {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      /*background-color: #f5f5f5;*/
+      background-image: url('img/fondoLogin.jpg');
+    }
+    .signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+  </style>
+</head>
+<!--<body class="text-center"> -->
+<!-- imagen de fondo   background-image: url('img/fondoLogin.jpg');-->
+  <main class="loginformato"> <!--comenzamos el diseño del login-->
+    <div>
+      <h2>Iniciar Sesión</h2> <br>
+      
+      <label><b>Usuario</b> </label> 
+      <input type="text" id="user"placeholder="&#128100;  usuario" required="required" >
+      <br> <br>
 
-        <div class="w3l-login-form editContent"
-          style="
-            color: rgb(255, 255, 255);
-            font-size: 14.6667px;
-            background-color: rgba(0, 0, 0, 0.41);
-            font-family: Raleway, sans-serif;
-            outline: none;
-            cursor: inherit;">
+      <label> <b>Contraseña</b> </label> 
+      <input type="password" id="pass"placeholder="&#128272;  contraseña" required="required"/>
+      <br>
+      <br>
+      <p class="#" style="outline: none; cursor: inherit;"> <a>¿Olvidó la contraseña?</a> </p>
+      <br><br>
 
-          <h2 class="editContent"> <b>Formulario para iniciar sesión</b> </h2>
+      <button onclick="loginUser(user.value, pass.value);">Ingresar</button>
+      <br>
+      <br>
+      <p class="#" style="outline: none; cursor: inherit;"> <a>¿No tienes una cuenta?</a> </p>
 
-          <form action="#" method="POST">
-            <div class="texto-formulario editContent">
-              <label class="editContent" style="outline: none; outline-offset: -2px; cursor: inherit;">
-                <b>Nombre de usuario:</b>
-              </label>
-
-              <div
-                class="group editContent"
-                style="
-                  outline: rgba(233, 94, 94, 0.5) solid 2px;
-                  outline-offset: -2px;
-                  cursor: pointer;">
-                <span class="fa fa-user" style="outline: none; cursor: inherit;"> </span>
-                <input
-                  class="form-control"
-                  type="text"
-                  placeholder="&#128100; Usuario"
-                  name="user"
-                  required="required"/>
-              </div>
-            </div>
-
-            <div class="texto-formulario editContent">
-              <label class="editContent">
-                <font style="vertical-align: inherit;"> <b>Contraseña:</b> </font>
-              </label>
-              <div class="group editContent" style="outline: none; cursor: inherit;">
-                <span class="fa fa-unlock" style="outline: none; cursor: inherit;"></span>
-                <input type="password"class="form-control"placeholder="&#128272;Contraseña"name="pass" required="required"/>
-              </div>
-            </div>
-
-            <div class="olvidar editContent" style="outline: none; cursor: inherit;">
-              <!--hipervinculo, si olvida contraseña-->  
-              <a href="#" class="editContent" style="outline: none; cursor: inherit;">
-                <font style="vertical-align: inherit;"> <b> ¿Olvidaste tu contraseña? </b> </font>
-              </a>
-
-              <!--elegir si el usuario quiere ser recordado con un checkbox-->
-              <p class="editContent" style="outline: none; cursor: inherit;">
-                <b> <input type="checkbox"/> <font style="vertical-align: inherit;">Recordarme</font> </b>
-              </p>
-            </div>
-            <!--boton iniciar sesion-->
-            <button
-              type="submit" name="login" 
-              class="btn" style="outline: none; cursor: inherit;" 
-              onclick="loginUser(user.value, pass.value);"> <b>Iniciar sesión</b>
-            </button>
-
-          </form>
-
-          <p class="editContent w3l-register-p" style="outline: none; cursor: inherit;">
-            <b> <a> <font style="vertical-align: inherit;"> ¿No tienes una cuenta? </font> </a> </b>
-          </p>
-        </div> <!--<div class="w3l-login-form editContent"-->
-      </div> <!--<div class="form-menu bg bg1"-->
-    </div> <!--<div id="page" class="page">-->
+    </div>
+  </main>
+  <!--tranqui
+  <div class="container p-5">
+    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
+      <h4 class="alert-heading">¡A trabajar! :)</h4>
+      <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 16/08/2020) -> Punto 3 y 4.</p>
+      <hr>
+      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    </div>
+  </div>-->
 
   <script src="js/init.js"></script>
-  <script src="js/login.js"></script>  
+  <script src="js/login.js"></script>
 
-  <!--/#page-->
-  </body>
 </html>
