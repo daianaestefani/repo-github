@@ -2,29 +2,26 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Raleway', sans-serif;
-}
-
-button, .btn, a{
-	cursor: pointer !important;
-}
-.form-menu{
-	background: url(.img/fondoLogin.jpeg) no-repeat 0px 0px;
+    background-image: url(/img/fondoLogin.jpg); /*imagen de fondo para el login*/
     min-height: 100vh;
     background-size: cover;
 }
-h1 {
-    margin: 0;
-    color: #ffffff;
+
+.loginformato{
     text-align: center;
-    font-size: 50px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    padding: 50px 0;
+    align-content: center;
+    height: 10em;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%,-50%);
 }
 
-h2 {
+h2 { /*formato para el texto inicio sesion*/
     margin: 0;
-    color: #fc3955;
+    color: #ebb5bd;
     font-size: 25px;
     font-weight: 400;
     text-align: center;
@@ -32,105 +29,69 @@ h2 {
     padding-bottom: 30px;
 }
 
-p.w3l-register-p {
-    color: #eee;
-    font-size: 13px;
-    text-align: center;
-    margin-top: 2em;
-}
 
-.w3l-login-form {
-    background: rgba(0, 0, 0, 0.5);
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 3em;
-    border-radius: 10px;
-    box-sizing: border-box;
-}
-
-.group {
-    display: flex;
-    padding: 15px 5px;
-    background-color: #ffffff;
-}
-
-.group span {
-    color: #fc3955;
+label{ /*formato labels: Usuario, Contraseña*/
+    margin: 2px;
+    color: #ffffff;
     font-size: 20px;
-    padding: 0 10px;
-} 
 
-/*label: NombreUsuario, Contraseña,¿olvidoContrasela?*/ 
-.texto-formulario {
-    margin: 20px 0;
 }
-.texto-formulario label {
-    display: block;
-    text-transform: uppercase;
-    font-size: 13px;
-    color: #d2d2d2;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    font-style: italic;
-}
-
-/*textboxes de usuario y contraseña*/
-input[type="text"], input[type="password"] {
-    width: 100%;
-    border: none;
-    box-sizing: border-box;
-    background: transparent;
-    color: rgb(0, 0, 0); /*color de texto al escribir*/
-}
-
-input[type="text"]:focus, input[type="password"]:focus {
-    outline: none;
-}
-
 button {
-    background: #fc3955;
+    background: #000000;
     color: #ffffff;
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 1px;
     border: none;
     padding: 12px 60px;
-    cursor: pointer;
+    cursor: pointer!important;
     width: 100%;
     border-radius: 6px;
 }
 /*SEUDOCLASE INSTANTE QUE HACE CLICK*/
 button:active{ /*REDUCE EL TAMAÑO*/
-    transform: scale(0.8);
+    transform: scale(0.9);
 }
-
+/*SEUDOCLASE INSTANTE QUE pasa sobre el boton*/
 button:hover {
-    background-color: #00BCD4!important;
-    transition-duration: 5s;
+    background-color: #000000!important;
+    transition-duration: 3s;
+    size: 2cm;
+}
+input{
+    border-top: solid 5px rgb(6, 15, 85);
+}
+/*textboxes de usuario y contraseña*/
+input[type="text"], input[type="password"] {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    background: white;
+    color: rgb(0, 0, 0); /*color de texto al escribir*/
 }
 
-.olvidar {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
+input[type="text"]:focus, input[type="password"]:focus {
+    outline: none;
+    
 }
 
 a {
     color: #eee;
-    font-size: 14px;
+    font-size: 16px;
     text-decoration: none;
+    align-content: center;
 }
 
-.olvidar p {
-    color: #ffffff;
-    text-align: center;
-    margin: 0px;
-	font-size: 13px;
+
+a:focus {
+	outline: none !important;
 }
 
-.register {
-    color: #00BCD4;
+a:hover {
     text-decoration: none;
+    color: #fc00ff!important;
+    border-color: #fc00ff;
+    font-size: 20px;
 }
 
 /*--footer--*/
@@ -178,9 +139,6 @@ footer {
 }
 
 @media(max-width:640px) {
-    p.copyright-agileinfo {
-        letter-spacing: 1px;
-    }
     h1 {
         font-size: 43px!important;
     }
@@ -190,20 +148,12 @@ footer {
     h1 {
         font-size: 40px!important;
     }
-    p.copyright-agileinfo {
-        font-size: 14px!important;
-    }
 }
 
 @media(max-width:480px) {
-    .w3l-login-form {
-    margin: 0 3vw;
-}
+
     h1 {
         font-size: 38px!important;
-    }
-    p.copyright-agileinfo {
-        line-height: 1.8em;
     }
 }
 
@@ -223,12 +173,6 @@ footer {
     h1 {
         font-size: 25px!important;
     }
-    .olvidar p {
-        text-align: left;
-    }
-    .olvidar {
-        display: block;
-    }
-}
+
 
 /*-- /responsive design --*/
