@@ -7,21 +7,25 @@ body {
     background-size: cover;
 }
 
+h1,h2,h3,h4,h5,h6 { /*PARA TODOS LOS TITULOS DE DISTINTOS TAMAÑOS*/
+	margin: 0px;
+}
 .loginformato{
-    text-align: center;
+    text-align: left;
     align-content: center;
-    height: 10em;
+    align-items: center;
+    height: 20em;
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%,-50%);
+
 }
 
 h2 { /*formato para el texto inicio sesion*/
-    margin: 0;
-    color: #ebb5bd;
+    color: #ffffff;
     font-size: 25px;
     font-weight: 400;
     text-align: center;
@@ -36,6 +40,61 @@ label{ /*formato labels: Usuario, Contraseña*/
     font-size: 20px;
 
 }
+
+
+a {
+    text-decoration: none;
+    align-content: left;
+    font-family: Poppins-Regular;
+	font-size: 20px;
+	line-height: 1.7;
+	color: #ffffff;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+a:focus {
+	outline: none !important;
+}
+a:hover { /*CUANDO PASO EL MOUSE SOBRE EL LINK*/
+    text-decoration: none;
+    color: #ffffff!important;
+    border-color: #fc00ff;
+    font-size: 20px;
+}
+
+p { /*TODOS LOS PARRAFOS*/
+	font-family: Poppins-Regular;
+	font-size: 20px;
+	line-height: 1.7;
+	color: #ffffff;
+	margin: 0px;
+}
+
+.linkes{
+    width: 100%;
+    text-align: left;
+    padding-top: 55px;
+}
+
+.linkesout{
+    font-family: sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 1.5;
+    
+}
+
+.txt2 { /*TEXTO OLVIDO CONTRASEÑA Y REGISTRARSE*/
+    font-family: Poppins-Regular;
+    font-size: 18px;
+    color: #eeff00;
+    line-height: 1.5;
+    border-bottom: 1px solid #999999;  
+}
+
 button {
     background: #000000;
     color: #ffffff;
@@ -54,44 +113,37 @@ button:active{ /*REDUCE EL TAMAÑO*/
 }
 /*SEUDOCLASE INSTANTE QUE pasa sobre el boton*/
 button:hover {
-    background-color: #000000!important;
+    background: -webkit-linear-gradient(45deg, #00dbde, #fc00ff);
+  background: -o-linear-gradient(45deg, #00dbde, #fc00ff);
+  background: -moz-linear-gradient(45deg, #00dbde, #fc00ff);
+  background: linear-gradient(45deg, #00dbde, #fc00ff);
     transition-duration: 3s;
     size: 2cm;
 }
+
 input{
     border-top: solid 5px rgb(6, 15, 85);
 }
 /*textboxes de usuario y contraseña*/
 input[type="text"], input[type="password"] {
     width: 100%;
+    padding: 10px;
     border: none;
     box-sizing: border-box;
     background: white;
+    text-size-adjust: 30px;
     color: rgb(0, 0, 0); /*color de texto al escribir*/
 }
-
 input[type="text"]:focus, input[type="password"]:focus {
     outline: none;
     
-}
-
-a {
-    color: #eee;
-    font-size: 16px;
-    text-decoration: none;
-    align-content: center;
+    
 }
 
 
-a:focus {
-	outline: none !important;
-}
-
-a:hover {
-    text-decoration: none;
-    color: #fc00ff!important;
-    border-color: #fc00ff;
-    font-size: 20px;
+ul, li { /*FILAS, COLUMNAS*/
+	margin: 0px;
+	list-style-type: none;
 }
 
 /*--footer--*/
@@ -102,6 +154,7 @@ p.copyright-agileinfo {
     color: #fff;
     font-weight: 300;
 }
+
 
 footer p a {
     display: inline-block;
@@ -149,26 +202,22 @@ footer {
         font-size: 40px!important;
     }
 }
-
 @media(max-width:480px) {
 
     h1 {
         font-size: 38px!important;
     }
 }
-
 @media(max-width:414px) {
     h1 {
         font-size: 34px!important;
     }
 }
-
 @media(max-width:384px) {
     h1 {
         font-size: 30px!important;
     }
 }
-
 @media(max-width:320px) {
     h1 {
         font-size: 25px!important;
