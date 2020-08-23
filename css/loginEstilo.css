@@ -2,26 +2,28 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Raleway', sans-serif;
-    background-image: url(/img/fondoLogin.jpg); /*imagen de fondo para el login*/
-    min-height: 100vh;
+    background-image: url(/img/fondoshopping.jpg ); /*imagen de fondo para el login*/
+    min-height: min-content;
     background-size: cover;
 }
 
 h1,h2,h3,h4,h5,h6 { /*PARA TODOS LOS TITULOS DE DISTINTOS TAMAÑOS*/
-	margin: 0px;
+    margin: 0px;
+    color: #ffffff;
+    align-content: center;
+    text-align: center;
 }
 .loginformato{
     text-align: left;
     align-content: center;
     align-items: center;
-    height: 20em;
+    height: 30em;
     margin: 0;
     position: absolute;
-    top: 50%;
+   /*top: 50%;*/ top: center;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%,-50%);
-
 }
 
 h2 { /*formato para el texto inicio sesion*/
@@ -33,13 +35,19 @@ h2 { /*formato para el texto inicio sesion*/
     padding-bottom: 30px;
 }
 
-
 label{ /*formato labels: Usuario, Contraseña*/
     margin: 2px;
     color: #ffffff;
     font-size: 20px;
-
+    
 }
+
+.label2{ /*label que dice "o iniciar con "*/
+    text-align: center;
+    align-content: center;
+    color: #ffffff;
+    font-size: 20px;
+}  /*no lo use, elegi usar h4, pero lo dejo por las dudas*/
 
 
 a {
@@ -48,7 +56,8 @@ a {
     font-family: Poppins-Regular;
 	font-size: 20px;
 	line-height: 1.7;
-	color: #ffffff;
+    color: #ffffff;
+    border-color: transparent;
 	margin: 0px;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
@@ -61,7 +70,6 @@ a:focus {
 a:hover { /*CUANDO PASO EL MOUSE SOBRE EL LINK*/
     text-decoration: none;
     color: #ffffff!important;
-    border-color: #fc00ff;
     font-size: 20px;
 }
 
@@ -89,10 +97,11 @@ p { /*TODOS LOS PARRAFOS*/
 
 .txt2 { /*TEXTO OLVIDO CONTRASEÑA Y REGISTRARSE*/
     font-family: Poppins-Regular;
-    font-size: 18px;
+    font-size: 20px;
     color: #eeff00;
     line-height: 1.5;
-    border-bottom: 1px solid #999999;  
+    border-bottom: 1px solid #999999;
+
 }
 
 button {
@@ -131,15 +140,118 @@ input[type="text"], input[type="password"] {
     border: none;
     box-sizing: border-box;
     background: white;
-    text-size-adjust: 30px;
+    text-size-adjust: 35px;
     color: rgb(0, 0, 0); /*color de texto al escribir*/
-}
-input[type="text"]:focus, input[type="password"]:focus {
-    outline: none;
-    
-    
+    font-size: 18px;
 }
 
+input[type="text"]:focus, input[type="password"]:focus, input :focus 
+{  /*CLICK EN LA CAJA DE TEXTO*/
+  border-color: yellowgreen !important;
+  border: 50px;
+}
+
+.recordarolvidar{ /* CLASE checklist>>RECORDARME, link>>OLVIDÓCONTRASEÑA*/
+display: -webkit-box;   display: -webkit-flex;    display: -moz-box;
+display: flex;         
+justify-content: space-between;
+align-content: center;
+
+    width: 100%; /*width full*/     padding-top: 3px;    padding-bottom: 32px;
+}
+ /*clase checklist>>RECORDARME */
+ .label-checkbox{
+    font-family: Poppins-Regular;
+    font-size: 13px;
+    color: #000000;
+    line-height: 1.4;
+  
+    display: block;
+    cursor: pointer;
+ }
+/*::before*/
+.label-checkbox::before{
+    content: "\f00c";
+    font-family: FontAwesome;       font-size: 13px;            color: transparent;
+
+    display: -webkit-box;               display: -webkit-flex;
+    display: -moz-box;                  display: -ms-flexbox;   display: flex;
+
+    justify-content: center;              align-items: center;
+    position: absolute;                   width: 18px;           height:18px;
+    border-radius: 2px;                   background: #fff;    border:1px solid #6675df;
+    left: 0;    top: 50%;
+    -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);     -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #00ff9d     
+}   
+
+/*COPIE EL FORMATO PARA LOS BOTONES DE LOGIN DE GOOGLE Y FACEBOOK*/
+/*[ Button sign in with ]*/
+.btn-margen{    margin-bottom: 20px; }
+
+/*----------------boton facebook*/ /*boton google----------------*/
+.btn-face, /*boton facebook*/ .btn-google /*boton google*/ {
+    font-family: Montserrat-SemiBold;
+    font-size: 18px;
+    line-height: 1.2;
+  
+    display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/*    padding: 15px;
+    width: calc((100% - 20px) / 2);*/
+    height: 70px;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -ms-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-google::before, /*boton Google*/  .btn-face::before /*boton FacebooK*/{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    background: #a64bf4;
+    /*COLOR DEGRADE A LOS BOTONES Facebook y Google*/
+    background: -webkit-linear-gradient(45deg, #100111, #00dbde);
+    background: -o-linear-gradient(45deg, #440046, #84eef0);
+    background: -moz-linear-gradient(45deg, #00dbde, #440046);
+    background: linear-gradient(45deg, #00dbde, #440046);
+    opacity: 0;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+/*boton facebook antes de clickear o pasar mouse por arriba*/
+.btn-face {   color: #fff;   background-color: #3b5998;}
+.btn-face i {  font-size: 30px;  margin-right: 17px;  padding-bottom: 3px;}
+
+.btn-google {  color: #555555;  background-color: #fff;}
+
+.btn-google img {  width: 30px;  margin-right: 15px;  padding-bottom: 3px;}
+
+.btn-face:hover:before,.btn-google:hover:before {  opacity: 1;}
+
+.btn-face:hover,.btn-google:hover {  color: #fff;}
+
+.btn-face,.btn-google {  width: 100%;}
 
 ul, li { /*FILAS, COLUMNAS*/
 	margin: 0px;
@@ -155,13 +267,11 @@ p.copyright-agileinfo {
     font-weight: 300;
 }
 
-
 footer p a {
     display: inline-block;
     color: #fff;
     text-decoration: underline;
 }
-
 footer p a:hover {
     color: #fff;
     text-decoration: none;
@@ -222,6 +332,6 @@ footer {
     h1 {
         font-size: 25px!important;
     }
-
+}
 
 /*-- /responsive design --*/
