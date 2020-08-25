@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<!--id cliente google 690440154408-90cdi608u6oq6im0q0acg5uphjpmsm8q.apps.googleusercontent.com-->
+<html lang="en">
+  <head>
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <!--*************GOOGLE*************-->
+    <!--<meta name="google-signin-scope" content="profile email">-->
+    <meta name="google-signin-client_id" content="690440154408-90cdi608u6oq6im0q0acg5uphjpmsm8q.apps.googleusercontent.com"> <!--id cliente google-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!--<script src="https://apis.google.com/js/api.js"> </script>  <--cargamos la api--> <!--NUCLEO DE LA BIBLIOTECA JAVASCRIPT DE GOOGLE-->
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <link rel="icon" type="image/ico" href="img/casita.ico">    <!--icono en la pestaña-->
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <!--se usa para poder ingresar iconos, user, pass, email-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>eMercado - Todo lo que busques está aquí</title>
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/loginsocial.css" rel="stylesheet">
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <style>
+      /*html,      body {        height: 100%;*/
+      
+      body{
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        color: #777;
+        font-family: sans-serif;
+        background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url("./img/fondoshopping.jpg") ;
+        background-position: center;
+        background-size: cover;
+        font-weight: 300;
+    }
+      .signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+      }
+    </style>
+  <!---------------------------------------------------------------------------------------------------------------------->
+    </head>
+    
+    <body>
+        <div class="login-caja">
+            <div class="caja-izquierda"> <!-- login izquierdo -->
+                <h1> Regístrate </h1>
+                <!--
+                <div class="usernombre">-->
+                    <i class="far fa-user iconos"></i> 
+                    <input type="text" class="caja-entrada" placeholder="Nombre de usuario" id="userSOCIAL">
+                <!--</div>
+                <div class="usermail">-->
+                    <i class="fas fa-envelope-square iconos"></i> 
+                    <input type="email" class="caja-entrada" placeholder="Correo electrónico" id="emailSOCIAL">
+                <!--</div>
+                <div class="userpass">-->
+                    <i class="fas fa-unlock-alt iconos"></i> 
+                    <input type="password" class="caja-entrada" placeholder="Contraseña" id="passSOCIAL">
+                <!--</div>  
+                <div class="userpass">--->
+                    <i class="fas fa-unlock-alt iconos"></i> 
+                    <input type="password" class="caja-entrada" placeholder="Repita su Contraseña" id="passConfirm">
+                <!--</div> -->     
+                    <input type="submit" class="submit-btn" value="Registrarse" id="LogInBtn">
+            </div> <!--formato caja-izquierda-->
+
+            <div class="caja-derecha">
+                <span class="titulo-derecho"> Regístrate con : 
+                    <br> Redes Sociales 
+                </span>
+
+                <button class="Social Facebook"> <b> Iniciar sesión con Facebook </b> </button>
+                <br>
+                <!--<a href="#" class="google"> <img src="img/icon-google.png" alt="GOOGLE"> Google </a>
+                <br> <br>-->
+                <!--<button class="Social Google" >  <b> Iniciar sesión con Google </b> </button>-->
+                <div class="g-signin2" data-onsuccess="onSignIn">
+
+                </div>
+            </div> <!--formato caja-derecha -> loginSocial-->
+
+            <!--solo es para ingresar la letra 0, separando entre logindelsitio VS loginSocial -->
+            <div class="or"> 
+                O
+            </div>
+        </div> <!-- formato login-caja-->
+    </body>
+
+  </html>
