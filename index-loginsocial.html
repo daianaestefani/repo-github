@@ -53,27 +53,30 @@
     </head>
     
     <body>
+      <div id="content"> </div>
+      <button  onclick="SignOut()"> </button>
         <div class="login-caja">
             <div class="caja-izquierda"> <!-- login izquierdo -->
                 <h1> Regístrate </h1>
                 <!--
                 <div class="usernombre">-->
                     <i class="far fa-user iconos"></i> 
-                    <input type="text" class="caja-entrada" placeholder="Nombre de usuario" id="userSOCIAL">
+                    <input type="text" class="caja-entrada" placeholder="Nombre de usuario" id="userSOCIAL" required>
                 <!--</div>
                 <div class="usermail">-->
                     <i class="fas fa-envelope-square iconos"></i> 
-                    <input type="email" class="caja-entrada" placeholder="Correo electrónico" id="emailSOCIAL">
+                    <input type="email" class="caja-entrada" placeholder="Correo electrónico" id="emailSOCIAL" required>
                 <!--</div>
                 <div class="userpass">-->
                     <i class="fas fa-unlock-alt iconos"></i> 
-                    <input type="password" class="caja-entrada" placeholder="Contraseña" id="passSOCIAL">
-                <!--</div>  
-                <div class="userpass">--->
+                    <input type="password" class="caja-entrada" placeholder="Contraseña" id="passSOCIAL" required>
+                <!--
+                <div class="userpass">
                     <i class="fas fa-unlock-alt iconos"></i> 
-                    <input type="password" class="caja-entrada" placeholder="Repita su Contraseña" id="passConfirm">
-                <!--</div> -->     
-                    <input type="submit" class="submit-btn" value="Registrarse" id="LogInBtn">
+                    <input type="password" class="caja-entrada" placeholder="Repita su Contraseña" id="passConfirm" required>
+                </div> -->     
+                    <input type="submit" class="submit-btn" value="Registrarse" id="LogInBtn" onclick="reregistrando(userSOCIAL.value, emailSOCIAL.value, passSOCIAL.value);">
+                   
             </div> <!--formato caja-izquierda-->
 
             <div class="caja-derecha">
@@ -86,6 +89,7 @@
                 <!--<a href="#" class="google"> <img src="img/icon-google.png" alt="GOOGLE"> Google </a>
                 <br> <br>-->
                 <!--<button class="Social Google" >  <b> Iniciar sesión con Google </b> </button>-->
+                
                 <div class="g-signin2" data-onsuccess="onSignIn"> </div>
             </div> <!--formato caja-derecha -> loginSocial-->
 
@@ -93,13 +97,9 @@
             <div class="or"> 
                 O
             </div>
-        </div> <!-- formato login-caja-->
+            </div> <!-- formato login-caja-->
+        <label class="condicion"> Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</label> 
+        
     </body>
-  
-    <script>
-        function onSignIn(googleUser){
-            console.log('Usuario es ' + JSON.stringify(googleUser.getBasicProfile()))
-        }
-    </script>
-    
+    <script src="js/loginsocial.js" > </script>
   </html>
