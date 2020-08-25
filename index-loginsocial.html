@@ -95,6 +95,11 @@
             </div>
         </div> <!-- formato login-caja-->
     </body>
-
+  
+    <script>
+        function onSignIn(googleUser){
+            console.log('Usuario es ' + JSON.stringify(googleUser.getBasicProfile()))
+        }
+    </script>
     
   </html>
