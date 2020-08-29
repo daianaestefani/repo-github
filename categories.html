@@ -22,15 +22,19 @@
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-        <a class="py-2 d-none d-md-inline-block"> <span id="sesion"></span> </a>       <!--nombre usuario-->
-      </div>
+
+        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="cerrarsesion();"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
+
+        <a class="py-2 d-none d-md-inline-block"> <span id="sesion"></span> </a> <!--nombre usuario-->
+        <a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> 
+        </div>
     </nav>
 
     <script>
-        var sesion = sessionStorage.getItem("usuario");
-        document.getElementById('sesion').innerHTML=sesion;
+      var sesion = sessionStorage.getItem("usuario");
+      document.getElementById('sesion').innerHTML=sesion;
     </script>
-    
+
     <main role="main" class="pb-5">
         <div class="text-center p-4">
             <h2>Categorías</h2>
@@ -52,6 +56,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row justify-content-end">
               <div class="col-md-6"></div>
                 <div class="col-md-6 col-sm-12 mb-1 container">
@@ -74,6 +79,7 @@
                   </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="list-group" id="cat-list-container">
                 </div>
