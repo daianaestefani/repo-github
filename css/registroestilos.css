@@ -1,73 +1,75 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    background-image: url("img/fondoshopping.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-}
 * {
     box-sizing: border-box;
 }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-image:url("img/fondoshopping.jpg");
+    background-size: cover;
+    background-attachment: fixed; /*fondo completo, que quede una sola imagen*/
+}
 .contenedor{
     width: 100%;
-    padding: 15px;
+    padding: 15px; /*para que se expanda un poco*/
 }
 .formulario{
-    background: #fff;
+    background: rgb(255, 253, 253, 0.8); /*fondo blanco*/
     margin-top: 150px;
     padding: 3px;
 }
 h1{
-    text-align: center;
+    text-align: center; 
     color: #1a2537;
     font-size: 40px;
 }
-input[type="text"],
-input[type="password"]{
-    font-size: 20px;
-    width: 82%;
-    padding: 10px;
-    border: none;
+input[type="text"],input[type="password"], input[type="email"]
+{ /*estilo del input tipo text y password*/
+    font-size: 20px; /*tamaño fuente*/
+    width: 82%; 
+    padding: 10px; /*para que se expanda un poco*/
+    border: none; /*sin borde*/
+
 }
-.input-contenedor{
-    margin-bottom: 15px;
-    border: 1px solid #aaa;
+.input-contenedor{ /*estilo, input contenedor*/
+    margin-bottom: 15px; /*espacio entre lineas*/
+    border: 1px solid rgba(241, 8, 230, 0.575); 
 }
-.icon{
-    min-width: 50px;
-    text-align: center;
+.icon{ 
+    min-width: 50px;    /*ancho minimo*/
+    text-align: center; /*centrado en la caja de texto*/
     color: #999;
 }
-.button{
-    border: none;
-    width: 100%;
+.button{    
+    border: none;   /*boton sin borde*/
+    width: 100%;    /*si ancho entero*/
     color: white;
-    font-size: 20px;
-    background:  #1a2537;
+    font-size: 20px; 
+    background:  #1a2537; /*fondo, igual tamaño de titulo*/
     padding: 15px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 5px; /*borde redondeado*/
+    cursor: pointer;   /*cuando pase el mouse sobre el boton, que muestre la mano*/
 }
 .button:hover{
-    background: cadetblue;
+    background: rgb(206, 7, 113);
 }
 p{
     text-align: center;
 }
 .link{
-    text-decoration: none;
-      color: #1a2537;
-    font-weight: 600;
+    text-decoration: none; /*quita subrayado*/
+      color: #1a2537; 
+    font-weight: 600; /*grosor*/
 }
-.link:hover{
-     color: cadetblue;
+.link:hover{ 
+     color: rgb(15, 1, 19); 
 }
-@media(min-width:768px)
-{
+@media(min-width:768px) /*apartir de los 768 pixeles*/
+{/*para que se adapte, cuando cambio pagina de tamaño*/
     .formulario{
         margin: auto;
         width: 500px;
-        margin-top: 150px;
-        border-radius: 2%;
+        margin-top: 150px; /*que se baje un poco más*/
+        border-radius: 2%; /*redondeo el formulario*/
     }
 }

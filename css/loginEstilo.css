@@ -2,9 +2,12 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Raleway', sans-serif;
-    background-image: url(/img/fondoshopping.jpg ); /*imagen de fondo para el login*/
+    background-image:url("img/fondoshopping.jpg");/*imagen de fondo para el login*/
+    background-attachment: fixed; 
     min-height: min-content;
     background-size: cover;
+    color: whitesmoke;
+
 }
 
 h1,h2,h3,h4,h5,h6 { /*PARA TODOS LOS TITULOS DE DISTINTOS TAMAÑOS*/
@@ -14,6 +17,7 @@ h1,h2,h3,h4,h5,h6 { /*PARA TODOS LOS TITULOS DE DISTINTOS TAMAÑOS*/
     text-align: center;
 }
 .loginformato{
+    top: 50%;
     text-align: left;
     align-content: center;
     align-items: center;
@@ -259,14 +263,12 @@ ul, li { /*FILAS, COLUMNAS*/
 }
 
 /*--footer--*/
-
 p.copyright-agileinfo {
     font-size: 15px;
     letter-spacing: 2px;
     color: #fff;
     font-weight: 300;
 }
-
 footer p a {
     display: inline-block;
     color: #fff;
@@ -281,7 +283,6 @@ footer p a:hover {
     -ms-transition: 0.5s all;
     transition: 0.5s all;
 }
-
 footer {
     padding: 4em 0;
     text-align: center;
@@ -289,24 +290,31 @@ footer {
 /*--//footer--*/
 
 /*-- /responsive design --*/
+@media(min-width:768px) /*apartir de los 768 pixeles*/
+{/*para que se adapte, cuando cambio pagina de tamaño*/
+    .formulario{
+        margin: auto;
+        width: 500px;
+        margin-top: 150px; /*que se baje un poco más*/
+        border-radius: 2%; /*redondeo el formulario*/
+    }
+}
+
 @media(max-width:768px) {
     h1 {
         font-size: 47px!important;
     }
 }
-
 @media(max-width:667px) {
     h1 {
         font-size: 45px!important;
     }
 }
-
 @media(max-width:640px) {
     h1 {
         font-size: 43px!important;
     }
 }
-
 @media(max-width:568px) {
     h1 {
         font-size: 40px!important;

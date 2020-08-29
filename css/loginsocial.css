@@ -1,0 +1,184 @@
+/*loginsocial.css*/
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  font-family: sans-serif;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    url("../img/fondoshopping.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  font-weight: 300;
+  text-align: absolute;
+}
+h1{
+    text-align:center;
+}
+
+.condicion{
+    color: white;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.972);
+    font-size: 20px;
+}
+
+.login-caja {
+  /*formato para todo el login*/
+  /*
+    margin-top: 150px;    padding: 3px;    width: 100%;    padding: 15px;*/
+  position: relative;
+  margin: 10% auto;
+  height: 450px; /* height:400px;*/
+  width: 600px; /* width: 600px;*/
+  background: rgba(71, 69, 69, 0.815);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+/*///////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////CAJA IZQUIERDA//////////////////////*/
+.caja-izquierda {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 300px;
+  height: 450px;
+}
+h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #fff;
+}
+
+.userpass,
+.usermail,
+.usernombre {
+  /*iconos antes de los input*/
+  margin-bottom: 15px;
+  border: 1px solid #aaa;
+}
+.iconos {
+  color: rgb(233, 250, 0);
+  min-width: 50px;
+  text-align: left;
+}
+.caja-entrada {
+  /*  width: 82%;
+    padding: 10px;*/
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  padding: 4px;
+  width: 220px;
+  height: 32px;
+  border: 1px solid #fff;
+  outline: none;
+  font-size: 15px;
+  transition: 0.2s;
+  color: #fff;
+  background: transparent;
+}
+
+.submit-btn {
+  margin-bottom: 15px;
+  width: 160px; /*ancho*/
+  height: 32px; /*alto*/
+  background: #7e7207;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.2s;
+}
+/*pasando mouse por arriva/hago click*/
+.submit-btn:hover,
+.submit-btn:focus {
+  background: yellow;
+  transition: 0.5s;
+  color: black;
+}
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////CAJA DERECHA//////////////////////*/
+.caja-derecha {
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 30px; /*espacio tabulado*/
+  width: 300px; /* width: 300px;*/
+  height: 450px; /* height:400px;*/
+
+  background-image: linear-gradient(rgba(90, 90, 90, 0.6), rgba(100, 100, 100, 0.6)), url("../img/VenderCosas.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.titulo-derecho {
+  display: block;
+  margin-bottom: 40px;
+  font-size: 28px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.Social {
+  /*formato boton y Google*/
+  margin-bottom: 20px;
+  width: 255px; /*ancho*/
+  height: 60px; /*alto*/
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  transition: 0.2s;
+  color: #fff;
+  background: rgb(241, 129, 245);
+  cursor: pointer;
+}
+/*pasando mouse por arriva/hago click*/
+.Social:hover,
+.Social:focus {
+  background: -webkit-linear-gradient(45deg, #011e1f, #fc00ff);
+  background: -o-linear-gradient(45deg, #227b7c, #fc00ff);
+  background: -moz-linear-gradient(45deg, #62b6b8, #fc00ff);
+  background: linear-gradient(45deg, #004ede, #fc00ff);
+  transition-duration: 3s;
+  size: 2cm;
+}
+.Facebook {
+  background: #32508e;
+}
+.Google {
+    color: rgba(0, 0, 0, 0.966);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.938);
+    transition-duration: 3s;
+
+    background: -webkit-linear-gradient( 45deg,
+        rgba(235, 0, 0, 1) 0%,
+        rgba(235, 0, 0, 0.98) 6%,
+        rgba(235, 0, 0, 0.92) 25%,
+        rgba(235, 223, 0, 0.91) 27%,
+        rgba(235, 223, 0, 0.83) 52%,
+        rgba(0, 219, 15, 0.83) 53%,
+        rgba(31, 235, 0, 0.76) 75%,
+        rgba(7, 23, 87, 0.76) 76%,
+        rgba(8, 9, 180, 0.71) 91%,
+        rgba(8, 0, 235, 0.71) 100%
+  ); /* Chrome10+,Safari5.1+ */
+
+}
+.or {
+  position: absolute;
+  top: 205px;
+  left: 280px;
+  width: 40px;
+  height: 40px;
+  background: #efefef;
+  border-radius: 50%;
+  line-height: 40px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
