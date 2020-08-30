@@ -68,8 +68,11 @@ function showProdsList(){       //function showProdsList(array){
     for(let i = 0; i < prodsArray.length; i++){
         let product = prodsArray[i];
 
-        if ( ( (minCount==undefined) || (minCount != undefined && parseInt(product.soldCount) >= minCount) ) &&
-             ( (maxCount == undefined) || (maxCount != undefined && parseInt(product.soldCount) <= maxCount) ) 
+        //para buscar segun rango de precio
+        //si no selecciona ninguno, muestra todos, 
+        //si selecciona un rango, muestra los productos en ese rango de precio
+        if ( ( (minCount==undefined) || (minCount != undefined && parseInt(product.cost) >= minCount) ) &&
+             ( (maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount) ) 
            )
         {
 
@@ -116,27 +119,29 @@ document.addEventListener("DOMContentLoaded", function(e){
             prodsArray = resultObj.data;
             showProdsList(prodsArray);            //Muestro las categorías ordenadas
             hideSpinner();                      //oculto el spinner    }    });*/
+
+        // ---------SI HAY ALGUN ELEMENTO EN  LA LISTA, MUESTRA (ORDEN ALFABETICO) ---------        
     getJSONData(PRODUCTS_URL).then(function(resultObj){                         //ordenar alfabeticamente
         if (resultObj.status === "ok"){
             sortShowProductos(ORDER_ASC_BY_NAME, resultObj.data);
         }
     });
-
+    // ---------ORDENAR POR PRECIO DE PRODUCTOS (DE MENOR A MAYOR)- ---------
     document.getElementById("sortAsc").addEventListener("click", function(){   //ordenar por $ venta ASCENDENTE
         //usando el id del label (sortAsc) que contiene el radiobutton...
         sortShowProductos(ORD_ASC_BY_COST);
     });
-
+    // ---------ORDENAR POR PRECIO DE PRODUCTOS (DE MAYOR A MENOR)- ---------
     document.getElementById("sortDesc").addEventListener("click", function(){ //ordenar por $ venta DESCENDENTE
         //usando el id del label (sortDesc) que contiene el radiobutton...
         sortShowProductos(ORD_DESC_BY_COST);
     });
-
+        // --------- ORDENAR POR CANTIDAD DE PRODUCTOS - ---------
     document.getElementById("sortByCount").addEventListener("click", function(){ //ordenar por $ venta DESCENDENTE
         //usando el id del label (sortDesc) que contiene el radiobutton...
         sortShowProductos(ORDER_BY_SOLDCOUNT);
     });
-
+    // ---------LIMPIA LA BUSQUEDA POR RANGO DE PRECIO- ---------
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
@@ -146,6 +151,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         showProdsList();
     });
+
+    // ---------CUANDO HAGO CLICK EN EL BOTON FILTRAR- ---------
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
         //de productos por categoría.
