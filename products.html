@@ -23,17 +23,16 @@
         <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a> <!--CATEGORIA-->
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>    <!--PRODUCTOS-->
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>           <!--VENDER-->
-        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>       <!--MI CARRITO-->
-
-        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="cerrarsesion();"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
+        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>        
 
         <a class="py-2 d-none d-md-inline-block"> <span id="sesion"></span> </a> <!--nombre usuario-->
-        <a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> 
-        </div>
+        <!--<a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> --> 
+        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="localStorage.clear(); alert('Desconectando usuario: '+ sesion); location.href='index.html';"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
+      </div>
     </nav>
-
+  
     <script>
-        var sesion = sessionStorage.getItem("usuario");
+        var sesion = localStorage.getItem("usuario");
         document.getElementById('sesion').innerHTML=sesion;
     </script>
     <!--<div class="container p-5"> 
@@ -86,7 +85,7 @@
               <div class="col-md-6 col-sm-12 mb-1 container">
                 <div class="row container p-0 m-0">
                   <div class="col">
-                    <p class="font-weight-normal text-right my-2">Cant.</p>
+                    <p class="font-weight-normal text-right my-2">Cant. artículos</p>
                   </div>
                   <div class="col">
                     <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">

@@ -22,17 +22,18 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <a class="py-2 d-none d-md-inline-block"> <span id="sesion"></span> </a>       <!--nombre usuario-->
+      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>        
+
+      <a class="py-2 d-none d-md-inline-block"> <span id="sesion"></span> </a> <!--nombre usuario-->
+      <!--<a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> --> 
+      <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="localStorage.clear(); alert('usuario: ' +sesion +'desconectando'); location.href='index.html';"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
     </div>
   </nav>
 
   <script>
-      var sesion = sessionStorage.getItem("usuario");
+      var sesion = localStorage.getItem("usuario");
       document.getElementById('sesion').innerHTML=sesion;
-  </script>  </nav>
-
-  <div class="container p-5">
+  </script>  <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
       <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 13/09/2020) y Entrega 4 (Fecha de entrega: 20/09/2020).</p>

@@ -21,20 +21,17 @@
         <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-
-        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="cerrarsesion();"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
-
-        <a class="py-2 d-none d-md-inline-block"> <span id="sesion"></span> </a> <!--nombre usuario-->
-        <a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> 
-        </div>
+        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>        
+        <a class="py-2 d-none d-md-inline-block" id="sesion"></a> <!--nombre usuario-->
+        <!--<a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> --> 
+        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="localStorage.clear(); alert('Cerrando sesión de usuario: '+sesion); location.href='index.html';"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
+      </div>
     </nav>
 
     <script>
-      var sesion = sessionStorage.getItem("usuario");
-      document.getElementById('sesion').innerHTML=sesion;
+        var sesion = localStorage.getItem("usuario");
+        document.getElementById('sesion').innerHTML=sesion;
     </script>
-
     <main role="main" class="pb-5">
         <div class="text-center p-4">
             <h2>Categorías</h2>
@@ -100,5 +97,6 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/categories.js"></script>
+
   </body>
 </html>
