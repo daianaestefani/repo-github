@@ -18,51 +18,56 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/registroestilos.css" rel="stylesheet">
 <!---------------------------------------------------------------------------------------------------------------------->
+<!--<link rel="stylesheet" href="registroestilos.css">-->
+<!---------------------------------------------------------------------------------------------------------------------->
     <!-- link para acceder a las fuentes online de: fontawesome.com -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-    <link rel="stylesheet" href="registroestilos.css">
 <!---------------------------------------------------------------------------------------------------------------------->
-    <style>
-       
+  <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-image:url("img/fondoshopping.jpg");
+            background-size: cover;
+            background-attachment: fixed; /*fondo completo*/
+        }
     </style>
+<!---------------------------------------------------------------------------------------------------------------------->
+
 </head>
 
 <body>
-
     <form class="formulario"> <!--form, clase formulario--> 
+        
         <h1> Registrate </h1>
-        <div class="contenedor"> <!--div, clase contenedor-->
+        <div class="contenedor"> <!--div,contiene las entradas y botones, clase contenedor-->
 
             <div class="input-contenedor"> <!--clase contenedor entrada-->
-            <!--ingreso la caja de texto y el icono USUARIO-->
-                <i class="fas fa-user icon"></i> 
-                <!--icono usuario de fontawesome.com y le agregamos mas estilo -->
-                <input type="text" placeholder="Nombre de usuario">
+                <i class="fas fa-user icon"></i>     <!--ingreso la caja de texto y el icono USUARIO-->
+                <input type="text" placeholder="Nombre de usuario" id="usereg" required>    <!--icono usuario de fontawesome.com y le agregamos mas estilo -->
             </div>
 
             <div class="input-contenedor"> <!--clase contenedor entrada-->
-                <!--ingreso la caja de texto y el icono EMAIL -->
-                <i class="far fa-envelope icon"></i> 
-                <!--icono uemail de fontawesome.com  y le agregamos mas estilo -->
-                <input type="text" placeholder="Correo electronico">
+                <i class="far fa-envelope icon"></i>     <!--ingreso la caja de texto y el icono EMAIL -->
+                <input type="email" placeholder="Correo electronico" id="usermail" required>    <!--icono uemail de fontawesome.com  y le agregamos mas estilo -->
             </div>
 
             <div class="input-contenedor"> <!--clase contenedor entrada-->
-                <!--ingreso la caja de texto y el icono CONTRASEÑA-->
-                <i class="fas fa-unlock-alt icon"></i> 
-                <!--icono contraseña de fontawesome.com  y le agregamos mas estilo -->
-                <input type="password" placeholder="Contraseña">
+                <i class="fas fa-unlock-alt icon"></i>     <!--ingreso la caja de texto y el icono CONTRASEÑA-->
+                <input type="password" placeholder="Contraseña" id="userpass" required>    <!--icono contraseña de fontawesome.com  y le agregamos mas estilo -->
             </div>
-
-            <!--boton para ingresar la informacion del registro-->
-            <input type="submit" value="Registrarte" class="button">
-            <!--submit=tipo boton, value=nombre que muestra, clasepraraformato button-->
-            <p> Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad. </p>
-            <!--parrafo:TieneCuenta? , clase LINK, redireccion al login INDEX-->
-            <p>¿No tienes una cuenta?  <a class="link" href="index.html">Iniciar Sesión</a></p>
+        
+            <input type="submit" value="Registrarte" class="button"  onclick="registraruser(usereg.value, usermail.value, userpass.value);">    <!--boton para ingresar la informacion del registro-->
+            <!--<button onclick="registraruser(usereg.value, usermail.value, userpass.value);">Ingresar</button> -->
+            <br> <br>
+            <p> Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad. </p>  <!--tipo boton, value=nombre que muestra, clasepraraformato button-->
+            <p>¿Ya tienes una cuenta?  <a class="link" href="index.html">Iniciar Sesión</a></p>   <!--parrafo:TieneCuenta? , clase LINK, redireccion al login INDEX-->
         </div><!--div class contenedor-->
     </form>
-    
 </body>
+
+<script src="js/init.js"></script>
+<!--<script src="js/login.js"></script>-->
+<script src="js/registraruser.js"> </script>
 
 </html>
