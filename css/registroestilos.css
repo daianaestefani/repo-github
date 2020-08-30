@@ -64,6 +64,7 @@ p{
 .link:hover{ 
      color: rgb(233, 19, 126); 
 }
+
 @media(min-width:768px) /*apartir de los 768 pixeles*/
 {/*para que se adapte, cuando cambio pagina de tamaño*/
     .formulario{

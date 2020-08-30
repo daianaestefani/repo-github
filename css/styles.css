@@ -139,3 +139,17 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/* para nombre de usuario*/
+#sesion{
+  
+  font-size: 18px;
+  color: rgb(216, 212, 235);
+  text-shadow: 0 2px 4px rgba(2, 255, 234, 0.972);
+}
+.logout-btn{
+  color: white;
+  background: black;
+  border: none;
+  
+}
