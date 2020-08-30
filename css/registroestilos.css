@@ -58,11 +58,11 @@ p{
 }
 .link{
     text-decoration: none; /*quita subrayado*/
-      color: #1a2537; 
+      color: #300841; 
     font-weight: 600; /*grosor*/
 }
 .link:hover{ 
-     color: rgb(15, 1, 19); 
+     color: rgb(233, 19, 126); 
 }
 @media(min-width:768px) /*apartir de los 768 pixeles*/
 {/*para que se adapte, cuando cambio pagina de tamaño*/
