@@ -12,6 +12,11 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!--<script src="https://apis.google.com/js/api.js"> </script>  <--cargamos la api--> <!--NUCLEO DE LA BIBLIOTECA JAVASCRIPT DE GOOGLE-->
   <!---------------------------------------------------------------------------------------------------------------------->
+  <!--*************Facebook*************-->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v8.0" nonce="FSpUiHYC"></script>
+
+  <!---------------------------------------------------------------------------------------------------------------------->
     <link rel="icon" type="image/ico" href="img/casita.ico">    <!--icono en la pestaña-->
   <!---------------------------------------------------------------------------------------------------------------------->
     <!--se usa para poder ingresar iconos, user, pass, email-->
@@ -54,52 +59,58 @@
     
     <body>
       <div id="content"> </div>
-      <button  onclick="SignOut()"> </button>
         <div class="login-caja">
-            <div class="caja-izquierda"> <!-- login izquierdo -->
-                <h1> Regístrate </h1>
-                <!--
-                <div class="usernombre">-->
-                    <i class="far fa-user iconos"></i> 
-                    <input type="text" class="caja-entrada" placeholder="Nombre de usuario" id="userSOCIAL" required>
-                <!--</div>
-                <div class="usermail">-->
-                    <i class="fas fa-envelope-square iconos"></i> 
-                    <input type="email" class="caja-entrada" placeholder="Correo electrónico" id="emailSOCIAL" required>
-                <!--</div>
-                <div class="userpass">-->
-                    <i class="fas fa-unlock-alt iconos"></i> 
-                    <input type="password" class="caja-entrada" placeholder="Contraseña" id="passSOCIAL" required>
-                <!--
-                <div class="userpass">
-                    <i class="fas fa-unlock-alt iconos"></i> 
-                    <input type="password" class="caja-entrada" placeholder="Repita su Contraseña" id="passConfirm" required>
-                </div> -->     
-                    <input type="submit" class="submit-btn" value="Registrarse" id="LogInBtn" onclick="reregistrando(userSOCIAL.value, emailSOCIAL.value, passSOCIAL.value);">
-                   
-            </div> <!--formato caja-izquierda-->
 
-            <div class="caja-derecha">
-                <span class="titulo-derecho"> Regístrate con : 
-                    <br> Redes Sociales 
-                </span>
+          <div class="caja-izquierda"> <!-- login izquierdo -->
+            <h1> Inicia tu Sesión... </h1>
+            <!--
+            <div class="usernombre">-->
+              <i class="far fa-user iconos"></i> 
+              <input type="text" class="caja-entrada" placeholder="Nombre de usuario" id="userSOCIAL" required>
+            <!--</div>
+            <div class="usermail">-->
+              <i class="fas fa-envelope-square iconos"></i> 
+              <input type="email" class="caja-entrada" placeholder="Correo electrónico" id="emailSOCIAL" required>
+            <!--</div>
+            <div class="userpass">-->
+              <i class="fas fa-unlock-alt iconos"></i> 
+              <input type="password" class="caja-entrada" placeholder="Contraseña" id="passSOCIAL" required>
+              <!--
+              <div class="userpass">
+                <i class="fas fa-unlock-alt iconos"></i> 
+                <input type="password" class="caja-entrada" placeholder="Repita su Contraseña" id="passConfirm" required>
+              </div> -->     
+              <input type="submit" class="submit-btn" value="Iniciar Sesión" id="LogInBtn" onclick="usermailpass(userSOCIAL.value, emailSOCIAL.value, passSOCIAL.value);">
+              <br>
+              <p>¿No tienes cuenta?  <a class="link" href="registrarLogin.html">Regístrate</a></p>  
 
-                <button class="Social Facebook"> <b> Iniciar sesión con Facebook </b> </button>
-                <br>
-                <!--<a href="#" class="google"> <img src="img/icon-google.png" alt="GOOGLE"> Google </a>
-                <br> <br>-->
-                <!--<button class="Social Google" >  <b> Iniciar sesión con Google </b> </button>-->
-                
-                <div class="g-signin2" data-onsuccess="onSignIn"> </div>
-            </div> <!--formato caja-derecha -> loginSocial-->
+          </div> <!--formato caja-izquierda-->
 
-            <!--solo es para ingresar la letra 0, separando entre logindelsitio VS loginSocial -->
-            <div class="or"> 
-                O
-            </div>
-            </div> <!-- formato login-caja-->
+          <div class="caja-derecha">
+              <p class="titulo-derecho"> Inicia con tus <br> Redes Sociales :</p>
+
+              <button class="Social Facebook">
+                <b> Iniciar sesión con Facebook </b> 
+              </button>   <br>
+              <div class = "fb-login-button" data-size = "large" data-button-type = "continue_with" data-layout = "default" data-auto-logout-link = "false" data-use-continue -as = "false" data-width = "" >   </div>
+               <!-- ↑↑↑↑↑↑ facebook boton, pero ni si quiera logro hacer que se vea en la pantalla, mucho menos pude hacer que funcione-->
+              
+              <!--<a href="#" class="google"> <img src="img/icon-google.png" alt="GOOGLE"> Google </a>    <br> <br>-->
+
+              <button class="Social Google" >
+                <b> Iniciar sesión con Google </b>
+              </button>
+              <!-- ↓↓↓↓↓↓↓↓ boton google, si se ve, pero no me funciona. ((es muy probable que le estoy errando en todo)) =S -->
+              <div class="g-signin2 " data-onsuccess="onSignIn"> </div>   <!--<button  onclick="SignOut()"> </button>-->
+          </div> <!--formato caja-derecha -> loginSocial-->
+
+          <!--solo es para ingresar la letra 0, separando entre logindelsitio VS loginSocial -->
+          <div class="or">    O    </div>
+
+        </div> <!-- cierro formato login-caja-->
+
         <label class="condicion"> Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</label> 
-        
+
     </body>
     <script src="js/loginsocial.js" > </script>
   </html>

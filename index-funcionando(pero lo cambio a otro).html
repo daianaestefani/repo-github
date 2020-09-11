@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<!--id cliente google 690440154408-90cdi608u6oq6im0q0acg5uphjpmsm8q.apps.googleusercontent.com-->
+<html lang="en">
+  <head>
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <!--*************GOOGLE*************-->
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="690440154408-90cdi608u6oq6im0q0acg5uphjpmsm8q.apps.googleusercontent.com"> <!--id cliente google-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/api.js"> </script>  <!--cargamos la api--> <!--NUCLEO DE LA BIBLIOTECA JAVASCRIPT DE GOOGLE-->
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <link rel="icon" type="image/ico" href="img/casita.ico">    <!--icono en la pestaña-->
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>eMercado - Todo lo que busques está aquí</title>
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" 
+      rel="stylesheet">
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/loginEstilo.css" rel="stylesheet">
+  <!---------------------------------------------------------------------------------------------------------------------->
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;        
+        /*background-color: #f5f5f5;*/
+        background-image: url("img/fondoshopping.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+      }
+    </style>
+  <!---------------------------------------------------------------------------------------------------------------------->
+  </head>
+  <!--<body class="text-center"> -->
+  <main class="loginformato">
+    <!--comenzamos el diseño del login-->
+    <div>
+      <h1>Iniciar sesión para continuar</h1> <br>
+
+      <!--usuario-->
+      <label><b>Usuario</b> </label>
+      <input type="text" id="user" name="usuario" placeholder="&#128100;  usuario" required>
+      <br>      <br>
+          <!--contraseña-->
+      <label> <b>Contraseña</b> </label>
+      <input type="password" id="pass" placeholder="&#128272;  contraseña" required>
+      <br>      <br>
+
+      <!--class="recordarolvidar"> clase para recordar/olvidar-->
+      <input  type="checkbox" id="ckb1"> 
+      <label for="ckb1"> Recordarme </label> <br>
+        <!--checkbox <label class="label-checkbox" for="chkb">Recordarme</label> </div>clase para checkbox-->
+
+        <!--link, olvido contraseña?-->
+      <a href="#" class="txt1"> ¿Olvidó la contraseña?</a>
+
+      <button onclick="loginUser(user.value, pass.value);">Ingresar</button>      
+      <br> <br>
+
+      <!--lebel, No está registrado?-->
+      <p>¿No está registrado? ?  
+      <!--HIPERVINCULO, para registrarse-->
+      <a class="link txt2" href="registrarLogin.html">Registrar ahora</a></p>
+      <br> <br> <br> <br>
+
+      <!--<div class="label2"> O iniciar con  </div>-->
+      <h3> O iniciar sesión usando   </h3> <br><br>
+
+      <!--<div class="g-signin2" data-onsuccess="onSignIn"> Iniciar con Google</div>  BOTON INICIAR SESIÒN CON GOOGLE-->
+      <div class="g-signin2" data-onsuccess="onSignIn"> </div>
+
+      <!--boton Facebook-->
+      <a href="#" class="btn-face btn-margen"> 
+      <i class="fa fa-facebook-official" onclick=""></i> Facebook </a> 
+
+      <h4> O </h4> <br>
+
+      <!--boton Google-->
+      <a href="#" class="btn-google btn-margen "> 
+        <img src="img/icon-google.png" alt="GOOGLE"> Google 
+      </a>
+
+    </div> <!--div dentro del login-->
+  </main> <!--<main class="loginformato">-->
+
+ 
+  <!--tranqui
+  <div class="container p-5">
+    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
+      <h4 class="alert-heading">¡A trabajar! :)</h4>
+      <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 16/08/2020) -> Punto 3 y 4.</p> 
+      <hr>
+      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    </div>
+  </div>-->
+  <script src="js/init.js"></script>
+  <script src="js/login.js"></script>
+</html>

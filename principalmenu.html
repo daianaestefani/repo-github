@@ -21,9 +21,12 @@
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>        
-        <a class="py-2 d-none d-md-inline-block" id="sesion"></a> <!--nombre usuario-->
-        <!--<a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> --> 
-        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="localStorage.clear(); alert('Cerrando sesión de usuario: '+sesion); location.href='index.html';"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
+        <a class="py-2 d-none d-md-inline-block" id="sesion"></a> <!--nombre usuario--><!-- --> 
+        <!--boton Cerrar Sesión-->  
+        <!-- cerrar sesion de google-->
+        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="signOut();"> Log Out Google</button>  </a>
+        <!-- cerrar sesion del sitio web-->
+        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="cerrarsesion();"> Cerrar Sesión </button> </a>
       </div>
     </nav>
 
@@ -114,6 +117,6 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/loginsocial.js"></script>
   </body>
 </html>

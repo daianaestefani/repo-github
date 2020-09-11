@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
-<!--id cliente google 690440154408-90cdi608u6oq6im0q0acg5uphjpmsm8q.apps.googleusercontent.com-->
+<!--id cliente google SERVER 690440154408-90cdi608u6oq6im0q0acg5uphjpmsm8q.apps.googleusercontent.com-->
+<!--id cliente google local:  690440154408-pqtnmhq48jp0jporto5g157e91ivd34c.apps.googleusercontent.com -->
 <html lang="en">
   <head>
   <!---------------------------------------------------------------------------------------------------------------------->
@@ -8,9 +9,13 @@
   <!---------------------------------------------------------------------------------------------------------------------->
     <!--*************GOOGLE*************-->
     <!--<meta name="google-signin-scope" content="profile email">-->
-    <meta name="google-signin-client_id" content="690440154408-90cdi608u6oq6im0q0acg5uphjpmsm8q.apps.googleusercontent.com"> <!--id cliente google-->
+    <!-- --------   conectando con github
+    <meta name="google-signin-client_id" content="690440154408-90cdi608u6oq6im0q0acg5uphjpmsm8q.apps.googleusercontent.com"> --><!--id cliente google-->
+    <!-- --------   conectando con servidor local-->
+    <meta name="google-signin-client_id" content="690440154408-8qhnlt2o6el02tpfo9pp9s7428r4bvd7.apps.googleusercontent.com"> <!--id cliente google local-->
+    
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <!--<script src="https://apis.google.com/js/api.js"> </script>  <--cargamos la api--> <!--NUCLEO DE LA BIBLIOTECA JAVASCRIPT DE GOOGLE-->
+    <script src="https://apis.google.com/js/api.js"> </script>  <!--cargamos la api--> <!--NUCLEO DE LA BIBLIOTECA JAVASCRIPT DE GOOGLE-->
   <!---------------------------------------------------------------------------------------------------------------------->
   <!--*************Facebook*************-->
     <div id="fb-root"></div>
@@ -94,22 +99,21 @@
               </button>   <br>
               <div class = "fb-login-button" data-size = "large" data-button-type = "continue_with" data-layout = "default" data-auto-logout-link = "false" data-use-continue -as = "false" data-width = "" >   </div>
                <!-- ↑↑↑↑↑↑ facebook boton, pero ni si quiera logro hacer que se vea en la pantalla, mucho menos pude hacer que funcione-->
-              
-              <!--<a href="#" class="google"> <img src="img/icon-google.png" alt="GOOGLE"> Google </a>    <br> <br>-->
 
               <button class="Social Google"   onclick="alert('Éste botón no está funcionando... Inicia ingresando tus datos..');";>
                 <b> Iniciar sesión con Google </b>
               </button>
-              <!-- ↓↓↓↓↓↓↓↓ boton google, si se ve, pero no me funciona. ((es muy probable que le estoy errando en todo)) =S -->
+
+              <!--<a href="#" class="google"> <img src="img/icon-google.png" alt="GOOGLE"> Google </a>    <br> <br>-->
+              <!-- ↓↓↓↓↓↓↓↓ boton google, se ve, tambien inicia sesion-->
               <div class="g-signin2 " data-onsuccess="onSignIn"> </div>   <!--<button  onclick="SignOut()"> </button>-->
           </div> <!--formato caja-derecha -> loginSocial-->
 
           <!--solo es para ingresar la letra 0, separando entre logindelsitio VS loginSocial -->
           <div class="or">    O    </div>
-
         </div> <!-- cierro formato login-caja-->
 
-        <label class="condicion"> Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</label> 
+        <label class="condicion align-center"> Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</label> 
 
     </body>
     <script src="js/loginsocial.js" > </script>

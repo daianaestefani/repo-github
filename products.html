@@ -23,12 +23,13 @@
         <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a> <!--CATEGORIA-->
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>    <!--PRODUCTOS-->
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>           <!--VENDER-->
-        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>        
-
+        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      
         <a class="py-2 d-none d-md-inline-block"> <span id="sesion"></span> </a> <!--nombre usuario-->
-        <!--<a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> --> 
-        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="localStorage.clear(); alert('Desconectando usuario: '+ sesion); location.href='index.html';"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
-      </div>
+        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="cerrarsesion"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
+      <!--  <a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> -->
+        <a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> 
+        </div>
     </nav>
   
     <script>
@@ -85,7 +86,7 @@
               <div class="col-md-6 col-sm-12 mb-1 container">
                 <div class="row container p-0 m-0">
                   <div class="col">
-                    <p class="font-weight-normal text-right my-2">Cant. artículos</p>
+                    <p class="font-weight-normal text-right my-2">Precio</p>
                   </div>
                   <div class="col">
                     <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
@@ -102,7 +103,9 @@
                 </div>
               </div>
           </div>
-
+          <div class="divSearch"> <!--barra buscador, para buscarPRODUCTO, segun descripcion o nombre-->
+            <input id="inputSearch" type="search" placeholder=" ¿ Qué desea buscar ? " required/>
+          </div>
         <div class="row"> 
           <div class="list-group" id="pro-list-container"> </div>  
         </div>
@@ -125,5 +128,6 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/products.js"></script>
+    <script src="js/loginsocial.js" > </script>
   </body>
 </html>
