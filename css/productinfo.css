@@ -1,0 +1,94 @@
+/*productinfo*/
+/*
+CONSEGUI LOS FORMATOS DE UNA PAGINA WEB 
+(https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img)
+(https://www.w3schools.com/code/tryit.asp?filename=GIGJ8GCZ3Q1P)
+MOPDIFIQUE MUY POCAS COSAS...
+
+formatos extras para darle a la pagina productos-info
+*//*
+*/
+#myImg {
+  border-radius: 10px; /*border de la imagen*/
+  cursor: pointer;	   /*cuando señalo c/mouse, aparece la manito*/
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (fondo) */
+.modal {
+  display: none; 					/* Oculto por defecto */
+  position: fixed; 					/* Permanecer en el lugar */
+  z-index: 1; 						/* Sit arriba */
+  padding-top: 100px; 				/* Localizacion en la caja */
+  left: 0;							/*izquierda - 0*/
+  top: 0;							/*arriba - 0*/
+  width: 100%; 						/* ancho completo */
+  height: 100%; 					/* alto completo */
+  overflow: auto; 					/* Habilita scroll si es necesario */
+  background-color: black; 			/* color de fondo */
+  background-color: rgba(0,0,0,0.8);/* Black con/ opacidad */
+}
+
+/*contenido modal (imagen)*/
+.modal-content {
+  margin: auto;			/*margen automatico*/
+  display: block;		/*pantalla bloqueda*/
+  width: 80%;			/*ancho*/
+  max-width: 700px;		/*ancho maximo */
+}
+
+/* Título de la imagen modal*/
+#caption {
+  margin: auto; 		/*margen - automatica*/
+  display: block;		/*pantalla-bloqueada*/
+  width: 80%;			/*ancho 80% */
+  max-width: 700px; 	/*ancho maximo - 700pixeles*/
+  text-align: center; 	/*alineacion de texto: centrada*/
+  color: #ccc; 			/*color de texto*/
+  padding: 10px 0; 		/*relleno : 10pixeles, 0*/
+  height: 150px;		/*altura : 150 pixeles*/
+}
+
+/*Agregar animacion*/
+.modal-content, #caption {   /*modal-content y #caption*/
+  -webkit-animation-name: zoom;		/* nombre de animacion: aumento*/
+  -webkit-animation-duration: 0.6s;	/* duracion de animacion 0.6segundos */
+  animation-name: zoom;				/* nombre de animacion: aumento*/
+  animation-duration: 0.6s;			/* duracion de animacion 0.6segundos */
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} /*desde*/
+  to {transform:scale(1)}	/*hasta*/
+}
+
+/* Button para cerrar la imagen grande*/
+.close {
+  position: absolute;
+  top: 10px;
+  right: 35px;
+  color: yellow;
+  font-size: 60px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.close:hover,
+.close:focus { /*cuando click/paso sobre la X cerrar*/
+  color: salmon;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ancho de imagen del 100% en pantallas mas pequeñas*/
+@media only screen and (max-width: 700px){
+  .modal-content { /*a todo el modal*/
+    width: 100%;/*ancho -100%*/
+  }
+}
