@@ -1,3 +1,4 @@
+
 var category = {};
 
 function showImagesGallery(array){
