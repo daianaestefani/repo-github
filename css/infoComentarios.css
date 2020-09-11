@@ -1,0 +1,64 @@
+/*******************************************************************/
+/***********usando ejercicio de la clase para comentarios***********/
+/***************estilo de estrellas para comentarios****************/
+
+ .puntuacion {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    }
+
+    .puntuacion input {
+    position: absolute;
+    top: -100px;
+    }
+
+
+    .puntuacion label {
+    float: right;
+    color: #c1b8b8;
+    font-size: 30px; 
+    }
+
+    .puntuacion label:hover,
+    .puntuacion label:hover ~ label,
+    .puntuacion input:checked ~ label {
+    color:orange;
+    }
+    span{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 400;
+        color: rgb(1, 1, 31);
+    }
+
+/****************estilo: formato para formulario..*****************/
+    .formComentario{ 
+        background-color: rgba(236, 236, 236, 0.431);
+        padding-left: 20px;
+        color: red;
+        font-weight: bold;
+    }
+
+    .lblComentario{
+        color: red;
+        border: red;
+    }
+
+    .ingresarComentario{ 
+        background-color: rgb(240, 216, 232) !important;
+        padding-left: 20px;
+        color: rgb(63, 4, 15) !important;
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+
+        float: inline-start; /*Especifica cómo debe flotar una caja. Se puede configurar para cualquier elemento, pero solo se aplica a elementos que generan cajas que no están absolutamente posicionadas.*/
+        vertical-align: middle;
+        margin-right:auto;
+        
+        /*text-size-adjust: auto; /*ajuste de tamaño de texto controla el algoritmo de inflación de texto utilizado en algunos teléfonos inteligentes y tabletas*/
+        /*display: inline-block !important; /*para que el formato termine en donde terminan los elementos*/        
+    }
+    .areatext{
+        width: 15cm;
+        height: 2cm;
+    }

@@ -153,3 +153,27 @@ a.custom-card:hover {
   border: none;
   
 }
+/********************** formato para la barra de busqueda, cuando se ve, cuando se hace click*/
+#inputSearch{
+  color: brown;
+  background-color: rgb(245, 189, 222);
+  margin: .4rem 0;
+  border-color: salmon;
+  border-radius: 50px 20px;
+  box-shadow: 3px 3px darksalmon;
+  width: 7cm;
+  height: 1cm;
+  align-content: center;
+  padding-left: 20px;
+  padding-right:20px;
+}
+#inputSearch:active, #inputSearch:hover{
+  background: pink;
+  border-radius: 50px 20px;
+  border-color: white;
+  outline: none;  
+  padding: 2px;
+  padding-left: 20px;
+  padding-right:20px;
+
+}
