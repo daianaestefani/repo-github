@@ -177,3 +177,33 @@ a.custom-card:hover {
   padding-right:20px;
 
 }
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ESTAMOS AGREGANDO UN MENU DESPLEGABLE:
+PARA PODER VER EL PERFIL DE USUARIO, BOTON DE CERRARSESION
+obtenido de internet
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-menu {
+    display:none;
+    position: absolute;
+    background-color: white;
+    min-width: 155px;
+    overflow:auto;
+    z-index: 1;
+    color:black;
+    padding: 8px 10px;
+}
+.dropdown-toggle a{
+    color: black;
+    padding: 6px 8px;
+    text-decoration: none;
+    display:block;
+}
+.dropdown a:hover {
+      background-color: yellow;
+}
