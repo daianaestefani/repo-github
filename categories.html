@@ -17,21 +17,33 @@
   <body>
     <nav class="site-header sticky-top py-1 bg-dark">
       <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-        <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-        <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-        <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>        
-        <a class="py-2 d-none d-md-inline-block" id="sesion"></a> <!--nombre usuario-->
-        <!--<a class="py-2 d-none d-md-inline-block"> <a href="#" onclick="signOut();"> </a>  </a> --> 
-        <a class="py-2 d-none d-md-inline-block"> <button class="logout-btn" onclick="localStorage.clear(); alert('Cerrando sesión de usuario: '+sesion); location.href='index.html';"> Cerrar Sesión</button> <!--boton Cerrar Sesión--> </a>
-      </div>
-    </nav>
+          <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
+          <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+          <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+          <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+          <!--dentro de la barra menu-->
 
-    <script>
-        var sesion = localStorage.getItem("usuario");
-        document.getElementById('sesion').innerHTML=sesion;
-    </script>
+          <!-- ahora agrego dentro del nombre del usuario: el carrito, elboton de cerrar sesión -->
+            <a class="nav-link dropdown-toggle" id="sesion" href="#" data-toggle="dropdown">Usuario</a> <!--para que se cree el desplegable -->
+            <a class="py-2 d-none d-md-inline-block" id="sesion"><!--</a>nombre usuario--><!-- -->
+
+            <div class="dropdown-menu" id="usuarioNombre">              <!--mostrando el menu desplegable del usuario-->
+                <li> <a class="drpdown-item" id="usuarioPerfil" href="my-profile.html">Mi perfil</a>  </li>
+                <li> <a class="drpdown-item" id="usuarioPerfil" href="cart.html">Mi carrito</a>  </li>
+                <!--boton Cerrar Sesión-->
+                  <!-- cerrar sesion de google-->
+                <li> <a class="drpdown-item"> <button class="logout-btn" onclick="signOut();"> Log Out Google </button> </a> </li>
+                  <!-- cerrar sesion del sitio web-->
+                <li> <a class="drpdown-item"> <button class="logout-btn" onclick="cerrarsesion();"> Cerrar Sesión </button> </a> </li>
+            </div> <!-- cierro:  <div class="dropdown-menu" id="usuarioNombre">-->
+      </div> <!-- cierro:  <div class="container d-flex flex-column flex-md-row justify-content-between"> -->
+  </nav>
+
+  <script>
+    var sesion = localStorage.getItem("usuario");
+    document.getElementById("sesion").innerHTML = sesion;    
+  </script>
+  
     <main role="main" class="pb-5">
         <div class="text-center p-4">
             <h2>Categorías</h2>
