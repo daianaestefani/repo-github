@@ -86,7 +86,7 @@ function showProdsList(){       //function showProdsList(array){
                 ( (maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount) ) ){
 
                 htmlContentToAppend += `
-                <div class="list-group-item list-group-item-action">
+                <a href="product-info.html" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-3"> <img src="` + product.imgSrc + `" alt="` + product.name + `" class="img-thumbnail"> </div>
                         <div class="col">
@@ -97,13 +97,13 @@ function showProdsList(){       //function showProdsList(array){
                             <small class="text-muted">` + product.description + `</small>
                         </div>
                     </div>
-                </div>
+                </a>
                         `
 
             }//busca el elemento en la lista con innertext
 
         }//FIN DE  if ( (barrabusquedafiltro == undefined) || (productName.includes(barrabusquedafiltro)) || (productDescription.includes(barrabusquedafiltro)) )
-    document.getElementById("pro-list-container").innerHTML = htmlContentToAppend;
+    document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
     }   // for(let i = 0; i < prodsArray.length; i++){
 }       //function showProdsList(){ 
 
