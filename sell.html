@@ -31,7 +31,7 @@
   </head>
   <body>
     <nav class="site-header sticky-top py-1 bg-dark">
-      <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <div class="container d-flex flex-column flex-md-row justify-content-between doradogradiente">
           <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
           <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
           <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
@@ -39,19 +39,21 @@
           <!--dentro de la barra menu-->
 
           <!-- ahora agrego dentro del nombre del usuario: el carrito, elboton de cerrar sesión -->
-            <a class="nav-link dropdown-toggle" id="sesion" href="#" data-toggle="dropdown">Usuario</a> <!--para que se cree el desplegable -->
-            <a class="py-2 d-none d-md-inline-block" id="sesion"><!--</a>nombre usuario--><!-- -->
 
-            <div class="dropdown-menu" id="usuarioNombre">              <!--mostrando el menu desplegable del usuario-->
-                <li> <a class="drpdown-item" id="usuarioPerfil" href="my-profile.html">Mi perfil</a>  </li>
-                <li> <a class="drpdown-item" id="usuarioPerfil" href="cart.html">Mi carrito</a>  </li>
-                <!--boton Cerrar Sesión-->
-                  <!-- cerrar sesion de google-->
-                <li> <a class="drpdown-item"> <button class="logout-btn" onclick="signOut();"> Log Out Google </button> </a> </li>
-                  <!-- cerrar sesion del sitio web-->
-                <li> <a class="drpdown-item"> <button class="logout-btn" onclick="cerrarsesion();"> Cerrar Sesión </button> </a> </li>
-            </div> <!-- cierro:  <div class="dropdown-menu" id="usuarioNombre">-->
-      </div> <!-- cierro:  <div class="container d-flex flex-column flex-md-row justify-content-between"> -->
+          <div class="dropdown" style="min-width: 10%;"> 
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span id="sesion" style="padding: 0 6px 0 6px;"> Usuario</span>
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"> <!--mostrando el menu desplegable del usuario-->
+              <a class="dropdown-item "  href="cart.html">  Mi Carrito <span id="totalSeleccionados" class="badge badge-success"> 0</span>  </a>
+              <a class="dropdown-item" id="usuarioPerfil" href="my-profile.html">Mi perfil</a>
+
+              <div class="dropdown-divider"> </div> <!--linea para dividir el menu-->                         
+              <button class="dropdown-item logout-btn" onclick="cerrarsesion();"> Cerrar Sesión </button>        <!-- cerrar sesion del sitio web--> 
+              <!--<button class="dropdown-item logout-btn" onclick="signOut();"> Log Out Google</button>       < !-- cerrar sesion de google NO LOGRA DESCONECTARSE...-->
+            </div> 
+          </div><!--class="dropdown" style="min-width: 10%;"-->
   </nav>
 
   <script>
@@ -237,5 +239,7 @@
       <script src="js/dropzone.js"></script>
       <script src="js/init.js"></script>
       <script src="js/sell.js"></script>
-    </body>
+      <script src="js/loginsocial.js"></script>
+      <script> document.getElementById("usuaregistrado").innerText = "Usuario: " + localStorage.getItem("usuario"); </script>
+  </body>
 </html>

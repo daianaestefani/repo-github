@@ -72,20 +72,14 @@
             <div class="usernombre">-->
               <i class="far fa-user iconos"></i> 
               <input type="text" class="caja-entrada" placeholder="Nombre de usuario" id="userSOCIAL" required>
-            <!--</div>
-            <div class="usermail">-->
-              <i class="fas fa-envelope-square iconos"></i> 
-              <input type="email" class="caja-entrada" placeholder="Correo electrónico" id="emailSOCIAL" required>
-            <!--</div>
-            <div class="userpass">-->
+            <!--</div>-->
+              <br>
+            <!--<div class="userpass">-->
               <i class="fas fa-unlock-alt iconos"></i> 
               <input type="password" class="caja-entrada" placeholder="Contraseña" id="passSOCIAL" required>
-              <!--
-              <div class="userpass">
-                <i class="fas fa-unlock-alt iconos"></i> 
-                <input type="password" class="caja-entrada" placeholder="Repita su Contraseña" id="passConfirm" required>
-              </div> -->     
-              <input type="submit" class="submit-btn" value="Iniciar Sesión" id="LogInBtn" onclick="usermailpass(userSOCIAL.value, emailSOCIAL.value, passSOCIAL.value);">
+            <!--</div>-->
+            <br>
+              <input type="submit" class="submit-btn" value="Iniciar Sesión" id="LogInBtn" onclick="loginUser(userSOCIAL.value, passSOCIAL.value);">
               <br>
               <p>¿No tienes cuenta?  <a class="link" href="registrarLogin.html">Regístrate</a></p>  
 
@@ -104,9 +98,10 @@
                 <b> Iniciar sesión con Google </b>
               </button>
 
-              <!--<a href="#" class="google"> <img src="img/icon-google.png" alt="GOOGLE"> Google </a>    <br> <br>-->
-              <!-- ↓↓↓↓↓↓↓↓ boton google, se ve, tambien inicia sesion-->
-              <div class="g-signin2 " data-onsuccess="onSignIn"> </div>   <!--<button  onclick="SignOut()"> </button>-->
+
+              <!-- ↓↓↓↓↓↓↓↓ boton google, SI inicia sesion, pero lo comento porque NO LOGRO QUE FUNCIONE EL BOTON CERRAR SESION CON GOOGLE-->
+        <!--    <div class="g-signin2 btngooglesocial" data-onsuccess="onSignIn" > </div> -->  <!--<button  onclick="SignOut()"> </button>-->
+
           </div> <!--formato caja-derecha -> loginSocial-->
 
           <!--solo es para ingresar la letra 0, separando entre logindelsitio VS loginSocial -->
