@@ -30,7 +30,7 @@
             </button>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"> <!--mostrando el menu desplegable del usuario-->
-              <a class="dropdown-item "  href="cart.html">  Mi Carrito <span id="totalSeleccionados" class="badge badge-success"> 0</span>  </a>
+              <a class="dropdown-item "  href="cart.html">  Mi Carrito <span id="cantSeleccionados" class="badge badge-success"> 0</span>  </a>
               <a class="dropdown-item" id="usuarioPerfil" href="my-profile.html">Mi perfil</a>
 
               <div class="dropdown-divider"> </div> <!--linea para dividir el menu-->                         
@@ -127,7 +127,8 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
-          <script src="js/loginsocial.js"></script>
-      <script> document.getElementById("usuaregistrado").innerText = "Usuario: " + localStorage.getItem("usuario"); </script>
+    <script src="js/loginsocial.js"></script>
+    <script src="js/cart.js"></script>
+    <script> document.getElementById("usuaregistrado").innerText = "Usuario: " + localStorage.getItem("usuario"); </script>
   </body>
 </html>
