@@ -65,7 +65,7 @@ function mostrarCarrito() {
                     <th>`+ 'USD' + " " + monedaDolar + ' ~ ' + 'UYU' + " " + monedaUY + `</th>
                     <th><input id="idinput_` + i + `" class="form-control" type="number" min="0" value="`+ miCarrito[i].count +`" onChange="modificarProducto(` + i + `, idinput_` + i + `.value)"</></th>
                     <th>` + subTotal + ` ` + " - UYU " + `</th>
-                    <td class="text-right"><button id="btnsupr" class="btn btn-sm btn-danger" onclick="quitarProducto();"><i class="fa fa-trash"></i> </button> </td>
+                    <td class="text-right"><button id="btnsupr" class="btn btn-sm btn-danger" onclick="quitarProducto(`+i+`);"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 `;
         }
@@ -123,12 +123,13 @@ function modificarProducto(indice, nuevoValor) {
 }
 
 function quitarProducto(lugar) {
-    miCarrito.splice(lugar, 1);
+    miCarrito.splice(lugar,1);
+    mostrarCarrito(miCarrito);
 }
 function vaciarCarrito() {
     miCarrito.removeItem("tableList")
     //sessionStorage.removeItem("listProducts");
-    mostrarCarrito();
+    mostrarCarrito(miCarrito);
 }
 
 //verificar que se escriba en todos los campos
