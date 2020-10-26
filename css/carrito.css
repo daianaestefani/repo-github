@@ -21,6 +21,9 @@
 .centrado{
   text-align: center;
 }
+.ctrcnt{
+  align-content: center;
+}
 .derecha{
   text-align: right;
 }
@@ -34,4 +37,9 @@ body{
 
 .totales span{
   text-align: right;
+}
+
+.ltrfnd{ /*fondo negro, letra amarrilla*/
+  color: black;
+  background-color: goldenrod;
 }

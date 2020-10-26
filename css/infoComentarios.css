@@ -45,9 +45,9 @@
     }
 
     .ingresarComentario{ 
-        background-color: rgb(240, 216, 232) !important;
+        background-color: rgb(243, 237, 168) !important;
         padding-left: 20px;
-        color: rgb(63, 4, 15) !important;
+        color: rgb(122, 6, 88) !important;
         padding-top: 0.5rem !important;
         padding-bottom: 0.5rem !important;
 
@@ -71,5 +71,23 @@
 
     .comentarios{
              text-align:center;
-             font-size: 50px;
+             font-size: 25px;
     }
+
+    
+.adjuntarpro{
+    min-width: 40%;
+    background-color: rgb(241, 241, 119);
+    align-content: center;
+    align-items: center;
+  }
+  
+  .darktime{
+    color:black;
+    border:none;
+  }
+  
+  .areatext{
+    color:darkblue;
+    background-color: smooth;
+  }

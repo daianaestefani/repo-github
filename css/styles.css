@@ -136,6 +136,9 @@ a.custom-card:hover {
   text-decoration: inherit;
 }
 
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
 .checked {
   color: orange;
 }
@@ -145,22 +148,30 @@ a.custom-card:hover {
   
   font-size: 18px;
   color: rgb(216, 212, 235);
-  text-shadow: 0 2px 4px rgba(2, 255, 234, 0.972);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.664);
 }
 .logout-btn{
-  color: white;
+  color: gold;
   background: black;
   border: none;
   
 }
+
+/********************** formano para la barra de menues **********************/
+.doradogradiente {
+  background: linear-gradient(180deg, #fcff9e 0%, #c67700 100%);
+  color: black;
+}
+/*
+color dorado >>>> color: #FFD700;*/
 /********************** formato para la barra de busqueda, cuando se ve, cuando se hace click*/
 #inputSearch{
-  color: brown;
-  background-color: rgb(245, 189, 222);
+  color: rgb(0, 0, 0);
+  background-color: rgb(238, 229, 150);
   margin: .4rem 0;
-  border-color: salmon;
+  border-color: rgb(227, 231, 0);
   border-radius: 50px 20px;
-  box-shadow: 3px 3px darksalmon;
+  box-shadow: 3px 3px rgb(226, 233, 122);
   width: 7cm;
   height: 1cm;
   align-content: center;
@@ -168,9 +179,9 @@ a.custom-card:hover {
   padding-right:20px;
 }
 #inputSearch:active, #inputSearch:hover{
-  background: pink;
+  background: rgb(245, 180, 59);
   border-radius: 50px 20px;
-  border-color: white;
+  border-color: rgb(204, 204, 204);
   outline: none;  
   padding: 2px;
   padding-left: 20px;
@@ -183,7 +194,7 @@ ESTAMOS AGREGANDO UN MENU DESPLEGABLE:
 PARA PODER VER EL PERFIL DE USUARIO, BOTON DE CERRARSESION
 obtenido de internet
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-*/
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -206,4 +217,5 @@ obtenido de internet
 }
 .dropdown a:hover {
       background-color: yellow;
-}
+}*/
+

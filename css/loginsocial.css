@@ -152,6 +152,11 @@ p{ /*texto. ¿no tiene una cuenta?*/
   background: rgb(241, 129, 245);
   cursor: pointer;
 }
+.btngooglesocial:hover{
+  background: (45deg, #2c1602, #ffc400);
+  transition-duration: 3s;
+  size: 2cm;
+}
 
 /*pasando mouse por arriva/hago click*/
 .Social:hover, .Social:focus {
