@@ -69,8 +69,8 @@ function mostrarCarrito() {
                 </tr>
                 `;
         }
-        document.getElementById('cantSeleccionados').innerHTML = miCarrito.length ;
-        document.getElementById('cantSelec').innerHTML = miCarrito.length ;
+        document.getElementById('cantSeleccionados').innerHTML = miCarrito.length;
+        document.getElementById('cantSelec').innerHTML = miCarrito.length; //en la pagina de carrito, muestro la cantidad de productos seleccionados
     }
     else {
         cargarmostrar = `
@@ -79,9 +79,8 @@ function mostrarCarrito() {
                 </tr>
                 `;
         document.getElementById('cantSeleccionados').innerHTML = miCarrito.length;
-        document.getElementById('cantSelec').innerHTML = miCarrito.length;
+        document.getElementById('cantSelec').innerHTML = miCarrito.length; //en la pagina de carrito, muestro la cantidad de productos seleccionados
     }
-
     document.getElementById('tableList').innerHTML = cargarmostrar;
 
     document.getElementById("stotal").innerText = "Total: UYU $ " +  subT;  //final de la tabla mmuestra un subtotal, faltando ecalcular el costo de envio
@@ -97,7 +96,7 @@ let productCost = 0;
 function actualizarCostsTotal(){
     let subProductCostHTML = document.getElementById("subTotalsinEnvio");//Subtotal
     let porcentajeEnvioHTML = document.getElementById("costoEnvio");//Costo de envío
-    let totalCostHTML = document.getElementById("costototal"); //Costo Total 
+    let totalCostHTML = document.getElementById("costototal"); //Costo Total  (subTotal+ costoEnvio)
 
     let showCostSB = UY_SYMBOL + productCost; //muestro costo subtotal
     let showPorcentaje = Math.round((porcentage * productCost));
@@ -127,9 +126,9 @@ function quitarProducto(lugar) {
     mostrarCarrito(miCarrito);
 }
 function vaciarCarrito() {
-    miCarrito.removeItem("tableList")
-    //sessionStorage.removeItem("listProducts");
-    mostrarCarrito(miCarrito);
+    //miCarrito.removeItem("tableList")
+    sessionStorage.removeItem("tableList");
+    mostrarCarrito();
 }
 
 //verificar que se escriba en todos los campos
@@ -140,16 +139,10 @@ function vaciarCarrito() {
     document.getElementById('validar').addEventListener("click",function(){
 
         var calleInput = document.getElementById("calle");
-        //var checkCALLE = document.getElementById("tickcalle");
-        //var marcaCALLE = "";        
 
         var esquinaInput = document.getElementById("esquina");
-        //var checkESQUINA = document.getElementById("tickesquina");
-        //var marcaESQUINA = "";        
 
         var dnumero = document.getElementById("dnumero");
-        //var checkPUERTA = document.getElementById("tickPUERTA");
-        //var marcaPUERTA = "";
 
         //Quito las clases que marcan como inválidos
         calleInput.classList.remove('is-invalid');
@@ -167,40 +160,22 @@ function vaciarCarrito() {
         //Consulto por la calle en la direcion
         if (calleInput.value === ""){
             calleInput.classList.add('is-invalid');
-            //marcaCALLE ="X";
-            //checkCALLE.classList.add('mal');
         }else{
             calleInput.classList.add('is-valid');
-            //marcaCALLE="&#10004;";
-            //checkCALLE.classList.add('bien');
         }
         //Consulto por la esquina en la direccion
         if (esquinaInput.value === ""){
             esquinaInput.classList.add('is-invalid');
-            //marcaESQUINA ="X";
-            //checkESQUINA.classList.add('mal');
         }else{
             esquinaInput.classList.add('is-valid');
-            //marcaESQUINA ="&#10004;";
-            //checkESQUINA.classList.add('bien');
         }
         //Consulto por el número de puerta en la direccion
         if (dnumero.value <=0){
             dnumero.classList.add('is-invalid');
-            //marcaPUERTA ="X";
-            //checkPUERTA.classList.add('mal');
         }else{
             dnumero.classList.add('is-valid');
-            //marcaPUERTA="&#10004;";
-            //checkPUERTA.classList.add('bien');
         }
-        //document.getElementById('tickcalle').innerHTML = marcaCALLE;
-        //document.getElementById('tickesquina').innerHTML = marcaESQUINA;
-        //document.getElementById('tickPUERTA').innerHTML = marcaPUERTA;
-        /*
-        //Esto se debe realizar para prevenir que el formulario se envíe (comportamiento por defecto del navegador)
-        if (e.preventDefault) e.preventDefault();
-            return false;*/
+
     });
 
     /////////////////////////////////////////////////////////////////////////////////

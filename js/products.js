@@ -86,20 +86,20 @@ function showProdsList(){       //function showProdsList(array){
                 ( (maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount) ) ){
 
                 htmlContentToAppend += `
-                <a href="product-info.html" class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-3"> <img src="` + product.imgSrc + `" alt="` + product.name + `" class="img-thumbnail"> </div>
-                        <div class="col">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">`+ product.name + ' _ ' + product.currency + ' ' + product.cost+ `</h4>
-                                <small class="text-muted">` + product.soldCount + ` artículos </small>
-                            </div>
-                            <small class="text-muted">` + product.description + `</small>
-                        </div>
-                    </div>
-                </a>
-                        `
+                <div class="col-md-4">
 
+                    <a href="product-info.html" class="card custom-card mb-4 ltrfnd">
+    
+                        <img src="` + product.imgSrc + `" alt="` + product.description + `" class="bd-placeholder-img card-img-top">
+
+                        <h4 class="m-3">`+ product.name +`</h4>
+                        <div class="card-body"> 
+                            <p class="card-text"> `+ product.currency + ' ' + product.cost+ `</p>
+                            <small class="card-text">` + product.soldCount +  ` artículos </small>
+                            <p class="card-text">` + product.description + `</p>
+                        </div>
+                    </a>
+                </div>                `
             }//busca el elemento en la lista con innertext
 
         }//FIN DE  if ( (barrabusquedafiltro == undefined) || (productName.includes(barrabusquedafiltro)) || (productDescription.includes(barrabusquedafiltro)) )
