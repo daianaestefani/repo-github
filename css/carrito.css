@@ -41,5 +41,15 @@ body{
 
 .ltrfnd{ /*fondo negro, letra amarrilla*/
   color: black;
-  background-color: goldenrod;
+  background: linear-gradient(60deg, goldenrod 40%, yellow);
+  border: 2px solid yellow;
+  border-radius: 8px;
+
+}
+
+.fndodorado{
+  background: linear-gradient(45deg, #FFF2A8 20%, gold);
+}
+.yellow-palido{
+  background-color: rgb(248, 242, 191);
 }
