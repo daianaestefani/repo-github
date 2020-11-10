@@ -20,11 +20,17 @@
     <link href="css/carrito.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">   
     <!--------------------------------------------------------------------------------------------------------------------->
+    <style>
+      .fondoamarillo{
+        background-color: green;
+      }
+    </style>
+
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-light doradogradiente">
       <!-- El logotipo y el icono que despliega el menú se agrupan para mostrarlos mejor en los dispositivos móviles -->
-      <span class="navbar-brand w-25">E-Commerce</span>
+      <span class="navbar-brand w-25"><a href="principalmenu.html">E-Commerce</a></span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" 
               data-target="#navbarSupportedContent" 
               aria-controls="navbarSupportedContent" 
@@ -88,14 +94,12 @@
     </div>--> 
     <!--MENU, MOSTRANDO LISTADO PRODUCTOS-->
     <main role="main" class="pb-5">
-      <div class="text-center p-4"> 
-        <h2>Listado</h2>  
-      </div>
+      <div class="text-center p-4"> <h2>Listado</h2> </div>
 
       <div class="container">
 
           <div class="row" >          <!-- radio buttons para ordenar busquedas-->
-              <div class="col text-right">
+              <div class="row text-right">
 
                   <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
                   
@@ -153,9 +157,10 @@
         </div>-->
 
       </div> <!--      <div class="container"> -->
-        <div class="container">
-          <div class="row">
-              <div class="list-group" id="cat-list-container"> </div>
+
+        <div class="album py-5 fndodorado">
+          <div class="container">
+              <div class="row" id="cat-list-container"> </div>
           </div>
        </div>
     </main>
@@ -184,6 +189,6 @@
     <script src="js/products.js"></script>
     <script src="js/loginsocial.js"></script>
     <script src="js/cart.js"></script>
-    <script> document.getElementById("usuaregistrado").innerText = "Usuario: " + localStorage.getItem("usuario"); </script>
+  
   </body>
 </html>

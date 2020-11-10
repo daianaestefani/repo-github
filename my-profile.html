@@ -34,13 +34,16 @@
           font-size: 3.5rem;
         }
       }
+      input{
+        width: 10cm;
+      }
     </style>
   </head>
 
   <body>
     <nav class="navbar navbar-expand-md navbar-light doradogradiente">
       <!-- El logotipo y el icono que despliega el menú se agrupan para mostrarlos mejor en los dispositivos móviles -->
-      <span class="navbar-brand w-25">E-Commerce</span>
+      <span class="navbar-brand w-25"><a href="principalmenu.html">E-Commerce</a></span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" 
               data-target="#navbarSupportedContent" 
               aria-controls="navbarSupportedContent" 
@@ -49,8 +52,7 @@
           <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Agrupar los enlaces de navegación, los formularios y cualquier
-      otro elemento que se pueda ocultar al minimizar la barra -->
+      <!-- Agrupar los enlaces de navegación, los formularios y cualquier otro elemento que se pueda ocultar al minimizar la barra -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto w-100  justify-content-between">
               <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
@@ -94,15 +96,39 @@
         var sesion = localStorage.getItem("usuario"); 
         document.getElementById("sesion").innerHTML = sesion;
     </script>
+<br>
+    <div class="container">
+      <div class="row content-center">
+          <h2> Mi Perfil <i class="fas fa-user-edit"></i></h2>
+          <br><br><br><br>
+      </div>
+      <!--COL-SM  /* Dispositivos pequeños (tablets, anchura mayor o igual a 768px) */-->
+      <!--COL-MD  /* Dispositivos medianos (ordenadores, anchura mayor o igual a 992px) */-->      
+      <!--COL-LG  /* Dispositivos grandes (ordenadores, anchura mayor o igual a 1200px) */-->
+      <!--COL-XL   col-xl-2-->
+      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
 
-  <div class="container p-5">
+          <label for="nombre"> Nombre</label> <input type="text" id="idnombre" name="nombre" placeholder="su/s Nombre/s"> <br><br>
+          <label for="apellidoUno"> Primer Apellido </label> <input type="text" id="idapellidoUno" name="apellidoUno" placeholder="su Primer Apellido"> <br><br>
+          <label for="apellidoDos"> Segundo Apellido </label> <input type="text" id="idapellidoDos" name="apellidoDos" placeholder="su Segundo Apellido"> <br><br>
+
+          <label for="edad"> Edad</label> <input type="number" id="idedad" name="edad" min="1" max="200"> <br><br>
+          <label for="telefono"> Telefono</label> <input type="number" id="idtelefono" name="telefono" min="0"> <br><br>
+          <label for="email"> Correo Electrónico</label> <input type="email" id="idemail" name="email" placeholder="su Correo Electrónico"> <br>
+          <br><br>
+
+          <input type="button" value="Guardar Cambios" class="btn btn-success" onclick="actualizarPerfil();">  <br>
+      </div>
+
+    </div>
+  <!--<div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
       <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
     </div>
-  </div>
+  </div>-->
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
