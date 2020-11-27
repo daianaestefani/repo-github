@@ -158,8 +158,12 @@ a.custom-card:hover {
 }
 
 /********************** formano para la barra de menues **********************/
-.doradogradiente {
+.doradogradiente{
   background: linear-gradient(180deg, #fcff9e 0%, #c67700 100%);
+  color: black;
+  
+}
+a{
   color: black;
 }
 /*

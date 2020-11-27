@@ -2,7 +2,7 @@
   width: 500px !important;/*ancho*/
 }
 .caja-entrada {
-  /*  width: 82%;
+  /*  width: 82%; //ancho
     padding: 10px;*/
   display: block;
   box-sizing: border-box;
@@ -52,4 +52,16 @@ body{
 }
 .yellow-palido{
   background-color: rgb(248, 242, 191);
+}
+
+.aviso-envio-carrito{
+    text-align:center;
+    border-radius:10px;
+    border:1px solid #e2f108;
+    color:#00a030;
+    padding:10px
+    
+}
+.aviso-envio-carrito h3{
+   color:#0e0d01
 }
