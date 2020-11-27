@@ -2,10 +2,13 @@
 
 //const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";   //{"msg":"¡Has comprado con éxito!"}
 //const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";   //un elemento en el carrito
-const CART_BUY_TOTAL =  "https://japdevdep.github.io/ecommerce-api/cart/654.json"; //muestra dos items en la lista >> DESAFIATE
+const CART_BUY_TOTAL =   "http://localhost:4000/cart";/*"https://japdevdep.github.io/ecommerce-api/cart/654.json";*/ //muestra dos items en la lista >> DESAFIATE
 
 let UY_SYMBOL = "$";
 let porcentage = 0.05;
+var cantidadDEelementos = 0;
+
+var variableFormaPago ="";
 
 var miCarrito = []; //array que uso para cargar los valores del carrito
 
@@ -62,28 +65,33 @@ function mostrarCarrito() {
                 <tr>
                     <th> <img src="` + miCarrito[i].src + `" alt="` + miCarrito[i].name + `" class="img-thumbnail" width="100"> </th>                   
                     <th>` + miCarrito[i].name + `</th>
-                    <th>`+ 'USD' + " " + monedaDolar + ' ~ ' + 'UYU' + " " + monedaUY + `</th>
-                    <th><input id="idinput_` + i + `" class="form-control" type="number" min="0" value="`+ miCarrito[i].count +`" onChange="modificarProducto(` + i + `, idinput_` + i + `.value)"</></th>
+                    <th>`+ 'USD' + " " + monedaDolar + ' ~~ ' + 'UYU' + " " + monedaUY + `</th>
+                    <th><input id="idinput_` + i + `" class="form-control" type="number" min="0" style="width:70px;" value="`+ miCarrito[i].count +`" onChange="modificarProducto(` + i + `, idinput_` + i + `.value)"</></th>
+                    <th></th>
                     <th>` + subTotal + ` ` + " - UYU " + `</th>
                     <td class="text-right"><button id="btnsupr" class="btn btn-sm btn-danger" onclick="quitarProducto(`+i+`);"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                `;
+                </tr> `;
+
+            cantidadDEelementos = cantidadDEelementos + parseInt(miCarrito[i].count);
         }
+        
         document.getElementById('cantSeleccionados').innerHTML = miCarrito.length;
         document.getElementById('cantSelec').innerHTML = miCarrito.length; //en la pagina de carrito, muestro la cantidad de productos seleccionados
+        document.getElementById('cantidadDEelementos').innerHTML = cantidadDEelementos; //total de elementos
     }
     else {
-        cargarmostrar = `
-                <tr>
-                    <th>El carrito esta vacio.</th>
-                </tr>
-                `;
+        cargarmostrar = ` <tr> <th>El carrito esta vacio.</th> </tr>  `;
         document.getElementById('cantSeleccionados').innerHTML = miCarrito.length;
         document.getElementById('cantSelec').innerHTML = miCarrito.length; //en la pagina de carrito, muestro la cantidad de productos seleccionados
+        document.getElementById('cantidadDEelementos').innerHTML = cantidadDEelementos;//total de elementos
     }
+
     document.getElementById('tableList').innerHTML = cargarmostrar;
 
-    document.getElementById("stotal").innerText = "Total: UYU $ " +  subT;  //final de la tabla mmuestra un subtotal, faltando ecalcular el costo de envio
+    //SUBTOTAL EN PESOS final de la tabla mmuestra un subtotal, faltando ecalcular el costo de envio
+    document.getElementById("stotalpesos").innerText =" -.   . "+" .     UYU $  " +  subT; 
+    document.getElementById("stotaldolares").innerText=" -.   . "+" .     USD $  " +  subT/40; //SUBTOTAL EN DOLARES
+
     document.getElementById("costototal").innerText = " " + total;
     document.getElementById("subTotalsinEnvio").innerText = " " + subT;
 
@@ -128,6 +136,8 @@ function quitarProducto(lugar) {
 function vaciarCarrito() {
     //miCarrito.removeItem("tableList")
     sessionStorage.removeItem("tableList");
+    
+
     mostrarCarrito();
 }
 
@@ -186,6 +196,32 @@ function vaciarCarrito() {
     var vtot = document.getElementById('vto'); 
     var ncuenta = document.getElementById('nroCuenta');
 
+    /*function deshabilitar()
+    {
+        if (!document.getElementById('radiotarjeta').disable)
+        { //cuando hago click en el radiobutton de tarjeta
+            document.getElementById('radiotarjeta').disable=true;
+            nrot.readOnly =false;
+            cseg.readOnly =false;
+            vtot.readOnly =false;
+
+            document.getElementById('radiotransferencia').disable=false;
+            ncuenta.readOnly=true;
+        }
+        
+        if (!document.getElementById('radiotransferencia').disable)
+        {   //cuando hago click en el radiobutton de transferencia
+            document.getElementById('radiotransferencia').disable=true;
+            ncuenta.readOnly=false;
+
+            document.getElementById('radiotarjeta').disable=false;
+            nrot.readOnly =true;
+            cseg.readOnly =true;
+            vtot.readOnly =true;
+
+        }
+    }*/
+
     function deshabilitar(){
         if (!document.getElementById('radiotarjeta').disable)
         {
@@ -196,8 +232,10 @@ function vaciarCarrito() {
 
             document.getElementById('radiotransferencia').disable=false;
             ncuenta.readOnly=true;
+
+            variableFormaPago = "Tarjeta de Credito";
         }
-        else{
+        else if (!document.getElementById('radiotransferencia').disable){
             document.getElementById('radiotarjeta').disable=false;
             nrot.readOnly =true;
             cseg.readOnly =true;
@@ -205,5 +243,11 @@ function vaciarCarrito() {
             
             document.getElementById('radiotransferencia').disable=true;
             ncuenta.readOnly=false;
+
+            variableFormaPago = "Transferencia Bancaria";
         }
+        else if ((!document.getElementById('radiotransferencia').disable) && (!document.getElementById('radiotarjeta').disable)){
+            variableFormaPago = "No ha sido seleccionada aún.";
+        }
+        document.getElementById("variableFormaPago").innerText = " " +variableFormaPago;
     }

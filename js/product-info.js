@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function(e){
                         let productorelacionado = showprodrel[productinfo.relatedProducts[x]];
 
                         contenidoHTML += `
-                        <a href="products.html" class="list-group-item list-group-item-action col">
+                        <a href="products.html" class="list-group-item list-group-item-action col ltrfnd">
                             <div class="col">
                                 <img src="` + productorelacionado.imgSrc + `" alt="` + productorelacionado.name + `" class="img-thumbnail" width="300">
                             </div>

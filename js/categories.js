@@ -44,7 +44,7 @@ function showCategoriesList(){
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
 
-            htmlContentToAppend += `
+           /* htmlContentToAppend += `
             <a href="category-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
@@ -59,7 +59,18 @@ function showCategoriesList(){
                     </div>
                 </div>
             </a>
-            `
+            `*/
+            htmlContentToAppend += `
+            <div class="col-md-4">
+                <a href="category-info.html" class="card custom-card mb-4 ltrfnd">
+                    <img src="` + category.imgSrc + `" alt="` + category.description + `" class="bd-placeholder-img card-img-top">
+                    <h4 class="m-3">`+ category.name +`</h4> 
+                    <div class="card-body">
+                        <small class="card-text">` + category.productCount +  ` artículos </small>
+                        <p class="card-text">` + category.description + `</p>
+                    </div>
+                </a>
+            </div>                `
         }
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
