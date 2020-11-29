@@ -16,3 +16,24 @@ function convertir(img) {
         document.getElementById('contenido').innerHTML=localStorage.imagen;
         console.log(imgbase64);
   });
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+function importarimagen(){
+      var imgprevia = document.getElementById('myImg');
+      var archivoImg = document.querySelector('input[type=archivoImg]').files[0];
+      var lectura = new FileReader();
+
+      lectura.addEventListener("load", function(){
+            imgprevia.src =  lectura.result;
+            localStorage.setItem("myImg", (lectura.reslut));
+      });
+
+      if (archivoImg){
+            lectura.readAsDataURL(archivoImg);
+      }
+}
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////

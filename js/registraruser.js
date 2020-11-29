@@ -7,11 +7,21 @@
 function registraruser(usereg, usermail, userpass){
   if (usereg.trim()==="" || userpass.trim()==="" || usermail.trim()==="")
   {
-      alert("No ingresó todos los datos");   
+    Swal.fire({
+      title: 'Faltaron Datos',
+      text: "Debe ingresar todos los datos",
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK'
+    })
+      //alert("No ingresó todos los datos");   
   } 
   else {
-      alert("REGISTRO : * Usuario: " + usereg + ' * ' + ' Email: ' + usermail + ' * ' + ' Contraseña: ' + userpass + ' * ');
-      //alert(" Email: " + usermail );
+         alert("REGISTRO : * Usuario: " + usereg + ' * ' + ' Email: ' + usermail + ' * ' + ' Contraseña: ' + userpass + ' * '),
+  
+
+//alert(" Email: " + usermail );
       //alert(" Contraseña: " + userpass );
       sessionStorage.setItem("usuario", user.usereg());
       sessionStorage.setItem("contraseña", userpass.trim());

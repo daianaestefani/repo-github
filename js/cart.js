@@ -2,11 +2,11 @@
 
 //const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";   //{"msg":"¡Has comprado con éxito!"}
 //const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";   //un elemento en el carrito
-const CART_BUY_TOTAL =  "https://japdevdep.github.io/ecommerce-api/cart/654.json"; //muestra dos items en la lista >> DESAFIATE
+const CART_BUY_TOTAL =  "http://localhost:4000/cart"    //https://japdevdep.github.io/ecommerce-api/cart/654.json"; //muestra dos items en la lista >> DESAFIATE
 
 let UY_SYMBOL = "$";
 let porcentage = 0.05;
-
+var variableFORMAPAGO = "No ha sido seleccionada aún.";
 var miCarrito = []; //array que uso para cargar los valores del carrito
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -65,7 +65,7 @@ function mostrarCarrito() {
                     <th>`+ 'USD' + " " + monedaDolar + ' ~ ' + 'UYU' + " " + monedaUY + `</th>
                     <th><input id="idinput_` + i + `" class="form-control" type="number" min="0" value="`+ miCarrito[i].count +`" onChange="modificarProducto(` + i + `, idinput_` + i + `.value)"</></th>
                     <th>` + subTotal + ` ` + " - UYU " + `</th>
-                    <td class="text-right"><button id="btnsupr" class="btn btn-sm btn-danger" onclick="quitarProducto();"><i class="fa fa-trash"></i> </button> </td>
+                    <td class="text-right"><button id="btnsupr" class="btn btn-sm btn-danger" onclick="quitarProducto(`+i+`);"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 `;
         }
@@ -124,6 +124,7 @@ function modificarProducto(indice, nuevoValor) {
 
 function quitarProducto(lugar) {
     miCarrito.splice(lugar, 1);
+    mostrarCarrito(miCarrito);
 }
 function vaciarCarrito() {
     miCarrito.removeItem("tableList")
@@ -163,6 +164,19 @@ function vaciarCarrito() {
         //Se realizan los controles necesarios,
         //En este caso se controla que se haya ingresado la calle, numero de puerta y esquina.
 
+        if ((calleInput.value != "") && (esquinaInput.value != "") && (dnumero.value >=0)){
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'GRACIAS POR SU COMPRA',
+                text: "Su producto llegará en el rango de tiempo seleccionado",
+                showConfirmButton: false,
+                timer: 3500
+              })
+            //alert("gracias por su compra");
+
+        }else{
         //Consulto por la calle en la direcion
         if (calleInput.value === ""){
             calleInput.classList.add('is-invalid');
@@ -192,7 +206,7 @@ function vaciarCarrito() {
             dnumero.classList.add('is-valid');
             //marcaPUERTA="&#10004;";
             //checkPUERTA.classList.add('bien');
-        }
+        }}
         //document.getElementById('tickcalle').innerHTML = marcaCALLE;
         //document.getElementById('tickesquina').innerHTML = marcaESQUINA;
         //document.getElementById('tickPUERTA').innerHTML = marcaPUERTA;
@@ -211,6 +225,7 @@ function vaciarCarrito() {
     var ncuenta = document.getElementById('nroCuenta');
 
     function deshabilitar(){
+
         if (!document.getElementById('radiotarjeta').disable)
         {
             document.getElementById('radiotarjeta').disable=true;
@@ -220,6 +235,7 @@ function vaciarCarrito() {
 
             document.getElementById('radiotransferencia').disable=false;
             ncuenta.readOnly=true;
+            variableFORMAPAGO="Tarjeta de Crédito";
         }
         else{
             document.getElementById('radiotarjeta').disable=false;
@@ -229,5 +245,7 @@ function vaciarCarrito() {
             
             document.getElementById('radiotransferencia').disable=true;
             ncuenta.readOnly=false;
+            variableFORMAPAGO="Transferencia Bancaria";
         }
+        document.getElementById("variableFORMAPAGO").innerHTML =" "+ variableFORMAPAGO;
     }

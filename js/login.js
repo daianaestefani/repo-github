@@ -5,7 +5,16 @@
 });*/
 function loginUser(user, pass){
     if (user.trim()=== "" || pass.trim()=== ""){
-        alert("Debe rellenar los datos");
+
+      //alert("Debe rellenar los datos");
+      Swal.fire({
+        title: 'Faltaron Datos',
+        text: "Debe ingresar todos los datos",
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+      })
     } else {
         localStorage.setItem("usuario", user.trim());
         localStorage.setItem("contraseña", pass.trim());

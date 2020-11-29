@@ -13,26 +13,6 @@
  * 
  * vuelvo a cargar en cada input los valores anteriormente guardados en las variables
  */
-//var arrayPerfil=[];
-var objetoPerfil={};
-
-function actualizarPerfil(){
-    var nombre = document.getElementById('idnombre').value;
-    var apellidoUno = document.getElementById('idapellidoUno').value;
-    var apellidoDos = document.getElementById('idapellidoDos').value;
-    var edad = document.getElementById('idedad').value;
-    var telefono = document.getElementById('idtelefono').value;
-    var email = document.getElementById('idemail').value;
-    
-    objetoPerfil.nombre = nombre;
-    objetoPerfil.apellidoUno = apellidoUno;
-    objetoPerfil.apellidoDos = apellidoDos;
-    objetoPerfil.edad = edad;
-    objetoPerfil.telefono = telefono;
-    objetoPerfil.email = email;
-
-    localStorage.setItem('objetoPerfil', JSON.stringify(objetoPerfil));
-}
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los elementos HTML presentes.
@@ -47,3 +27,41 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById('idtelefono').value = objetoPerfil.telefono;
     document.getElementById('idemail').value = objetoPerfil.email;
 });   
+
+//var arrayPerfil=[];
+var objetoPerfil={};
+
+function actualizarPerfil(nombre, apellidoUno, apellidoDos, edad, telefono, email){
+    if (nombre.trim()==="" || apellidoUno.trim()==="" || edad.trim()==="" || telefono.trim()==="" || email.trim()===""){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '¡DEBE LLENAR SUS DATOS DE PERFIL!',
+          })
+        //alert("DEBE LLENAR TODOS SUS DATOS DE PERFIL");
+    }
+    else {
+        var nombre = document.getElementById('idnombre').value;
+        var apellidoUno = document.getElementById('idapellidoUno').value;
+        var apellidoDos = document.getElementById('idapellidoDos').value;
+        var edad = document.getElementById('idedad').value;
+        var telefono = document.getElementById('idtelefono').value;
+        var email = document.getElementById('idemail').value;
+        
+        objetoPerfil.nombre = nombre;
+        objetoPerfil.apellidoUno = apellidoUno;
+        objetoPerfil.apellidoDos = apellidoDos;
+        objetoPerfil.edad = edad;
+        objetoPerfil.telefono = telefono;
+        objetoPerfil.email = email;
+
+    localStorage.setItem('objetoPerfil', JSON.stringify(objetoPerfil));
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'PERFIL ACTUALIZADO',
+        showConfirmButton: false,
+        timer: 5000
+      })
+    }
+} //FUNCIÓN ACTUALIZARPERFIL 

@@ -4,6 +4,9 @@ var productinfo = {}; //creo conjunto productInfo para acceder a la informacion 
 
 var coments ={}; //cargar los comentarios
 
+var hsactual ="";
+var fechaactual ="";
+
 /**/ 
 
 function showImGallery(array){ //funcion, para mostrar las imagenes del producto
@@ -103,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         });//getJSONData(PRODUCT_INFO_URL).then(function(resultObj)
 
+//CARGAR TODOS LOS COMENTARIOS
         getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){ 
              if (resultObj.status === "ok")
             {
@@ -177,7 +181,7 @@ function puntajeTotal (pts){ //dependiendo de los puntos seleccionados
       }return num;
   }
   /******************************************************************************************** */
-  /*                                       mostrar hora y fecha actual:                                             */
+  /*                              mostrar hora y fecha actual:                                             */
 function comenzarTiempo(){
     fechaCompletaHoy=new Date();
     h=fechaCompletaHoy.getHours();
@@ -186,6 +190,8 @@ function comenzarTiempo(){
     m=checkTime(m);
     s=checkTime(s);
     document.getElementById('reloj').innerHTML=h+":"+m+":"+s;
+    hsactual = h+":"+m+":"+s;
+    
     t=setTimeout('comenzarTiempo()',500);
 }
 function checkTime(i){
@@ -202,6 +208,7 @@ function comenzarFecha(){
     mm=checkTime(fechaCompletaHoy.getMonth());
     dd=checkTime(fechaCompletaHoy.getDate());
     document.getElementById('datetime').innerHTML=yyyy+"-"+mm+"-"+dd;
+    fechaactual = yyyy+"-"+mm+"-"+dd;
 }
   /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
   /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -211,8 +218,9 @@ function comenzarFecha(){
   //puntuacion: --->calif
 /*
 var today = new Date;
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours()+":"+today.getMinutes()+":"+today.getSecond();
+var fechaactual = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var horaactual = today.getHours()+":"+today.getMinutes()+":"+today.getSecond();
+var tiempoactual = date + ' ' + time;
   function agregarComentario(coment){
       if (coment.trim()!= "")
       { //en el caso de escribir comentario 
@@ -223,7 +231,7 @@ var time = today.getHours()+":"+today.getMinutes()+":"+today.getSecond();
             let nuevoComentario = {};
             nuevoComentario.score = calif;
             nuevoComentario.user = localStorage.getItem("usuario");
-            nuevoComentario.dateTime = date + ' ' + time;
+            nuevoComentario.dateTime = tiempoactual;
 
             coments.push(nuevoComentario);
 
@@ -234,12 +242,31 @@ var time = today.getHours()+":"+today.getMinutes()+":"+today.getSecond();
       }
   }//function agregarComentario */
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-  function agregarComentario(coment){
-    if (coment.trim()!= ""){ //en el caso de escribir comentario
-      
-      alert( "GRACIAS POR SU COMENTARIO: Nos importa tu opinion sobre nuestro producto");
+  function agregarComentario(coment)
+  {
+    if (coment.trim()!="")
+    { //en el caso de escribir comentario
+        //"score":"calif",  // "description":"coment", // "user":"sesion",  //"dateTime":"fechaactual hsactual"
+        //comentarioS.push(coment,calif,fechaactual,hsactual);
+        //mostrarComentario();
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'GRACIAS POR SU COMENTARIO',
+            text: "Nos importa tu opinion sobre nuestro producto",
+            showConfirmButton: false,
+            timer: 3000
+          })
+        //alert( "GRACIAS POR SU COMENTARIO: Nos importa tu opinion sobre nuestro producto");
     }
-    else{
-        alert("ingrese una puntuacion y escriba un comentario");
+    if(coment.trim()==="") {
+        Swal.fire({
+            title: 'Faltan datos',
+            text: "¡ingrese una puntuacion y escriba un comentario!",
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK, GRACIAS'
+          })
+        //alert("ingrese una puntuacion y escriba un comentario");
     }
 }
