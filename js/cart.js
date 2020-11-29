@@ -65,12 +65,12 @@ function mostrarCarrito() {
                     <th>`+ 'USD' + " " + monedaDolar + ' ~ ' + 'UYU' + " " + monedaUY + `</th>
                     <th><input id="idinput_` + i + `" class="form-control" type="number" min="0" value="`+ miCarrito[i].count +`" onChange="modificarProducto(` + i + `, idinput_` + i + `.value)"</></th>
                     <th>` + subTotal + ` ` + " - UYU " + `</th>
-                    <td class="text-right"><button id="btnsupr" class="btn btn-sm btn-danger" onclick="quitarProducto(`+i+`);"><i class="fa fa-trash"></i> </button> </td>
+                    <td class="text-right"><button id="btnsupr" class="btn btn-sm btn-danger" onclick="quitarProducto();"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 `;
         }
-        document.getElementById('cantSeleccionados').innerHTML = miCarrito.length;
-        document.getElementById('cantSelec').innerHTML = miCarrito.length;
+        document.getElementById('cantSeleccionados').innerHTML = miCarrito.length ;
+        document.getElementById('cantSelec').innerHTML = miCarrito.length ;
     }
     else {
         cargarmostrar = `
@@ -81,6 +81,7 @@ function mostrarCarrito() {
         document.getElementById('cantSeleccionados').innerHTML = miCarrito.length;
         document.getElementById('cantSelec').innerHTML = miCarrito.length;
     }
+
     document.getElementById('tableList').innerHTML = cargarmostrar;
 
     document.getElementById("stotal").innerText = "Total: UYU $ " +  subT;  //final de la tabla mmuestra un subtotal, faltando ecalcular el costo de envio
@@ -96,7 +97,7 @@ let productCost = 0;
 function actualizarCostsTotal(){
     let subProductCostHTML = document.getElementById("subTotalsinEnvio");//Subtotal
     let porcentajeEnvioHTML = document.getElementById("costoEnvio");//Costo de envío
-    let totalCostHTML = document.getElementById("costototal"); //Costo Total  (subTotal+ costoEnvio)
+    let totalCostHTML = document.getElementById("costototal"); //Costo Total 
 
     let showCostSB = UY_SYMBOL + productCost; //muestro costo subtotal
     let showPorcentaje = Math.round((porcentage * productCost));
@@ -122,12 +123,11 @@ function modificarProducto(indice, nuevoValor) {
 }
 
 function quitarProducto(lugar) {
-    miCarrito.splice(lugar,1);
-    mostrarCarrito(miCarrito);
+    miCarrito.splice(lugar, 1);
 }
 function vaciarCarrito() {
-    //miCarrito.removeItem("tableList")
-    sessionStorage.removeItem("tableList");
+    miCarrito.removeItem("tableList")
+    //sessionStorage.removeItem("listProducts");
     mostrarCarrito();
 }
 
