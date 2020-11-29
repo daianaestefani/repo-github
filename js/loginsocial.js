@@ -1,10 +1,32 @@
 ///////////////////////////////////////////////////////////////////////////
 /////////////////funcion para CERRAR SESION CON user/////////////////
 function cerrarsesion(){
-    alert('Cerrando sesión de usuario: '+sesion);
-    localStorage.clear(); 
-    location.href='index.html';
-  }
+    Swal.fire({
+        title: '¿Desea Cerrar Sesión?',
+        text: "Usuario: "+ sesion,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Salir'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Cerrando Sesión!',
+                showConfirmButton: true,
+                timer: 4500,
+                           
+              }).then((result) => {
+                localStorage.clear(),
+                location.href='index.html'
+            });
+        }
+      })
+    //alert('Cerrando sesión de usuario: '+sesion);
+
+  }//funcion cerrar sesion
 /************************************ */
 ///////////////////////////////////////////////////////////////////////////
 /////////////////funcion para INICIAR SESION CON user-pass/////////////////
