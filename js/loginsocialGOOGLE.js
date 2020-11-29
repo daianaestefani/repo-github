@@ -31,7 +31,7 @@ document.addEventListener("DOMcontentLoaded", function(e){
         localStorage.setItem('imgPerfilURL', imgPerfilURL);
     })
     if (localStorage.getItem('usuario') != undefined){
-        location.href="home.html";
+        location.href="principalmenu.html";
     }
 });
 /*
