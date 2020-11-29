@@ -17,6 +17,7 @@ function onSignIn(googleUser){
 
     location.href="principalmenu.html";                  //REDIRECCIONA A LA PANTALLA PRINCIPAL
 }//funcion iniciar sesión
+/*
 document.addEventListener("DOMcontentLoaded", function(e){
     arrayPERFIL.addEventListener('submit', function(e){
         var usuario = arrayPERFIL[0].value;
@@ -31,9 +32,9 @@ document.addEventListener("DOMcontentLoaded", function(e){
         localStorage.setItem('imgPerfilURL', imgPerfilURL);
     })
     if (localStorage.getItem('usuario') != undefined){
-        location.href="principalmenu.html";
+        window.location.href="principalmenu.html";
     }
-});
+});*/
 /*
 function onSignIn(googleUser) {
     // Useful data for your client-side scripts:
