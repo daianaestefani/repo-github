@@ -59,7 +59,7 @@
       otro elemento que se pueda ocultar al minimizar la barra -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto w-100  justify-content-between">
-              <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link" href="principalmenu.html">Inicio</a></li>
               <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
               <li class="nav-item"><a class="nav-link" href="products.html">Productos</a></li>
               <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
@@ -138,14 +138,14 @@
               <div class="row">
                 <div class="col-md-3 mb-3">
                   <label for="zip">Costo</label>
-                  <input type="number" class="form-control" id="productCostInput" placeholder="" required="" value="0" min="0">
+                  <input type="number" class="form-control" id="productCostInput" placeholder="" value="0" min="0" required>
                   <div class="invalid-feedback">
                     El costo debe ser mayor que 0.
                   </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="state">Moneda</label>
-                    <select class="custom-select d-block w-100" id="productCurrency" required="">
+                    <select class="custom-select d-block w-100" id="productCurrency" required>
                       <option selected>Pesos Uruguayos (UYU)</option>
                       <option>Dólares (USD)</option>
                     </select>
@@ -174,7 +174,7 @@
               <div class="row">
                   <div class="col-md-3 mb-3">
                     <label for="productCountInput">Cantidad en stock</label>
-                    <input type="number" class="form-control" id="productCountInput" placeholder="" required="" value="1" min="0">
+                    <input type="number" class="form-control" id="productCountInput" placeholder="" value="1" min="0" required>
                     <div class="invalid-feedback">
                       La cantidad es requerida.
                     </div>
@@ -184,15 +184,15 @@
               <h5 class="mb-3">Tipo de publicación</h5>
               <div class="d-block my-3">
                 <div class="custom-control custom-radio">
-                  <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+                  <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" checked="" required>
                   <label class="custom-control-label" for="goldradio">Gold (13%)</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
+                  <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required>
                   <label class="custom-control-label" for="premiumradio">Premium (7%)</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+                  <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required>
                   <label class="custom-control-label" for="standardradio">Estándar (3%)</label>
                 </div>
                 <div class="row">

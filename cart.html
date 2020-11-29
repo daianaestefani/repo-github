@@ -14,7 +14,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/dropzone.css" rel="stylesheet">
-    <!--------------------------------------------------------------------------------------------------------------------->
+  <!---------------------------------------------------------------------------------------------------------------------->
+      <!--librería para usar SweetAlert-->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>   
+  <!---------------------------------------------------------------------------------------------------------------------->
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/carrito.css" rel="stylesheet">
     <!--------------------------------------------------------------------------------------------------------------------->
@@ -63,7 +66,7 @@
         otro elemento que se pueda ocultar al minimizar la barra -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto w-100  justify-content-between">
-                <li class="nav-item"><a class="nav-link" href="index.html"><b>Inicio</b></a></li>
+                <li class="nav-item"><a class="nav-link" href="principalmenu.html"><b>Inicio</b></a></li>
                 <li class="nav-item"><a class="nav-link" href="categories.html"><b>Categorías</b></a></li>
                 <li class="nav-item"><a class="nav-link" href="products.html"><b>Productos</b></a></li>
                 <li class="nav-item"><a class="nav-link" href="sell.html"><b>Vender</b></a></li>
@@ -170,15 +173,15 @@
         <h3 class="mb-3">Tipo de Envío <i class="fas fa-hourglass-start"></i></h3>
         <div class="d-block my-3">
             <div class="custom-control custom-radio">
-                <input id="idpremium" name="tipoEnvio" type="radio" class="custom-control-input" checked="" required="" value="0.15">
+                <input id="idpremium" name="tipoEnvio" type="radio" class="custom-control-input" checked="" value="0.15" required >
                 <label class="custom-control-label" for="idpremium">Premium 2 a 5 días (15%)</label>
             </div>
             <div class="custom-control custom-radio">
-                <input id="idexpress" name="tipoEnvio" type="radio" class="custom-control-input" required="" value="0.07">
+                <input id="idexpress" name="tipoEnvio" type="radio" class="custom-control-input" value="0.07" required>
                 <label class="custom-control-label" for="idexpress">Express 5 a 8 días (7%)</label>
             </div>
             <div class="custom-control custom-radio">
-                <input id="idstandard" name="tipoEnvio" type="radio" class="custom-control-input" required="" value="0.05">
+                <input id="idstandard" name="tipoEnvio" type="radio" class="custom-control-input" value="0.05" required>
                 <label class="custom-control-label" for="idstandard">Standard 8 a 15 días (5%)</label>
             </div>
             <hr>
@@ -226,17 +229,17 @@
                     <h3 class="container mb-3">Dirección de envío  <i class="fas fa-home"></i></h3>                
                     <div class="needs-validation">
                         <div class="col col-md-12 mb-3">
-                            Calle : <input type="text" id="calle" name="calle" class="form-control caja-entrada"  placeholder="Calle" required="" value="">  <!--<span id="tickcalle"></span>-->
+                            Calle : <input type="text" id="calle" name="calle" class="form-control caja-entrada"  placeholder="Calle" value="" required>  <!--<span id="tickcalle"></span>-->
                             <div class="invalid-feedback"> Ingresa una calle </div>
                         </div>
                         <br>
                         <div class="col col-md-3 mb-3">
-                            Número de puerta : <input type="number" id="dnumero" name="npuerta" class="form-control caja-entrada" required="" value="0" min="0"> <!--<span id="tickPUERTA"></span>-->
+                            Número de puerta : <input type="number" id="dnumero" name="npuerta" class="form-control caja-entrada" value="0" min="0" required> <!--<span id="tickPUERTA"></span>-->
                             <div class="invalid-feedback"> Número de puerta debe ser mayor que 0. </div>
                         </div>
                         <br>
                         <div class="col-md-12 mb-3">
-                            Esquina : <input type="text" id="esquina" name="esquina" class="form-control caja-entrada" placeholder="Calle Esquina" required="" value="" > <!--<span id="tickesquina"></span>-->
+                            Esquina : <input type="text" id="esquina" name="esquina" class="form-control caja-entrada" placeholder="Calle Esquina" value="" required> <!--<span id="tickesquina"></span>-->
                             <div class="invalid-feedback"> Ingresa un calle </div>
                         </div>
                     </div> <br>
@@ -250,6 +253,7 @@
                 <h3 class="container mb-3">Forma de pago <i class="fas fa-money-check-alt"></i></h3>
 
                 <span id="variableFormaPago"></span>
+                <span id="variablenro"></span>
                     
                 <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">
                     Seleccionar forma de pago <i class="far fa-credit-card"></i> 
@@ -275,7 +279,7 @@
 
                     <div class="modal-body">
                         <div class="container">
-                            <div class="row"> <h5 class="text-warning"> <input type="radio" name="formaPago" id="radiotarjeta" onclick="deshabilitar();"> Tarjeta de Crédito</h5> </div>
+                            <div class="row"> <h5 class="text-warning"> <input type="radio" name="formaPago" id="radiotarjeta"> Tarjeta de Crédito</h5> </div>
                             <hr>
                             <br>
                             <label for="nroTarjeta">Número de tarjeta</label> 
@@ -286,10 +290,10 @@
                             <input type="month" class="form-control caja-entrada" id="vto">
                             <br>
 
-                            <div class="row"> <h5 class="text-primary"> <input type="radio" name="formaPago" id="radiotransferencia" onclick="deshabilitar();"> Transferencia bancaria</h5> </div>
+                            <div class="row"> <h5 class="text-primary"> <input type="radio" name="formaPago" id="radiotransferencia"> Transferencia bancaria</h5> </div>
                             <hr>
                             <label for="nroCuenta">Número de cuenta</label> 
-                            <input type="number" class="form-control caja-entrada" id="nroCuenta" placeholder="" required="" value="0" min="1">
+                            <input type="number" class="form-control caja-entrada" id="nroCuenta" value="0" min="1" required>
                         </div>
                         <div class="modal-footer"> <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button> </div>
 
