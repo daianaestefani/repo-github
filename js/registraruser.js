@@ -46,7 +46,15 @@ function registraruser(usereg, usermail, userpass){
   //iniciar sesion ingresando usuario y contraseña
   function loginUser(user, pass){
     if (user.trim()=== "" || pass.trim()=== ""){
-        alert("Debe rellenar los datos");
+        //alert("Debe rellenar los datos");
+        Swal.fire({
+          title: 'Faltaron Datos',
+          text: "Debe rellenar los datos",
+          icon: 'warning',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        })
     } else {
         localStorage.setItem("usuario", user.trim());
         localStorage.setItem("contraseña", pass.trim());
@@ -57,10 +65,20 @@ function registraruser(usereg, usermail, userpass){
 
 //cerrar sesion, limpiar usuario, volver a iniciar sesion...
   function cerrarsesion(){
-    alert('Usuario: '+ sesion+' desconectandose...');
-    localStorage.clear(); 
- 
-    location.href='index.html';
+    //alert('Usuario: '+ sesion+' desconectandose...');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Usuario'+usereg + 'desconectandose...',
+        text: 'Usuario: '+ usereg,
+        text: ' Email: ' + usermail,
+        showConfirmButton: true,
+        timer: 4500,
+                  
+      }).then((result)=>{
+      localStorage.clear(); 
+      location.href='index.html';
+      });
   }
 
 
