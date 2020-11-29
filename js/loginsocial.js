@@ -75,4 +75,3 @@ function usermailpass (user, mail, pass){
         location.href="principalmenu.html";
     }//cierre else
 } //cierre de funcion
-

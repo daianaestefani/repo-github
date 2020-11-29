@@ -18,7 +18,20 @@ function registraruser(usereg, usermail, userpass){
       //alert("No ingresó todos los datos");   
   } 
   else {
-         alert("REGISTRO : * Usuario: " + usereg + ' * ' + ' Email: ' + usermail + ' * ' + ' Contraseña: ' + userpass + ' * '),
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Registro Exitoso!',
+          text: 'Usuario: '+ usereg,
+          text: ' Email: ' + usermail,
+          showConfirmButton: true,
+          timer: 4500,
+                    
+        }).then((result) => {
+          localStorage.clear(),
+          location.href='index.html'
+      });
+         //alert("REGISTRO : * Usuario: " + usereg + ' * ' + ' Email: ' + usermail + ' * ' + ' Contraseña: ' + userpass + ' * '),
   
 
 //alert(" Email: " + usermail );
