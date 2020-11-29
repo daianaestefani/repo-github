@@ -17,6 +17,8 @@
     <!--------------------------------------------------------------------------------------------------------------------->
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/carrito.css" rel="stylesheet">
+    <!--librería para usar SweetAlert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>   
     <!--------------------------------------------------------------------------------------------------------------------->
 
     <style>
@@ -209,8 +211,9 @@
     <!------------------------------------------------------------------------------------------------------------------------------->
     <!------------------------------------------------------------------------------------------------------------------------------->
     <!------------------------------------------------------------------------------------------------------------------------------->
-    <h3 class="container mb-3">Dirección de envío  <i class="fas fa-home"></i></h3>
+    <!--<form method="post" action="http://localhost:4000/ingresocompra" class="form-group" id="formulario" novalidate=""> -->
     <div class="container">
+        <h3 class="mb-3">Dirección de envío  <i class="fas fa-home"></i></h3>
         <div class="needs-validation">
 
                 <div class="col-md-12 mb-3">
@@ -241,14 +244,14 @@
     <div class="container">
         <h3>Forma de pago <i class="fas fa-money-check-alt"></i></h3>
 
-            No ha sido seleccionada aún.
+            <span id="variableFORMAPAGO"></span>
             <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">Seleccionar forma de pago <i class="far fa-credit-card"></i> </button>
 
     </div>
     <div class="container">
         <button class="bbtn btn-success centrado" id="validar" type="submit">PAGAR </button>
     </div>
-      </form>
+      <!--</form>-->
 <!---------------------------------------------------------------------------------------------------------------------------------->
 
 
@@ -307,6 +310,7 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/loginsocial.js"></script>
+    <script src="js/loginsocialGOOGLE"></script>
     <script src="js/cart.js"></script>
     <script src="js/dropzone.js"></script>
 
