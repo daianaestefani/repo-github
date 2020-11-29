@@ -92,6 +92,10 @@
           <div class="caja-derecha">
               <p class="titulo-derecho"> Inicia con tus <br> Redes Sociales :</p>
 
+              <!-- ↓↓↓↓↓↓↓↓ boton google, SI inicia sesion, pero lo comento porque NO LOGRO QUE FUNCIONE EL BOTON CERRAR SESION CON GOOGLE-->
+              <div class="g-signin2 " data-onsuccess="onSignIn"> </div>   <!--<button  onclick="SignOut()"> </button>-->
+            
+              
               <button class="Social Facebook"   onclick="alert('Éste botón no está funcionando... Inicia ingresando tus datos..');";>
                 <b> Iniciar sesión con Facebook </b> 
               </button>   <br>
@@ -103,9 +107,6 @@
                 <b> Iniciar sesión con Google </b>
               </button>-->
 
-              <!-- ↓↓↓↓↓↓↓↓ boton google, SI inicia sesion, pero lo comento porque NO LOGRO QUE FUNCIONE EL BOTON CERRAR SESION CON GOOGLE-->
-             <div class="g-signin2" data-onsuccess="onSignIn" data-gapiscan="true" data-onload="true"> </div>  
-            
             <!--<button  onclick="SignOut()"> </button>-->
 
           </div> <!--formato caja-derecha -> loginSocial-->
