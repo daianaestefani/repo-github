@@ -2,7 +2,9 @@
 
 //const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";   //{"msg":"¡Has comprado con éxito!"}
 //const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";   //un elemento en el carrito
-const CART_BUY_TOTAL =   "http://localhost:4000/cart";/*"https://japdevdep.github.io/ecommerce-api/cart/654.json";*/ //muestra dos items en la lista >> DESAFIATE
+
+//muestra dos items en la lista >> DESAFIATE
+const CART_BUY_TOTAL =   "http://localhost:4000/cart";/*"https://japdevdep.github.io/ecommerce-api/cart/654.json";*/ 
 
 let UY_SYMBOL = "$";
 let porcentage = 0.05;
@@ -13,14 +15,7 @@ var variableFormaPago ="";
 var miCarrito = []; //array que uso para cargar los valores del carrito
 
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(CART_BUY_TOTAL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            miCarrito = resultObj.data.articles;
-            mostrarCarrito(); //actualizo la tabla de la factura
-            document.getElementById("cantSeleccionados").innerHTML=miCarrito.length;
-        }
 
-    }); //cierro JSON
     document.getElementById("idpremium").addEventListener("change", function(){
         porcentage = 0.15;
         actualizarCostsTotal();
@@ -33,7 +28,44 @@ document.addEventListener("DOMContentLoaded", function (e) {
         porcentage = 0.05;
         actualizarCostsTotal();
     });
-});
+
+    getJSONData(CART_BUY_TOTAL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            miCarrito = resultObj.data.articles;
+            mostrarCarrito(); //actualizo la tabla de la factura
+            document.getElementById("cantSeleccionados").innerHTML=miCarrito.length;
+        }
+    }); //cierro JSON
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+    //RADIOBUTTON: funcion seleccionar modo de pago 
+/*    document.getElementById("radiotarjeta").addEventListener("change", function(){
+        document.getElementById("nrot").disabled = false;
+        document.getElementById("cseg").disabled = false;
+        document.getElementById("vtot").disabled = false;
+
+        document.getElementById("nroCuenta").disabled=false;
+
+        document.getElementById("nroCuenta").innerHTML = variablenro;
+
+    });
+    //RADIOBUTTON: funcion seleccionar modo de pago 
+    document.getElementById("radiotransferencia").addEventListener("change", function(){
+        document.getElementById("nrot").disabled = true;
+        document.getElementById("cseg").disabled = true;
+        document.getElementById("vtot").disabled = true;
+
+        document.getElementById("nroCuenta").disabled=false;
+
+        document.getElementById("nrot").innerHTML = variablenro;
+
+    });*/
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+}); //CIERRO document.addEventListener("DOMContentLoaded", function (e)
 
 function mostrarCarrito() {
     let cargarmostrar = ``;
@@ -195,32 +227,6 @@ function vaciarCarrito() {
     var cseg = document.getElementById('codSeguridad'); 
     var vtot = document.getElementById('vto'); 
     var ncuenta = document.getElementById('nroCuenta');
-
-    /*function deshabilitar()
-    {
-        if (!document.getElementById('radiotarjeta').disable)
-        { //cuando hago click en el radiobutton de tarjeta
-            document.getElementById('radiotarjeta').disable=true;
-            nrot.readOnly =false;
-            cseg.readOnly =false;
-            vtot.readOnly =false;
-
-            document.getElementById('radiotransferencia').disable=false;
-            ncuenta.readOnly=true;
-        }
-        
-        if (!document.getElementById('radiotransferencia').disable)
-        {   //cuando hago click en el radiobutton de transferencia
-            document.getElementById('radiotransferencia').disable=true;
-            ncuenta.readOnly=false;
-
-            document.getElementById('radiotarjeta').disable=false;
-            nrot.readOnly =true;
-            cseg.readOnly =true;
-            vtot.readOnly =true;
-
-        }
-    }*/
 
     function deshabilitar(){
         if (!document.getElementById('radiotarjeta').disable)
