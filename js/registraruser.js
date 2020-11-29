@@ -18,28 +18,24 @@ function registraruser(usereg, usermail, userpass){
       //alert("No ingresó todos los datos");   
   } 
   else {
+        //alert("REGISTRO : * Usuario: " + usereg + ' * ' + ' Email: ' + usermail + ' * ' + ' Contraseña: ' + userpass + ' * '),
         Swal.fire({
           position: 'top-end',
           icon: 'success',
           title: 'Registro Exitoso!',
-          text: 'Usuario: '+ usereg,
-          text: ' Email: ' + usermail,
+          text: 'Usuario: '+ usereg + ' .  Email: ' + usermail,
           showConfirmButton: true,
-          timer: 4500,
-                    
+          timer: 9990
         }).then((result) => {
-          localStorage.clear(),
-          location.href='index.html'
-      });
-         //alert("REGISTRO : * Usuario: " + usereg + ' * ' + ' Email: ' + usermail + ' * ' + ' Contraseña: ' + userpass + ' * '),
-  
 
-//alert(" Email: " + usermail );
-      //alert(" Contraseña: " + userpass );
-      sessionStorage.setItem("usuario", user.usereg());
-      sessionStorage.setItem("contraseña", userpass.trim());
-      location.href="principalmenu.html";
+          localStorage.setItem("usuario", user.usereg());
+          localStorage.setItem("contraseña", userpass.trim());
+          location.href="index.html"
+        });
+        
+        //alert(" Email: " + usermail );      //alert(" Contraseña: " + userpass );
       }//cierre else*/
+
   } //cierre de funcion
 
 ////////////////////////INICIAR LLENANDO DATOS ()////////////////////////
@@ -70,14 +66,12 @@ function registraruser(usereg, usermail, userpass){
         position: 'top-end',
         icon: 'success',
         title: 'Usuario'+usereg + 'desconectandose...',
-        text: 'Usuario: '+ usereg,
-        text: ' Email: ' + usermail,
+        text: 'Usuario: '+ usereg + ' .  Email: ' + usermail,
         showConfirmButton: true,
-        timer: 4500,
-                  
+        timer: 9999,
       }).then((result)=>{
       localStorage.clear(); 
-      location.href='index.html';
+      location.href='index.html'
       });
   }
 

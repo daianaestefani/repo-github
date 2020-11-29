@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////
 /////////////////funcion para CERRAR SESION CON user/////////////////
 function cerrarsesion(){
+      //alert('Cerrando sesión de usuario: '+sesion);
     Swal.fire({
         title: '¿Desea Cerrar Sesión?',
         text: "Usuario: "+ sesion,
@@ -24,7 +25,7 @@ function cerrarsesion(){
             });
         }
       })
-    //alert('Cerrando sesión de usuario: '+sesion);
+
 
   }//funcion cerrar sesion
 /************************************ */
