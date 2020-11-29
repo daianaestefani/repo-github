@@ -2,20 +2,22 @@
 
 //const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";   //{"msg":"¡Has comprado con éxito!"}
 //const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";   //un elemento en el carrito
-
-//muestra dos items en la lista >> DESAFIATE
-const CART_BUY_TOTAL =   "http://localhost:4000/cart";/*"https://japdevdep.github.io/ecommerce-api/cart/654.json";*/ 
+const CART_BUY_TOTAL =  "https://japdevdep.github.io/ecommerce-api/cart/654.json"; //muestra dos items en la lista >> DESAFIATE
 
 let UY_SYMBOL = "$";
 let porcentage = 0.05;
-var cantidadDEelementos = 0;
-
-var variableFormaPago ="";
 
 var miCarrito = []; //array que uso para cargar los valores del carrito
 
 document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(CART_BUY_TOTAL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            miCarrito = resultObj.data.articles;
+            mostrarCarrito(); //actualizo la tabla de la factura
+            document.getElementById("cantSeleccionados").innerHTML=miCarrito.length;
+        }
 
+    }); //cierro JSON
     document.getElementById("idpremium").addEventListener("change", function(){
         porcentage = 0.15;
         actualizarCostsTotal();
@@ -28,44 +30,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         porcentage = 0.05;
         actualizarCostsTotal();
     });
-
-    getJSONData(CART_BUY_TOTAL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            miCarrito = resultObj.data.articles;
-            mostrarCarrito(); //actualizo la tabla de la factura
-            document.getElementById("cantSeleccionados").innerHTML=miCarrito.length;
-        }
-    }); //cierro JSON
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-    //RADIOBUTTON: funcion seleccionar modo de pago 
-/*    document.getElementById("radiotarjeta").addEventListener("change", function(){
-        document.getElementById("nrot").disabled = false;
-        document.getElementById("cseg").disabled = false;
-        document.getElementById("vtot").disabled = false;
-
-        document.getElementById("nroCuenta").disabled=false;
-
-        document.getElementById("nroCuenta").innerHTML = variablenro;
-
-    });
-    //RADIOBUTTON: funcion seleccionar modo de pago 
-    document.getElementById("radiotransferencia").addEventListener("change", function(){
-        document.getElementById("nrot").disabled = true;
-        document.getElementById("cseg").disabled = true;
-        document.getElementById("vtot").disabled = true;
-
-        document.getElementById("nroCuenta").disabled=false;
-
-        document.getElementById("nrot").innerHTML = variablenro;
-
-    });*/
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-}); //CIERRO document.addEventListener("DOMContentLoaded", function (e)
+});
 
 function mostrarCarrito() {
     let cargarmostrar = ``;
@@ -97,33 +62,28 @@ function mostrarCarrito() {
                 <tr>
                     <th> <img src="` + miCarrito[i].src + `" alt="` + miCarrito[i].name + `" class="img-thumbnail" width="100"> </th>                   
                     <th>` + miCarrito[i].name + `</th>
-                    <th>`+ 'USD' + " " + monedaDolar + ' ~~ ' + 'UYU' + " " + monedaUY + `</th>
-                    <th><input id="idinput_` + i + `" class="form-control" type="number" min="0" style="width:70px;" value="`+ miCarrito[i].count +`" onChange="modificarProducto(` + i + `, idinput_` + i + `.value)"</></th>
-                    <th></th>
+                    <th>`+ 'USD' + " " + monedaDolar + ' ~ ' + 'UYU' + " " + monedaUY + `</th>
+                    <th><input id="idinput_` + i + `" class="form-control" type="number" min="0" value="`+ miCarrito[i].count +`" onChange="modificarProducto(` + i + `, idinput_` + i + `.value)"</></th>
                     <th>` + subTotal + ` ` + " - UYU " + `</th>
                     <td class="text-right"><button id="btnsupr" class="btn btn-sm btn-danger" onclick="quitarProducto(`+i+`);"><i class="fa fa-trash"></i> </button> </td>
-                </tr> `;
-
-            cantidadDEelementos = cantidadDEelementos + parseInt(miCarrito[i].count);
+                </tr>
+                `;
         }
-        
         document.getElementById('cantSeleccionados').innerHTML = miCarrito.length;
         document.getElementById('cantSelec').innerHTML = miCarrito.length; //en la pagina de carrito, muestro la cantidad de productos seleccionados
-        document.getElementById('cantidadDEelementos').innerHTML = cantidadDEelementos; //total de elementos
     }
     else {
-        cargarmostrar = ` <tr> <th>El carrito esta vacio.</th> </tr>  `;
+        cargarmostrar = `
+                <tr>
+                    <th>El carrito esta vacio.</th>
+                </tr>
+                `;
         document.getElementById('cantSeleccionados').innerHTML = miCarrito.length;
         document.getElementById('cantSelec').innerHTML = miCarrito.length; //en la pagina de carrito, muestro la cantidad de productos seleccionados
-        document.getElementById('cantidadDEelementos').innerHTML = cantidadDEelementos;//total de elementos
     }
-
     document.getElementById('tableList').innerHTML = cargarmostrar;
 
-    //SUBTOTAL EN PESOS final de la tabla mmuestra un subtotal, faltando ecalcular el costo de envio
-    document.getElementById("stotalpesos").innerText =" -.   . "+" .     UYU $  " +  subT; 
-    document.getElementById("stotaldolares").innerText=" -.   . "+" .     USD $  " +  subT/40; //SUBTOTAL EN DOLARES
-
+    document.getElementById("stotal").innerText = "Total: UYU $ " +  subT;  //final de la tabla mmuestra un subtotal, faltando ecalcular el costo de envio
     document.getElementById("costototal").innerText = " " + total;
     document.getElementById("subTotalsinEnvio").innerText = " " + subT;
 
@@ -168,8 +128,6 @@ function quitarProducto(lugar) {
 function vaciarCarrito() {
     //miCarrito.removeItem("tableList")
     sessionStorage.removeItem("tableList");
-    
-
     mostrarCarrito();
 }
 
@@ -238,10 +196,8 @@ function vaciarCarrito() {
 
             document.getElementById('radiotransferencia').disable=false;
             ncuenta.readOnly=true;
-
-            variableFormaPago = "Tarjeta de Credito";
         }
-        else if (!document.getElementById('radiotransferencia').disable){
+        else{
             document.getElementById('radiotarjeta').disable=false;
             nrot.readOnly =true;
             cseg.readOnly =true;
@@ -249,11 +205,5 @@ function vaciarCarrito() {
             
             document.getElementById('radiotransferencia').disable=true;
             ncuenta.readOnly=false;
-
-            variableFormaPago = "Transferencia Bancaria";
         }
-        else if ((!document.getElementById('radiotransferencia').disable) && (!document.getElementById('radiotarjeta').disable)){
-            variableFormaPago = "No ha sido seleccionada aún.";
-        }
-        document.getElementById("variableFormaPago").innerText = " " +variableFormaPago;
     }
