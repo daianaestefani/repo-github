@@ -14,10 +14,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/dropzone.css" rel="stylesheet">
-  <!---------------------------------------------------------------------------------------------------------------------->
-      <!--librería para usar SweetAlert-->
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>   
-  <!---------------------------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------------------------->
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/carrito.css" rel="stylesheet">
     <!--------------------------------------------------------------------------------------------------------------------->
@@ -46,6 +43,12 @@
             border-color: green;
             background-color:rgb(161, 245, 150);
         }
+        /*.bien{
+            color:rgb(8, 233, 8);
+        }
+        .mal{
+            color:red;
+        }*/
     </style>
 
 </head>
@@ -53,7 +56,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light doradogradiente">
         <!-- El logotipo y el icono que despliega el menú se agrupan para mostrarlos mejor en los dispositivos móviles -->
-        <span class="navbar-brand w-25"><a href="principalmenu.html">E-Commerce</a></span>
+        <span class="navbar-brand w-25">E-Commerce</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
                 data-target="#navbarSupportedContent" 
                 aria-controls="navbarSupportedContent" 
@@ -66,10 +69,10 @@
         otro elemento que se pueda ocultar al minimizar la barra -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto w-100  justify-content-between">
-                <li class="nav-item"><a class="nav-link" href="principalmenu.html"><b>Inicio</b></a></li>
-                <li class="nav-item"><a class="nav-link" href="categories.html"><b>Categorías</b></a></li>
-                <li class="nav-item"><a class="nav-link" href="products.html"><b>Productos</b></a></li>
-                <li class="nav-item"><a class="nav-link" href="sell.html"><b>Vender</b></a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
+                <li class="nav-item"><a class="nav-link" href="products.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">
                         <!--Usuario-->
@@ -83,11 +86,11 @@
                         </li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item">
-                            <a href="my-profile.html"><b>Mi Perfil</b></a>
+                            <a href="my-profile.html">Mi Perfil</a>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item">
-                            <a class="ltrfnd ctrcnt" onclick="cerrarsesion();"><b>Cerrar Sesión</b></a>
+                            <a class="ltrfnd ctrcnt" onclick="cerrarsesion();">Cerrar Sesión</a>
                         </li>
                         <!--<button class="dropdown-item logout-btn" onclick="signOut();"> Log Out Google</button>       < !-- cerrar sesion de google NO LOGRA DESCONECTARSE...-->
                     </ul>
@@ -124,73 +127,33 @@
         <h2 class="centrado">Mi carrito : Productos seleccionados <i class="fas fa-shopping-cart"></i></h2>
         <br>
         <h4>Contiene <span id="cantSelec" class="badge badge-success"> X </span> productos diferentes</h4> <br> <br>
-        <h5> ... <span class="badge" id="cantidadDEelementos">X</span> </h5>
-<!--
-        <table class="table-responsive">
-            <thead class="thead-dark table-responsive">
+
+        <table class="table">
+            <thead class="thead-dark">
                 <tr>
-                    <th><b>Logo Producto- </b></th>             <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th>
-                    <th><b> -Nobre de Producto-</b></th>        <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th>
-                    <th><b>-Precio por unidad-</b></th>         <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th>
-                    <th><b>-Cant. producto-</b></th>   <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th>
-                    <th><b>-SubTotal de c/ producto-</b></th>
+                    <th></th>
+                    <th><b>Logo Producto</b></th>
+                    <th></th>
+                    <th><b>Nobre de Producto</b></th>
+                    <th></th>
+                    <th><b>Precio por unidad</b></th>
+                    <th></th>
+                    <th><b>Cantidad del mismo producto</b></th>
+                    <th></th>
+                    <th><b>SubTotal de c/ producto</b></th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody id="miCarrito"> </tbody> 
+            <tbody id="miCarrito"> </tbody>
         </table>
-        <table id="tableList" class="table table-striped table-responsive"> </table> 
--->
-        <table class="table-responsive">
-            <thead class="thead-dark table-responsive">
-                <tr>
-                    <th><b>Logo Producto- </b></th>             <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th>
-                    <th><b> -Nobre de Producto-</b></th>        <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th>
-                    <th><b>-Precio por unidad-</b></th>         <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th>
-                    <th><b>-Cant. producto-</b></th>   <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th>
-                    <th><b>-SubTotal de c/ producto-</b></th>
-                </tr>
-            </thead>
-            <tbody id="tableList" class="table table-striped table-responsive align-items-center"> </tbody>
-        </table>
-<!---->
-        <div class="aviso-envio-carrito">
-            <h3> SUBTOTAL SIN COSTO DE ENVIO </h3>
-        </div>
-        <div class="aviso-envio-carrito">
-            <h5> <b>SUBTOTAL Dolares.  </b><span id="stotaldolares"></span> </h5>     
-            <br>
-            <h5> <b>SUBTOTAL Pesos.  </b> <span id="stotalpesos"></span> </h5>
-        </div>
-        <br>
-<!---->       
-        <button class="btn btn-danger" onclick="localStorage.clear(); location.reload();">Borrar Carrito <i class="fas fa-trash-alt"></i></button>
+
+        <table id="tableList" class="table table-striped"> </table>
+
+        <p class="derecha" id="stotal"> SubTotal: -</p>
+        <button class="btn btn-danger" onclick="vaciarCarrito();">Borrar Carrito <i class="fas fa-trash-alt"></i></button>
     </div>
 <br>
     <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-    <!-------------------------------------------------------------------------------------------------------------->
-    <!-------------------------------------------------------------------------------------------------------------->
-    <div class="container">
-        <h3 class="mb-3">Tipo de Envío <i class="fas fa-hourglass-start"></i></h3>
-        <div class="d-block my-3">
-            <div class="custom-control custom-radio">
-                <input id="idpremium" name="tipoEnvio" type="radio" class="custom-control-input" checked="" value="0.15" required >
-                <label class="custom-control-label" for="idpremium">Premium 2 a 5 días (15%)</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input id="idexpress" name="tipoEnvio" type="radio" class="custom-control-input" value="0.07" required>
-                <label class="custom-control-label" for="idexpress">Express 5 a 8 días (7%)</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input id="idstandard" name="tipoEnvio" type="radio" class="custom-control-input" value="0.05" required>
-                <label class="custom-control-label" for="idstandard">Standard 8 a 15 días (5%)</label>
-            </div>
-            <hr>
-
-        </div>
-    </div>
-    <br>
-    <!-------------------------------------------------------------------------------------------------------------->
-    <!-------------------------------------------------------------------------------------------------------------->
     <div class="container">
         <h3>Costos  <i class="fas fa-file-invoice-dollar"></i> </h3>
         <ul class="list-group mb-3">
@@ -208,7 +171,7 @@
                     <h6 class="my-0 sub">Costo de envío ( UYU )</h6>
                     <small class="text-muted">  Dependiendo del tipo de envío</small>
                 </div>
-                <label>$  <span class="text-muted" id="costoEnvio"> <b>-</b></span></label> <!-- comissionText-->
+                <span class="text-muted" id="costoEnvio"> <b>-</b></span> <!-- comissionText-->
             </li>
 
             <li class="list-group-item d-flex justify-content-between">
@@ -219,106 +182,131 @@
     </div>
     <br>
     <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-    <!------------------------------------------------------------------------------------------------------------------------------->
-    <!------------------------------------------------------------------------------------------------------------------------------->
-    <!------------------------------------------------------------------------------------------------------------------------------->
-
-        <!--<form method="post" action="http://localhost:4000/ingresocompra" class="form-group" id="formulario" novalidate=""> -->
-            <div class="col">
-                    <h3 class="container mb-3">Dirección de envío  <i class="fas fa-home"></i></h3>                
-                    <div class="needs-validation">
-                        <div class="col col-md-12 mb-3">
-                            Calle : <input type="text" id="calle" name="calle" class="form-control caja-entrada"  placeholder="Calle" value="" required>  <!--<span id="tickcalle"></span>-->
-                            <div class="invalid-feedback"> Ingresa una calle </div>
-                        </div>
-                        <br>
-                        <div class="col col-md-3 mb-3">
-                            Número de puerta : <input type="number" id="dnumero" name="npuerta" class="form-control caja-entrada" value="0" min="0" required> <!--<span id="tickPUERTA"></span>-->
-                            <div class="invalid-feedback"> Número de puerta debe ser mayor que 0. </div>
-                        </div>
-                        <br>
-                        <div class="col-md-12 mb-3">
-                            Esquina : <input type="text" id="esquina" name="esquina" class="form-control caja-entrada" placeholder="Calle Esquina" value="" required> <!--<span id="tickesquina"></span>-->
-                            <div class="invalid-feedback"> Ingresa un calle </div>
-                        </div>
-                    </div> <br>
-            </div> <!--container de DIRECCION DE ENVIO-->
-
-    <!--------------------------------------------------------------------------------------------------------------------------->
-    <!--------------------------------------------------------------------------------------------------------------------------->
-    <!--------------------------------------------------------------------------------------------------------------------------->
-    
-            <div class="col">
-                <h3 class="container mb-3">Forma de pago <i class="fas fa-money-check-alt"></i></h3>
-
-                <span id="variableFormaPago"></span>
-                <span id="variablenro"></span>
-                    
-                <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">
-                    Seleccionar forma de pago <i class="far fa-credit-card"></i> 
-                </button>
-                <br><br><br>   
-            </div> <!--columna de FORMA DE PAGO-->
-
-            <div class="container">
-                <button class="btn btn-success centrado" id="validar" type="submit" value="submmit">PAGAR </button>
-            </div>  
-    <!--    </form>< !--todoslos datos que envio por post-->    
-    <!--------------------------------------------------------------------------------------------->
-    <!------abro ventana modal, para elegir forma de pago--------->
-
-        <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content yellow-palido">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" > Forma de Pago</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row"> <h5 class="text-warning"> <input type="radio" name="formaPago" id="radiotarjeta"> Tarjeta de Crédito</h5> </div>
-                            <hr>
-                            <br>
-                            <label for="nroTarjeta">Número de tarjeta</label> 
-                            <input type="text" class="form-control caja-entrada" id="nroTarjeta">
-                            <label for="codSeguridad">Código de Seguridad</label> 
-                            <input type="text" class="form-control caja-entrada" id="codSeguridad">
-                            <label for="vto">Vencimiento (MM/AA)</label> <!--<label for="vto">Vencimiento (MM/AA)</label> -->
-                            <input type="month" class="form-control caja-entrada" id="vto">
-                            <br>
-
-                            <div class="row"> <h5 class="text-primary"> <input type="radio" name="formaPago" id="radiotransferencia"> Transferencia bancaria</h5> </div>
-                            <hr>
-                            <label for="nroCuenta">Número de cuenta</label> 
-                            <input type="number" class="form-control caja-entrada" id="nroCuenta" value="0" min="1" required>
-                        </div>
-                        <div class="modal-footer"> <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button> </div>
-
-                    </div>
-                </div>
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
+    <div class="container">
+        <h3 class="mb-3">Tipo de Envío <i class="fas fa-hourglass-start"></i></h3>
+        <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+                <input id="idpremium" name="tipoEnvio" type="radio" class="custom-control-input" checked="" required="" value="0.15">
+                <label class="custom-control-label" for="idpremium">Premium 2 a 5 días (15%)</label>
             </div>
-        </div>
+            <div class="custom-control custom-radio">
+                <input id="idexpress" name="tipoEnvio" type="radio" class="custom-control-input" required="" value="0.07">
+                <label class="custom-control-label" for="idexpress">Express 5 a 8 días (7%)</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input id="idstandard" name="tipoEnvio" type="radio" class="custom-control-input" required="" value="0.05">
+                <label class="custom-control-label" for="idstandard">Standard 8 a 15 días (5%)</label>
+            </div>
+            <hr>
 
-    <!---------------------------------------------------------------------------------------------------------------------------------->
+        </div>
+    </div>
+    <br>
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------->
+    <h3 class="container mb-3">Dirección de envío  <i class="fas fa-home"></i></h3>
+    <div class="container">
+        <div class="needs-validation">
+
+                <div class="col-md-12 mb-3">
+                    <label for="calle">Calle</label> <input type="text" class="form-control caja-entrada" id="calle" placeholder="Calle" value="" > <!--<span id="tickcalle"></span>-->
+                    <div class="invalid-feedback"> Ingresa una calle </div>
+                </div>
+                <br>
+                <div class="col-md-3 mb-3">
+                    <label for="dnumero">Número de puerta</label>
+                    <input type="number" class="form-control caja-entrada" id="dnumero" placeholder="" required="" value="0" min="0"> <!--<span id="tickPUERTA"></span>-->
+                    <div class="invalid-feedback"> Número de puerta debe ser mayor que 0. </div>
+                </div>
+                <br>
+                <div class="col-md-12 mb-3">
+                    <label for="esquina">Esquina</label>
+                    <input type="text" class="form-control caja-entrada" id="esquina" placeholder="Calle" value="" > <!--<span id="tickesquina"></span>-->
+                    <div class="invalid-feedback"> Ingresa un calle </div>
+                </div>
+
+        </div>
+        <br>
+
+    </div>
+    <!--------------------------------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="container">
+        <h3>Forma de pago <i class="fas fa-money-check-alt"></i></h3>
+
+            No ha sido seleccionada aún.
+            <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">Seleccionar forma de pago <i class="far fa-credit-card"></i> </button>
+
+    </div>
+    <div class="container">
+        <button class="bbtn btn-success centrado" id="validar" type="submit">PAGAR </button>
+    </div>
+      </form>
+<!---------------------------------------------------------------------------------------------------------------------------------->
+
+
     <!--<button class="btn btn-danger" onclick="eliminarProductos();">Borrar Carrito</button>-->
     <br>
     <div class="container">
         <a href="principalmenu.html">volver a principal</a>
         <br> <br>
+        
     </div><!--clase container-->
+
+
 
     <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
 
+    <!--------------------------------------------------------------------------------------------->
+    <!------abro ventana modal, para elegir forma de pago--------->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title"> Forma de Pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row"> <h5 class="text-warning"> <input type="radio" name="formaPago" id="radiotarjeta" onclick="deshabilitar();"> Tarjeta de Crédito</h5> </div>
+                        <hr>
+                        <br>
+                        <label for="nroTarjeta">Número de tarjeta</label> 
+                        <input type="text" class="form-control caja-entrada" id="nroTarjeta">
+                        <label for="codSeguridad">Código de Seguridad</label> 
+                        <input type="text" class="form-control caja-entrada" id="codSeguridad">
+                        <label for="vto">Vencimiento (DD/MM/AA)</label> <!--<label for="vto">Vencimiento (MM/AA)</label> -->
+                        <input type="date" class="form-control caja-entrada" id="vto">
+                        <br>
+
+                        <div class="row"> <h5 class="text-primary"> <input type="radio" name="formaPago" id="radiotransferencia" onclick="deshabilitar();"> Transferencia bancaria</h5> </div>
+                        <hr>
+                        <label for="nroCuenta">Número de cuenta</label> 
+                        <input type="number" class="form-control caja-entrada" id="nroCuenta" placeholder="" required="" value="0" min="1">
+
+                    </div>
+                    <div class="modal-footer"> <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button> </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/loginsocial.js"></script>
-    <script src="js/loginsocialGOOGLE.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/dropzone.js"></script>
 
