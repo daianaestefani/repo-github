@@ -9,13 +9,12 @@
   <!---------------------------------------------------------------------------------------------------------------------->
     <!--*************GOOGLE*************-->
     <!--<meta name="google-signin-scope" content="profile email">-->
+    <!-- --------   conectando con servidor local-->
+    <!--<meta name="google-signin-client_id" content="690440154408-8qhnlt2o6el02tpfo9pp9s7428r4bvd7.apps.googleusercontent.com"> < !--id cliente google local-->
+    <!--<script src="https://apis.google.com/js/api.js"> </script> cargamos la api--> <!--NUCLEO DE LA BIBLIOTECA JAVASCRIPT DE GOOGLE-->
     <!-- --------   conectando con github-->
     <meta name="google-signin-client_id" content="683328523327-2doipooik8ru4u1gi3kb0015719lg9h6.apps.googleusercontent.com"> <!--id cliente google-->
-    <!-- --------   conectando con servidor local-->
-    <meta name="google-signin-client_id" content="690440154408-8qhnlt2o6el02tpfo9pp9s7428r4bvd7.apps.googleusercontent.com"> <!--id cliente google local-->
-    
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="https://apis.google.com/js/api.js"> </script>  <!--cargamos la api--> <!--NUCLEO DE LA BIBLIOTECA JAVASCRIPT DE GOOGLE-->
   <!---------------------------------------------------------------------------------------------------------------------->
   <!--*************Facebook*************-->
     <div id="fb-root"></div>
@@ -95,15 +94,17 @@
                 <b> Iniciar sesión con Facebook </b> 
               </button>   <br>
               <div class = "fb-login-button" data-size = "large" data-button-type = "continue_with" data-layout = "default" data-auto-logout-link = "false" data-use-continue -as = "false" data-width = "" >   </div>
-               <!-- ↑↑↑↑↑↑ facebook boton, pero ni si quiera logro hacer que se vea en la pantalla, mucho menos pude hacer que funcione-->
-
+              <!-- ↑↑↑↑↑↑ facebook boton, pero ni si quiera logro hacer que se vea en la pantalla, mucho menos pude hacer que funcione-->
+              
+              <!--
               <button class="Social Google"   onclick="alert('Éste botón no está funcionando... Inicia ingresando tus datos..');";>
                 <b> Iniciar sesión con Google </b>
-              </button>
-
+              </button>-->
 
               <!-- ↓↓↓↓↓↓↓↓ boton google, SI inicia sesion, pero lo comento porque NO LOGRO QUE FUNCIONE EL BOTON CERRAR SESION CON GOOGLE-->
-        <!--    <div class="g-signin2 btngooglesocial" data-onsuccess="onSignIn" > </div> -->  <!--<button  onclick="SignOut()"> </button>-->
+             <div class="g-signin2 d-flex justify-content-center" data-onsuccess="onSignIn" data-theme="dark" data-gapiscan="true" data-onload="true"> </div>  
+            
+            <!--<button  onclick="SignOut()"> </button>-->
 
           </div> <!--formato caja-derecha -> loginSocial-->
 
