@@ -54,9 +54,15 @@ function onSignIn(googleUser) {
 //////////////////funcion para que google cierre sesion de usuario////////////////////
 function signOut(){
     var auth2 = gapi.auth2.getAuthInstance(); /*me salio error en esta linea.... Uncaught ReferenceError: gapi is not defined at signOut (loginsocial.js:70) at HTMLButtonElement.onclick (principalmenu.html:27)*/
-    auth2.signOut().then(function(){
-        alert('Cerrando sesion de usuario:' +usuario);
-        location.reload();
-    });//    auth2.disconnect();    
-    location.href='index.html';     //redirecciono al index
-} //funcion serrar sesion del boton
+    auth2.signOut();
+    auth2.disconnect();
+}
+
+function init(){
+    gapi.load('auth2', function(){
+    gapi.auth2.init().then(function(e){
+        signOut();
+        location.href='index.html';     //redirecciono al index
+    })
+    });
+}//function init
