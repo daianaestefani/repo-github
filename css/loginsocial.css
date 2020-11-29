@@ -192,3 +192,7 @@ p{ /*texto. ¿no tiene una cuenta?*/
   text-shadow: 0 2px 4px  indigo;            /*sombra en el texto*/
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);  /*sombra en "la caja""*/
 }
+
+img{
+  border-radius: 50%;
+}
