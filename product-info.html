@@ -1,258 +1,166 @@
-<!DOCTYPE html>
-<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
-<html lang="en">
-  <!-- const PRODUCT_INFO_URL = "https://japdevdep.github.io/ecommerce-api/product/5678.json";
-       const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json"; -->
-       <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-      <!--------------------------------------------------------------------------------------------------------------------->
-        <title>eMercado - Todo lo que busques está aquí</title>
-      <!--------------------------------------------------------------------------------------------------------------------->
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
-        <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-      <!--------------------------------------------------------------------------------------------------------------------->
-       <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/styles.css" rel="stylesheet">
-        <link href="css/dropzone.css" rel="stylesheet">
-      <!--------------------------------------------------------------------------------------------------------------------->
-        <link href="css/carrito.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">   
-      <!---------------------------------------------------------------------------------------------------------------------->
-      <!--librería para usar SweetAlert-->
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
-      <!--------------------------------------------------------------------------------------------------------------------->
-        <link href="css/productinfo.css" rel="stylesheet">
-        <link href="css/infoComentarios.css" rel="stylesheet">
-        <style>
-          body{
-            background: linear-gradient(45deg, #FFF2A8 20%, gold);
-          }
-      </style>
-  </head>
+let currentProductInfo = {};
+let currentComments = [];
 
-  <body>
-    <nav class="navbar navbar-expand-md navbar-light doradogradiente">
-      <!-- El logotipo y el icono que despliega el menú se agrupan para mostrarlos mejor en los dispositivos móviles -->
-      <span class="navbar-brand w-25"><a href="principalmenu.html">E-Commerce</a></span>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" 
-              data-target="#navbarSupportedContent" 
-              aria-controls="navbarSupportedContent" 
-              aria-expanded="false" 
-              aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <!-- Agrupar los enlaces de navegación, los formularios y cualquier
-      otro elemento que se pueda ocultar al minimizar la barra -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto w-100  justify-content-between">
-              <li class="nav-item"><a class="nav-link" href="principalmenu.html">Inicio</a></li>
-              <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
-              <li class="nav-item"><a class="nav-link" href="products.html">Productos</a></li>
-              <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
-              <li class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">
-                      <!--Usuario-->
-                      <b id="sesion"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                      <li class="dropdown-item">
-                          <a href="cart.html">
-                              Mi Carrito <span id="cantSeleccionados" class="badge badge-success">X</span>
-                          </a>
-                      </li>
-                      <li class="dropdown-divider"></li>
-                      <li class="dropdown-item">
-                          <a href="my-profile.html">Mi Perfil</a>
-                      </li>
-                      <li class="dropdown-divider"></li>
-                      <li class="dropdown-item">
-                          <a class="ltrfnd ctrcnt" onclick="cerrarsesion();">Cerrar Sesión</a>
-                      </li>
-                      <!--<button class="dropdown-item logout-btn" onclick="signOut();"> Log Out Google</button>       < !-- cerrar sesion de google NO LOGRA DESCONECTARSE...-->
-                  </ul>
-              </li>
-          </ul>
-          <!-- ESTE BUSCADOR NO FUNCIONA-->
-          <form class="nav-item p-2" role="search">
-              <div class="row">
-                  <input type="text" class="col form-control mr-2" placeholder="Buscar">
-                  <button type="submit" class="col-4 col-md btn btn-warning">Enviar</button>
-              </div>
-          </form>
-      </div>
-  </nav>
-  
-  <script>
-      var sesion = localStorage.getItem("usuario"); 
-      document.getElementById("sesion").innerHTML = sesion;
-  </script>
+// 1. FUNCIÓN PARA MOSTRAR LA INFORMACIÓN PRINCIPAL Y PRODUCTOS RELACIONADOS
+function showProductInfo(productData) {
+    let nameHTML = document.getElementById("productName");
+    let priceHTML = document.getElementById("productPrice");
+    let currencyHTML = document.getElementById("productMoneda");
+    let descriptionHTML = document.getElementById("proDescripHTML") || document.getElementById("proDescription");
+    let soldHTML = document.getElementById("soldCount");
+    let categoryHTML = document.getElementById("prodCateg");
 
-    <div class="container p-5">
-      <!--<div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 13/09/2020) y Entrega 4 (Fecha de entrega: 20/09/2020).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>-->
-    </div>
-    <main role="main">
-      <div class="container mt-5">
-        <div class="text-center p-4">
-          <h2>Descripción delproducto</h2>
-          <p class="lead"> Encontrarás aquí toda la información de la categoría seleccionada. </p>
-          <p class="small alert-warning py-3">
-            <strong>Nota: </strong>por simplicidad, cualquiera sea la categoría seleccionada previamente, siempre se visualizará la presente:
-            <strong>Autos</strong>.
-          </p>
-        </div>
-
-        <div class="container flex-column flex-md-row d-flex justify-content-between"><!--div para contener la informacion del producto-->
-            <h3 id="prodName"></h3>
-            <!--<div class="d-flex justify-content-between adjuntarpro">
-                  <label Seleccionar Cantidad></label>                
-                  <input type="number" id="cantCarrito" value="1" class="form-control">
-                  <button onclick="agregarCarrito()" class="btn">Agregar al Carrito</button>
-            </div>-->
-        </div>
-
-        <hr class="my-3">
-
-        <div class="row"> <!--clase: fila, contener tanto las imagenes como la informacion del producto-->
-
-            <div class="col"> <!--contener las imagenes-->
-                <div class="modal-content">
-                  <div id="autosdemostracion" class="carousel slide" data-ride="carousel">
-
-                    <ul class="carousel-indicators" ></ul>
-                    <div class="carousel-inner" id="pImgCarousel"> </div>
-
-                    <!-- Left and right controls --><!--     -->
-                    <a class="carousel-control-prev" href="#autosdemostracion" data-slide="prev"><span class="carousel-control-prev-icon"></span> </a>
-                    <a class="carousel-control-next" href="#autosdemostracion" data-slide="next"><span class="carousel-control-next-icon"></span> </a>
-                  </div>
-                </div>
-                <br><br>
-                <dt>Imágenes ilustrativas</dt>
-                <dd>    <div class="row text-center text-lg-left pt-2" id="productImages"></div>    </dd>
-            </div><!--class=col-->
-
-            <div class="col"><!--muestro la informacion de producto-->
-              <dl>
-                  <dt>Precio</dt>
-                  <dd>    <p>    <label id="productMoneda"> </label> <label id="productPrice"> </label>    </p>    </dd>
-                  <dt>Descripción</dt>
-                  <dd>    <p id="proDescription"></p>    </dd>
-        
-                  <dt>Cantidad de productos vendidos</dt>
-                  <dd>    <p id="soldCount"></p>    </dd>
-        
-                  <dt>Categoría a la que pertenece el producto</dt>
-                  <dd>    <a href="category-info.html"> <label id="category"> </label> </a>    </dd>
-              </dl>        
-            </div><!--class=col-->
-          </div> <!--class="row">-->
-<br><br>
-
-          <div class="container"> <!--muestro los productos relacionados al producto que estoy viendo ahora...-->
-
-            <h2>Productos relacionados</h2>
-            <dd>  
-            
-            <div class="row">
-                <div class="row" id="proRelacionados"> 
-                  <!-- muestro Imagen Producto-->         <!--<div id="productImgSrc"></div>-->            
-                  <!-- muestro Nombre Producto-->         <!--<p id="prodNameRel"></p>-->                                          
-                  <!--Moneda & Precio de Producto-->      <!--<label id="prodRMoneda"></label> <label id="prodRPrecio"></label>--> 
-                </div>
-            </div> <!-- <div class="row">-->
-            </dd>
-         </div> <!--container: productos relacionados...-->
-<br><br>
-
-        <!--//////////////////////////////////seccion para los comentarios//////////////////////////////////-->
-        <br><br>
-              <h2><b>  Comentarios de otros usuarios: </b></h2>
-              <br>
-        
-          <div id="comm">
-          <!--comentarios agregados-->
-          </div>
-
-          <div id="agregado"> 
-          <!-- carga el comentario que agrego yo-->
-          </div>
-
-          <div class="ingresarComentario">  <!--usuario...    puntuacion...   publicar...-->
-            <h1>  Ingresar Comentario:  </h1>
-            <br>
-            <h3 id="usuaregistrado"> </h3>
+    if (nameHTML) nameHTML.innerHTML = productData.name;
+    if (priceHTML) priceHTML.innerHTML = productData.cost;
+    if (currencyHTML) currencyHTML.innerHTML = productData.currency;
+    if (soldHTML) soldHTML.innerHTML = productData.soldCount;
+    if (categoryHTML) categoryHTML.innerHTML = productData.category;
+    
+    if (descriptionHTML) {
+        descriptionHTML.innerHTML = productData.description + `
             <br><br>
-            
-            <textarea id="coment" class="areatext" placeholder=" Nos importa tu opinion sobre nuestro producto "> </textarea> <!-- comentario -->
-            <br><br>
-            Puntuación:
-            <select id="puntaje">  <!--puntos-->
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <span id="calif"></span><!--calificacion seleccionada-->
-            <br>
-            <br>
-            <input type="submit" value="Publicar" onclick="agregarComentario(coment.value)">
-            <br><br>            <br>
-            Fecha de hoy es:  <label id="datetime" class="darktime">...</label>  <label  id="reloj" class="darktime"> </label> 
-            <br>            <br>            <br>         
-          </div>  <!-- class "ingresarComentario"-->
-          <br>
+            <button id="btn-agregar-carrito" class="btn btn-success btn-lg mt-3">
+                <i class="fas fa-shopping-cart"></i> Agregar al carrito
+            </button>
+        `;
+    }
 
-<!--------------------------------------------------------------------------------------------------------------------->
+    // CARGAR IMÁGENES ILUSTRATIVAS
+    if (productData.images && productData.images.length > 0) {
+        let imagenesHTML = "";
+        let carouselHTML = "";
+        productData.images.forEach((imgSrc, index) => {
+            imagenesHTML += `
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="${imgSrc}" alt="">
+                </div>
+            </div>`;
+            let activeClass = index === 0 ? "active" : "";
+            carouselHTML += `
+            <div class="carousel-item ${activeClass}">
+                <img src="${imgSrc}" class="d-block w-100" alt="...">
+            </div>`;
+        });
+        let contenedorImagenes = document.getElementById("productImages");
+        let contenedorCarrusel = document.getElementById("pImgCarousel");
+        if (contenedorImagenes) contenedorImagenes.innerHTML = imagenesHTML;
+        if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
+    }
 
-        <br><br>
-        <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver todos los productos<a>
-          <br>
-      </div><!--<div class="container mt-5">-->
-    </main>
+    // CARGAR PRODUCTOS RELACIONADOS (Sistema multi-propiedad Inteligente)
+    // Buscamos dentro de relatedProducts o cualquier variante de JAP
+    let relacionados = productData.relatedProducts || productData.RelatedProducts || [];
+    
+    if (relacionados.length > 0) {
+        let relacionadosHTML = "";
+        
+        relacionados.forEach(rel => {
+            // Probamos todas las combinaciones posibles que JAP usa en sus APIs
+            let itemImg = rel.imgSrc || rel.image || rel.src || rel.ImgSrc || "";
+            let itemName = rel.name || rel.Name || rel.titulo || "Producto Relacionado";
+            let itemId = rel.id || rel.Id || localStorage.getItem("prodID");
 
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-right">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-        <p>
-          Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
-          letra del obligatorio.
-        </p>
-      </div>
-    </footer>
-    <div class="container">
-      <a href="principalmenu.html">volver a menú principal</a>
-      <br> <br>
-    </div>
-    <div id="spinner-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/cart.js"></script>
-<script src="js/product-info.js?v=1.3"></script>
-          <!--<script src="js/product-info.js"></script>-->
-          <!-- ?v=1.1 que le agregamos se llama "rompe-caché". Le grita al navegador: "¡Ey! Ignorá por completo el archivo viejo roto que tenés guardado en la memoria y cargá el código nuevo de GitHub ahora mismo").-->
-    <script src="js/loginsocial.js"></script>
-    <script src="js/loginsocialGOOGLE.js"></script>
-    <!--<script> document.getElementById("usuaregistrado").innerText = "Usuario: " + localStorage.getItem("usuario"); </script>-->
-  </body>
-</html>
+            relacionadosHTML += `
+            <div class="col-lg-3 col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
+                <div class="card h-100 shadow-sm custom-card">
+                    <img class="img-fluid card-img-top" src="${itemImg}" alt="${itemName}">
+                    <div class="card-body p-2">
+                        <p class="card-text font-weight-bold text-center small mb-0 text-dark">${itemName}</p>
+                    </div>
+                </div>
+            </div>`;
+        });
+        
+        // Buscamos el contenedor por su ID clásico de JAP o por el tuyo personalizado
+        let contenedorRelacionados = document.getElementById("proRelacionados") || document.getElementById("related-products-container");
+        if (contenedorRelacionados) {
+            contenedorRelacionados.innerHTML = relacionadosHTML;
+        }
+    }
+
+    // ACCIÓN DEL BOTÓN VERDE
+    let botonCarrito = document.getElementById("btn-agregar-carrito");
+    if (botonCarrito) {
+        botonCarrito.addEventListener("click", function() {
+            let carrito = JSON.parse(localStorage.getItem("carritoCompras")) || [];
+            let nuevoProducto = {
+                id: productData.id || 1,
+                name: productData.name,
+                count: 1,
+                unitCurrency: productData.currency,
+                src: productData.images && productData.images[0] ? productData.images[0] : "",
+                unitCost: productData.cost
+            };
+            let existe = carrito.find(item => item.name === nuevoProducto.name);
+            if (existe) {
+                existe.count++;
+            } else {
+                carrito.push(nuevoProducto);
+            }
+            localStorage.setItem("carritoCompras", JSON.stringify(carrito));
+            alert("¡" + productData.name + " agregado al carrito con éxito!");
+        });
+    }
+}
+
+// 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS
+function showComments(commentsArray) {
+    let htmlContentToAppend = "";
+    
+    if (!commentsArray || commentsArray.length === 0) {
+        htmlContentToAppend = `<p class="text-muted p-3">No hay comentarios para este producto aún.</p>`;
+    } else {
+        commentsArray.forEach(comment => {
+            let estrellas = "";
+            let score = comment.score || comment.Score || 0;
+            for (let i = 1; i <= 5; i++) {
+                if (i <= score) {
+                    estrellas += `<span class="fa fa-star checked" style="color: orange;"></span>`;
+                } else {
+                    estrellas += `<span class="fa fa-star" style="color: grey;"></span>`;
+                }
+            }
+
+            let usuario = comment.user || comment.usuario || "Anónimo";
+            let fecha = comment.dateTime || comment.date || "";
+            let descripcion = comment.description || comment.descripcion || "";
+
+            htmlContentToAppend += `
+            <div class="list-group-item list-group-item-action p-3 mb-2 shadow-sm" style="display: block; clear: both; width: 100%;">
+                <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                    <h6 class="mb-0"><strong>${usuario}</strong></h6>
+                    <small class="text-muted">${fecha}</small>
+                </div>
+                <p class="mb-2 text-secondary small">${descripcion}</p>
+                <div>${estrellas}</div>
+            </div>`;
+        });
+    }
+
+    // Buscamos todos los contenedores posibles de comentarios de tu HTML
+    let contenedorComentarios = document.getElementById("productComments") 
+                                || document.getElementById("comentarios") 
+                                || document.getElementById("comments-list");
+                                
+    if (contenedorComentarios) {
+        contenedorComentarios.innerHTML = htmlContentToAppend;
+    }
+}
+
+// 3. EVENTO PRINCIPAL
+document.addEventListener("DOMContentLoaded", function(e) {
+    getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            currentProductInfo = resultObj.data;
+            showProductInfo(currentProductInfo);
+        }
+    });
+
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            currentComments = resultObj.data;
+            showComments(currentComments);
+        }
+    });
+});
