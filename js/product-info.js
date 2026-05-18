@@ -1,9 +1,8 @@
 let currentProductInfo = {};
 let currentComments = [];
-let allProductsArray = []; // Guardará todos los productos para buscar las fotos de los relacionados
 
-// 1. FUNCIÓN PARA MOSTRAR LA INFORMACIÓN PRINCIPAL Y EL BOTÓN VERDE
-function showProductInfo(productData, allProducts) {
+// 1. FUNCIÓN PARA MOSTRAR LA INFORMACIÓN PRINCIPAL Y PRODUCTOS RELACIONADOS
+function showProductInfo(productData) {
     let nameHTML = document.getElementById("productName");
     let priceHTML = document.getElementById("productPrice");
     let currencyHTML = document.getElementById("productMoneda");
@@ -49,29 +48,26 @@ function showProductInfo(productData, allProducts) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (Buscando los datos reales por índice en la lista de JAP)
+    // CARGAR PRODUCTOS RELACIONADOS (Formato nativo de objetos de JAP)
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
-        let relacionadosHTML = `<div class="row w-100 mx-0">`;
+        let relacionadosHTML = "";
         
-        productData.relatedProducts.forEach(indexItem => {
-            // Si el servidor manda objetos directos o si mapeamos el array de JAP usando el índice
-            let productoRelacionado = allProducts[indexItem] || indexItem;
-            
-            let itemImg = productoRelacionado.imgSrc || productoRelacionado.image || productoRelacionado.src || "img/vehicle-placeholder.png";
-            let itemName = productoRelacionado.name || productoRelacionado.description || "Producto Relacionado";
-            
+        productData.relatedProducts.forEach(rel => {
+            // Evaluamos las propiedades exactas que JAP envía en su JSON de entrega
+            let itemImg = rel.imgSrc || rel.image || rel.src || "";
+            let itemName = rel.name || "Producto Relacionado";
+            let itemId = rel.id || localStorage.getItem("prodID");
+
             relacionadosHTML += `
-            <div class="col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${indexItem}); window.location='product-info.html'">
-                <div class="card h-100 shadow-sm text-center p-2">
-                    <img class="card-img-top img-fluid mb-2" src="${itemImg}" alt="${itemName}" style="max-height: 150px; object-fit: contain;">
-                    <div class="card-body p-1">
-                        <a href="#" class="font-weight-bold btn btn-outline-primary btn-block btn-sm">${itemName}</a>
+            <div class="col-lg-3 col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
+                <div class="card h-100 shadow-sm custom-card">
+                    <img class="img-fluid card-img-top" src="${itemImg}" alt="${itemName}">
+                    <div class="card-body p-2">
+                        <p class="card-text font-weight-bold text-center small mb-0 text-dark">${itemName}</p>
                     </div>
                 </div>
             </div>`;
         });
-        
-        relacionadosHTML += `</div>`;
         
         let contenedorRelacionados = document.getElementById("proRelacionados");
         if (contenedorRelacionados) {
@@ -102,7 +98,7 @@ function showProductInfo(productData, allProducts) {
 
 // 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS
 function showComments(commentsArray) {
-    let htmlContentToAppend = `<div class="row w-100 mx-0">`;
+    let htmlContentToAppend = "";
     
     commentsArray.forEach(comment => {
         let estrellas = "";
@@ -115,19 +111,15 @@ function showComments(commentsArray) {
         }
 
         htmlContentToAppend += `
-        <div class="col-12 mb-2">
-            <div class="list-group-item list-group-item-action p-3 shadow-sm">
-                <div class="d-flex w-100 justify-content-between align-items-center mb-1">
-                    <h6 class="mb-0"><strong>${comment.user}</strong></h6>
-                    <small class="text-muted">${comment.dateTime}</small>
-                </div>
-                <p class="mb-2 text-secondary small">${comment.description}</p>
-                <div>${estrellas}</div>
+        <div class="list-group-item list-group-item-action p-3 mb-2 shadow-sm" style="display: block; clear: both; width: 100%;">
+            <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                <h6 class="mb-0"><strong>${comment.user}</strong></h6>
+                <small class="text-muted">${comment.dateTime}</small>
             </div>
+            <p class="mb-2 text-secondary small">${comment.description}</p>
+            <div>${estrellas}</div>
         </div>`;
     });
-
-    htmlContentToAppend += `</div>`;
 
     let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios");
     if (contenedorComentarios) {
@@ -135,24 +127,15 @@ function showComments(commentsArray) {
     }
 }
 
-// 3. EVENTO PRINCIPAL (Carga en cadena: Primero todos los productos, luego la info específica)
+// 3. EVENTO PRINCIPAL
 document.addEventListener("DOMContentLoaded", function(e) {
-    // Traemos la lista completa de productos para poder sacar las fotos de los relacionados
-    getJSONData(PRODUCTS_URL).then(function(allProductsObj) {
-        if (allProductsObj.status === "ok") {
-            allProductsArray = allProductsObj.data;
-            
-            // Una vez que tenemos los productos, cargamos la info del auto actual
-            getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
-                if (resultObj.status === "ok") {
-                    currentProductInfo = resultObj.data;
-                    showProductInfo(currentProductInfo, allProductsArray);
-                }
-            });
+    getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            currentProductInfo = resultObj.data;
+            showProductInfo(currentProductInfo);
         }
     });
 
-    // Cargar comentarios en paralelo
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentComments = resultObj.data;
