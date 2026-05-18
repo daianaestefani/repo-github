@@ -1,8 +1,9 @@
 let currentProductInfo = {};
 let currentComments = [];
+let allProductsArray = []; // Guardará todos los productos para buscar las fotos de los relacionados
 
 // 1. FUNCIÓN PARA MOSTRAR LA INFORMACIÓN PRINCIPAL Y EL BOTÓN VERDE
-function showProductInfo(productData) {
+function showProductInfo(productData, allProducts) {
     let nameHTML = document.getElementById("productName");
     let priceHTML = document.getElementById("productPrice");
     let currencyHTML = document.getElementById("productMoneda");
@@ -48,22 +49,23 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (Compatibilidad total con JAP)
+    // CARGAR PRODUCTOS RELACIONADOS (Buscando los datos reales por índice en la lista de JAP)
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
-        let relacionadosHTML = `<div class="row w-100 mx-0">`; // Forzamos fila limpia de Bootstrap
+        let relacionadosHTML = `<div class="row w-100 mx-0">`;
         
-        productData.relatedProducts.forEach(rel => {
-            // Buscamos cualquier variante de nombre que envíe el JSON de Ceibal (imgSrc, image o src)
-            let itemImg = rel.imgSrc || rel.image || rel.src || "";
-            let itemName = rel.name || rel.description || "Producto Relacionado";
-            let itemId = rel.id || rel;
-
+        productData.relatedProducts.forEach(indexItem => {
+            // Si el servidor manda objetos directos o si mapeamos el array de JAP usando el índice
+            let productoRelacionado = allProducts[indexItem] || indexItem;
+            
+            let itemImg = productoRelacionado.imgSrc || productoRelacionado.image || productoRelacionado.src || "img/vehicle-placeholder.png";
+            let itemName = productoRelacionado.name || productoRelacionado.description || "Producto Relacionado";
+            
             relacionadosHTML += `
-            <div class="col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top img-fluid" src="${itemImg}" alt="${itemName}" onerror="this.src='img/vehicle-placeholder.png'">
-                    <div class="card-body p-2 text-center">
-                        <p class="card-text font-weight-bold small mb-0">${itemName}</p>
+            <div class="col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${indexItem}); window.location='product-info.html'">
+                <div class="card h-100 shadow-sm text-center p-2">
+                    <img class="card-img-top img-fluid mb-2" src="${itemImg}" alt="${itemName}" style="max-height: 150px; object-fit: contain;">
+                    <div class="card-body p-1">
+                        <a href="#" class="font-weight-bold btn btn-outline-primary btn-block btn-sm">${itemName}</a>
                     </div>
                 </div>
             </div>`;
@@ -133,23 +135,28 @@ function showComments(commentsArray) {
     }
 }
 
-// 3. EVENTO PRINCIPAL (Asegura la carga limpia desde las constantes globales de JAP)
+// 3. EVENTO PRINCIPAL (Carga en cadena: Primero todos los productos, luego la info específica)
 document.addEventListener("DOMContentLoaded", function(e) {
-    if (typeof PRODUCT_INFO_URL !== 'undefined') {
-        getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
-            if (resultObj.status === "ok") {
-                currentProductInfo = resultObj.data;
-                showProductInfo(currentProductInfo);
-            }
-        });
-    }
+    // Traemos la lista completa de productos para poder sacar las fotos de los relacionados
+    getJSONData(PRODUCTS_URL).then(function(allProductsObj) {
+        if (allProductsObj.status === "ok") {
+            allProductsArray = allProductsObj.data;
+            
+            // Una vez que tenemos los productos, cargamos la info del auto actual
+            getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
+                if (resultObj.status === "ok") {
+                    currentProductInfo = resultObj.data;
+                    showProductInfo(currentProductInfo, allProductsArray);
+                }
+            });
+        }
+    });
 
-    if (typeof PRODUCT_INFO_COMMENTS_URL !== 'undefined') {
-        getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
-            if (resultObj.status === "ok") {
-                currentComments = resultObj.data;
-                showComments(currentComments);
-            }
-        });
-    }
+    // Cargar comentarios en paralelo
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            currentComments = resultObj.data;
+            showComments(currentComments);
+        }
+    });
 });
