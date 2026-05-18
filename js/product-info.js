@@ -1,23 +1,26 @@
 document.addEventListener("DOMContentLoaded", function(e) {
+    // Llamada a la API utilizando la función definida en init.js
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
-            let p = resultObj.data;
-            document.getElementById("productName").innerHTML = p.name;
-            document.getElementById("productPrice").innerHTML = p.cost;
-            document.getElementById("productMoneda").innerHTML = p.currency;
-            document.getElementById("proDescription").innerHTML = p.description;
-            document.getElementById("soldCount").innerHTML = p.soldCount;
-            
-            // Imágenes
+            let product = resultObj.data;
+
+            // Llenado de información básica
+            document.getElementById("productName").innerHTML = product.name;
+            document.getElementById("productPrice").innerHTML = product.cost;
+            document.getElementById("productMoneda").innerHTML = product.currency;
+            document.getElementById("proDescription").innerHTML = product.description;
+            document.getElementById("soldCount").innerHTML = product.soldCount;
+
+            // Generación de imágenes (asegúrate de que product.images sea un array)
             let imgHTML = "";
-            p.images.forEach(img => {
-                imgHTML += `<img src="${img}" class="img-thumbnail" width="150">`;
+            product.images.forEach(img => {
+                imgHTML += `<div class="col-3"><img src="${img}" class="img-fluid img-thumbnail"></div>`;
             });
             document.getElementById("productImages").innerHTML = imgHTML;
 
-            // Relacionados
+            // Generación de productos relacionados
             let relHTML = "";
-            p.relatedProducts.forEach(rel => {
+            product.relatedProducts.forEach(rel => {
                 relHTML += `
                 <div class="col-3">
                     <img src="${rel.image}" class="img-fluid">
