@@ -1,166 +1,107 @@
-let currentProductInfo = {};
-let currentComments = [];
+<!DOCTYPE html>
+<html lang="es">
 
-// 1. FUNCIÓN PARA MOSTRAR LA INFORMACIÓN PRINCIPAL Y PRODUCTOS RELACIONADOS
-function showProductInfo(productData) {
-    let nameHTML = document.getElementById("productName");
-    let priceHTML = document.getElementById("productPrice");
-    let currencyHTML = document.getElementById("productMoneda");
-    let descriptionHTML = document.getElementById("proDescripHTML") || document.getElementById("proDescription");
-    let soldHTML = document.getElementById("soldCount");
-    let categoryHTML = document.getElementById("prodCateg");
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
 
-    if (nameHTML) nameHTML.innerHTML = productData.name;
-    if (priceHTML) priceHTML.innerHTML = productData.cost;
-    if (currencyHTML) currencyHTML.innerHTML = productData.currency;
-    if (soldHTML) soldHTML.innerHTML = productData.soldCount;
-    if (categoryHTML) categoryHTML.innerHTML = productData.category;
-    
-    if (descriptionHTML) {
-        descriptionHTML.innerHTML = productData.description + `
-            <br><br>
-            <button id="btn-agregar-carrito" class="btn btn-success btn-lg mt-3">
-                <i class="fas fa-shopping-cart"></i> Agregar al carrito
-            </button>
-        `;
-    }
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
 
-    // CARGAR IMÁGENES ILUSTRATIVAS
-    if (productData.images && productData.images.length > 0) {
-        let imagenesHTML = "";
-        let carouselHTML = "";
-        productData.images.forEach((imgSrc, index) => {
-            imagenesHTML += `
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="${imgSrc}" alt="">
-                </div>
-            </div>`;
-            let activeClass = index === 0 ? "active" : "";
-            carouselHTML += `
-            <div class="carousel-item ${activeClass}">
-                <img src="${imgSrc}" class="d-block w-100" alt="...">
-            </div>`;
-        });
-        let contenedorImagenes = document.getElementById("productImages");
-        let contenedorCarrusel = document.getElementById("pImgCarousel");
-        if (contenedorImagenes) contenedorImagenes.innerHTML = imagenesHTML;
-        if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
-    }
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
+          <li class="nav-item" id="user-nav-item">
+            <a class="nav-link text-info" href="cart.html" id="user-display"><i class="fas fa-shopping-cart"></i> Mi Carrito</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    // CARGAR PRODUCTOS RELACIONADOS (Sistema multi-propiedad Inteligente)
-    // Buscamos dentro de relatedProducts o cualquier variante de JAP
-    let relacionados = productData.relatedProducts || productData.RelatedProducts || [];
-    
-    if (relacionados.length > 0) {
-        let relacionadosHTML = "";
-        
-        relacionados.forEach(rel => {
-            // Probamos todas las combinaciones posibles que JAP usa en sus APIs
-            let itemImg = rel.imgSrc || rel.image || rel.src || rel.ImgSrc || "";
-            let itemName = rel.name || rel.Name || rel.titulo || "Producto Relacionado";
-            let itemId = rel.id || rel.Id || localStorage.getItem("prodID");
+  <main class="pb-5 container">
+    <div class="text-center p-4">
+      <h2 id="productName" class="display-4 font-weight-bold text-dark">Cargando producto...</h2>
+      <p class="lead">Verás aquí la información detallada del artículo seleccionado.</p>
+      <hr>
+    </div>
 
-            relacionadosHTML += `
-            <div class="col-lg-3 col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
-                <div class="card h-100 shadow-sm custom-card">
-                    <img class="img-fluid card-img-top" src="${itemImg}" alt="${itemName}">
-                    <div class="card-body p-2">
-                        <p class="card-text font-weight-bold text-center small mb-0 text-dark">${itemName}</p>
-                    </div>
-                </div>
-            </div>`;
-        });
-        
-        // Buscamos el contenedor por su ID clásico de JAP o por el tuyo personalizado
-        let contenedorRelacionados = document.getElementById("proRelacionados") || document.getElementById("related-products-container");
-        if (contenedorRelacionados) {
-            contenedorRelacionados.innerHTML = relacionadosHTML;
-        }
-    }
+    <div class="row m-0 p-3 bg-white rounded shadow-sm">
+      <div class="col-md-7">
+        <h4 class="mb-3"><strong>Precio:</strong></h4>
+        <p class="lead text-success"><span id="productMoneda"></span> <span id="productPrice"></span></p>
 
-    // ACCIÓN DEL BOTÓN VERDE
-    let botonCarrito = document.getElementById("btn-agregar-carrito");
-    if (botonCarrito) {
-        botonCarrito.addEventListener("click", function() {
-            let carrito = JSON.parse(localStorage.getItem("carritoCompras")) || [];
-            let nuevoProducto = {
-                id: productData.id || 1,
-                name: productData.name,
-                count: 1,
-                unitCurrency: productData.currency,
-                src: productData.images && productData.images[0] ? productData.images[0] : "",
-                unitCost: productData.cost
-            };
-            let existe = carrito.find(item => item.name === nuevoProducto.name);
-            if (existe) {
-                existe.count++;
-            } else {
-                carrito.push(nuevoProducto);
-            }
-            localStorage.setItem("carritoCompras", JSON.stringify(carrito));
-            alert("¡" + productData.name + " agregado al carrito con éxito!");
-        });
-    }
-}
+        <h4 class="mt-4 mb-2"><strong>Descripción:</strong></h4>
+        <p id="proDescripHTML" class="text-muted text-justify"></p>
 
-// 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS
-function showComments(commentsArray) {
-    let htmlContentToAppend = "";
-    
-    if (!commentsArray || commentsArray.length === 0) {
-        htmlContentToAppend = `<p class="text-muted p-3">No hay comentarios para este producto aún.</p>`;
-    } else {
-        commentsArray.forEach(comment => {
-            let estrellas = "";
-            let score = comment.score || comment.Score || 0;
-            for (let i = 1; i <= 5; i++) {
-                if (i <= score) {
-                    estrellas += `<span class="fa fa-star checked" style="color: orange;"></span>`;
-                } else {
-                    estrellas += `<span class="fa fa-star" style="color: grey;"></span>`;
-                }
-            }
+        <h4 class="mt-4"><strong>Categoría:</strong></h4>
+        <p id="prodCateg" class="badge bg-secondary p-2"></p>
 
-            let usuario = comment.user || comment.usuario || "Anónimo";
-            let fecha = comment.dateTime || comment.date || "";
-            let descripcion = comment.description || comment.descripcion || "";
+        <h4 class="mt-3"><strong>Cantidad de vendidos:</strong></h4>
+        <p id="soldCount" class="text-info font-weight-bold"></p>
+      </div>
 
-            htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action p-3 mb-2 shadow-sm" style="display: block; clear: both; width: 100%;">
-                <div class="d-flex w-100 justify-content-between align-items-center mb-1">
-                    <h6 class="mb-0"><strong>${usuario}</strong></h6>
-                    <small class="text-muted">${fecha}</small>
-                </div>
-                <p class="mb-2 text-secondary small">${descripcion}</p>
-                <div>${estrellas}</div>
-            </div>`;
-        });
-    }
+      <div class="col-md-5 mt-3 mt-md-0">
+        <div id="pImgCarousel" class="carousel slide border rounded shadow-sm" data-bs-ride="carousel">
+          <div class="carousel-inner" id="productImages">
+            </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#pImgCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#pImgCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
-    // Buscamos todos los contenedores posibles de comentarios de tu HTML
-    let contenedorComentarios = document.getElementById("productComments") 
-                                || document.getElementById("comentarios") 
-                                || document.getElementById("comments-list");
-                                
-    if (contenedorComentarios) {
-        contenedorComentarios.innerHTML = htmlContentToAppend;
-    }
-}
+    <div class="mt-5 p-3 bg-white rounded shadow-sm">
+      <h3 class="mb-4 text-secondary border-bottom pb-2"><i class="fas fa-exchange-alt"></i> Productos Relacionados</h3>
+      <div class="row w-100 mx-0" id="proRelacionados">
+        </div>
+    </div>
 
-// 3. EVENTO PRINCIPAL
-document.addEventListener("DOMContentLoaded", function(e) {
-    getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
-        if (resultObj.status === "ok") {
-            currentProductInfo = resultObj.data;
-            showProductInfo(currentProductInfo);
-        }
-    });
+    <div class="mt-5 p-3 bg-white rounded shadow-sm">
+      <h3 class="mb-4 text-secondary border-bottom pb-2"><i class="far fa-comments"></i> Opiniones de compradores</h3>
+      <div class="list-group w-100 mx-0" id="productComments">
+        </div>
+    </div>
+  </main>
 
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
-        if (resultObj.status === "ok") {
-            currentComments = resultObj.data;
-            showComments(currentComments);
-        }
-    });
-});
+  <footer class="text-muted text-small bg-light border-top p-3 text-center w-100">
+    <div class="container">
+      <p class="float-end"><a href="#">Volver arriba</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
+    </div>
+  </footer>
+
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div><div></div><div></div><div></div>
+    </div>
+  </div>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  
+  <script src="js/product-info.js?v=2.5"></script>
+</body>
+
+</html>
