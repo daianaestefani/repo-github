@@ -48,23 +48,22 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (Corregido para JAP)
+    // CARGAR PRODUCTOS RELACIONADOS (Aislado para que no choque con nada)
     let relacionadosHTML = "";
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
         productData.relatedProducts.forEach(rel => {
             relacionadosHTML += `
-            <div class="col-lg-3 col-md-4 col-6" style="cursor: pointer;" onclick="setProductID(${rel.id})">
-                <div class="card mb-4 shadow-sm custom-card">
-                    <img class="img-fluid img-thumbnail" src="${rel.image}" alt="${rel.name}">
-                    <div class="card-body">
-                        <p class="card-text font-weight-bold text-center">${rel.name}</p>
+            <div class="col-lg-3 col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${rel.id}); window.location='product-info.html'">
+                <div class="card h-100 shadow-sm custom-card">
+                    <img class="img-fluid card-img-top" src="${rel.image}" alt="${rel.name}">
+                    <div class="card-body p-2">
+                        <p class="card-text font-weight-bold text-center small mb-0">${rel.name}</p>
                     </div>
                 </div>
             </div>`;
         });
         
-        // Intentamos buscar "relatedProducts", y si no, buscamos el bloque justo abajo del título "Productos relacionados"
-        let contenedorRelacionados = document.getElementById("relatedProducts") || document.querySelector(".container .row:last-of-type");
+        let contenedorRelacionados = document.getElementById("proRelacionados");
         if (contenedorRelacionados) {
             contenedorRelacionados.innerHTML = relacionadosHTML;
         }
@@ -91,7 +90,7 @@ function showProductInfo(productData) {
     }
 }
 
-// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS REALES Y LAS ESTRELLAS
+// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS REALES (En formato de lista vertical limpia)
 function showComments(commentsArray) {
     let htmlContentToAppend = "";
     
@@ -105,26 +104,27 @@ function showComments(commentsArray) {
             }
         }
 
+        // Usamos una estructura de bloque completo (w-100) para obligar a que vayan uno abajo del otro
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action mb-2 shadow-sm">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"><strong>${comment.user}</strong></h5>
+        <div class="w-100 list-group-item list-group-item-action mb-3 p-3 shadow-sm style="display: block; clear: both;">
+            <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                <h6 class="mb-0"><strong>${comment.user}</strong></h6>
                 <small class="text-muted">${comment.dateTime}</small>
             </div>
-            <p class="mb-1">${comment.description}</p>
-            <div class="mb-1">${estrellas}</div>
+            <p class="mb-2 text-secondary small">${comment.description}</p>
+            <div>${estrellas}</div>
         </div>`;
     });
 
-    // Se inyecta en el contenedor de los comentarios del HTML
-    let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios") || document.querySelector(".list-group");
+    let contenedorComentarios = document.getElementById("productComments");
     if (contenedorComentarios) {
         contenedorComentarios.innerHTML = htmlContentToAppend;
     }
 }
 
-// 3. EVENTO PRINCIPAL
+// 3. EVENTO PRINCIPAL: INDEPENDIENTE PARA CADA LLAMADA
 document.addEventListener("DOMContentLoaded", function(e) {
+    // Pedir información del producto
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentProductInfo = resultObj.data;
@@ -132,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }
     });
 
+    // Pedir comentarios por separado para que si uno falla, el otro funcione igual
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentComments = resultObj.data;
