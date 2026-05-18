@@ -1,8 +1,8 @@
 let currentProductInfo = {};
+let currentComments = [];
 
-// Función para mostrar los datos principales, el botón y las imágenes
+// 1. FUNCIÓN PARA MOSTRAR LA INFORMACIÓN PRINCIPAL Y EL BOTÓN VERDE
 function showProductInfo(productData) {
-    // Buscamos tus etiquetas originales de HTML
     let nameHTML = document.getElementById("productName");
     let priceHTML = document.getElementById("productPrice");
     let currencyHTML = document.getElementById("productMoneda");
@@ -10,14 +10,12 @@ function showProductInfo(productData) {
     let soldHTML = document.getElementById("soldCount");
     let categoryHTML = document.getElementById("prodCateg");
 
-    // Asignamos los textos de forma segura
     if (nameHTML) nameHTML.innerHTML = productData.name;
     if (priceHTML) priceHTML.innerHTML = productData.cost;
     if (currencyHTML) currencyHTML.innerHTML = productData.currency;
     if (soldHTML) soldHTML.innerHTML = productData.soldCount;
     if (categoryHTML) categoryHTML.innerHTML = productData.category;
     
-    // Mostramos la descripción e inyectamos el botón verde justo debajo
     if (descriptionHTML) {
         descriptionHTML.innerHTML = productData.description + `
             <br><br>
@@ -27,10 +25,9 @@ function showProductInfo(productData) {
         `;
     }
 
-    // --- CARGAR IMÁGENES ILUSTRATIVAS ---
+    // CARGAR IMÁGENES
     let imagenesHTML = "";
     let carouselHTML = "";
-
     if (productData.images && productData.images.length > 0) {
         productData.images.forEach((imgSrc, index) => {
             imagenesHTML += `
@@ -38,24 +35,20 @@ function showProductInfo(productData) {
                 <div class="d-block mb-4 h-100">
                     <img class="img-fluid img-thumbnail" src="${imgSrc}" alt="">
                 </div>
-            </div>
-            `;
+            </div>`;
             let activeClass = index === 0 ? "active" : "";
             carouselHTML += `
             <div class="carousel-item ${activeClass}">
                 <img src="${imgSrc}" class="d-block w-100" alt="...">
-            </div>
-            `;
+            </div>`;
         });
-
         let contenedorImagenes = document.getElementById("productImages");
         let contenedorCarrusel = document.getElementById("pImgCarousel");
-        
         if (contenedorImagenes) contenedorImagenes.innerHTML = imagenesHTML;
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
- // --- CARGAR PRODUCTOS RELACIONADOS (Los dos autos de abajo) ---
+    // CARGAR PRODUCTOS RELACIONADOS
     let relacionadosHTML = "";
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
         productData.relatedProducts.forEach(rel => {
@@ -67,30 +60,17 @@ function showProductInfo(productData) {
                         <p class="card-text font-weight-bold text-center">${rel.name}</p>
                     </div>
                 </div>
-            </div>
-            `;
+            </div>`;
         });
-        
-        // Lo colgamos del contenedor de imágenes o del bloque de relacionados principal
-        let contenedorRelacionados = document.getElementById("relatedProducts") || document.querySelector(".container .row:last-of-type") || document.getElementById("productImages");
-        if (contenedorRelacionados && contenedorRelacionados.id !== "productImages") {
-            contenedorRelacionados.innerHTML = relacionadosHTML;
-        } else {
-            // Si no encuentra el bloque específico, crea uno nuevo al final de las imágenes
-            let divRelacionados = document.createElement("div");
-            divRelacionados.className = "row mt-4";
-            divRelacionados.innerHTML = relacionadosHTML;
-            let section = document.querySelector("main") || document.body;
-            if (section) section.appendChild(divRelacionados);
-        }
+        let contenedorRelacionados = document.getElementById("relatedProducts") || document.querySelector(".related-products-container");
+        if (contenedorRelacionados) contenedorRelacionados.innerHTML = relacionadosHTML;
     }
 
-    // --- ACTIVAR ACCIÓN DEL BOTÓN VERDE ---
+    // ACCIÓN DEL BOTÓN VERDE
     let botonCarrito = document.getElementById("btn-agregar-carrito");
     if (botonCarrito) {
         botonCarrito.addEventListener("click", function() {
             let carrito = JSON.parse(localStorage.getItem("carritoCompras")) || [];
-            
             let nuevoProducto = {
                 id: productData.id || 1,
                 name: productData.name,
@@ -99,26 +79,62 @@ function showProductInfo(productData) {
                 src: productData.images && productData.images[0] ? productData.images[0] : "",
                 unitCost: productData.cost
             };
-            
             let existe = carrito.find(item => item.name === nuevoProducto.name);
-            if (existe) {
-                existe.count++;
-            } else {
-                carrito.push(nuevoProducto);
-            }
-            
+            if (existe) { existe.count++; } else { carrito.push(nuevoProducto); }
             localStorage.setItem("carritoCompras", JSON.stringify(carrito));
             alert("¡" + productData.name + " agregado al carrito con éxito!");
         });
     }
 }
 
-// Evento principal para pedir los datos a la API de JAP
+// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS Y LAS ESTRELLAS
+function showComments(commentsArray) {
+    let htmlContentToAppend = "";
+    
+    commentsArray.forEach(comment => {
+        let estrellas = "";
+        // Armamos las 5 estrellas (pintadas según el puntaje)
+        for (let i = 1; i <= 5; i++) {
+            if (i <= comment.score) {
+                estrellas += `<span class="fa fa-star checked" style="color: orange;"></span>`;
+            } else {
+                estrellas += `<span class="fa fa-star" style="color: grey;"></span>`;
+            }
+        }
+
+        htmlContentToAppend += `
+        <div class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><strong>${comment.user}</strong></h5>
+                <small class="text-muted">${comment.dateTime}</small>
+            </div>
+            <p class="mb-1">${comment.description}</p>
+            <div class="mb-1">${estrellas}</div>
+        </div>`;
+    });
+
+    // Revisa si en tu HTML el contenedor de comentarios se llama "productComments"
+    let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios");
+    if (contenedorComentarios) {
+        contenedorComentarios.innerHTML = htmlContentToAppend;
+    }
+}
+
+// 3. EVENTO PRINCIPAL: LLAMA AL PRODUCTO Y A SUS COMENTARIOS
 document.addEventListener("DOMContentLoaded", function(e) {
+    // Pedimos la info del producto
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentProductInfo = resultObj.data;
             showProductInfo(currentProductInfo);
+        }
+    });
+
+    // Pedimos los comentarios del producto
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            currentComments = resultObj.data;
+            showComments(currentComments);
         }
     });
 });
