@@ -55,24 +55,34 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // --- CARGAR PRODUCTOS RELACIONADOS (Los dos autos de abajo) ---
+ // --- CARGAR PRODUCTOS RELACIONADOS (Los dos autos de abajo) ---
     let relacionadosHTML = "";
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
         productData.relatedProducts.forEach(rel => {
             relacionadosHTML += `
-            <div class="col-lg-3 col-md-4 col-6" style="cursor: pointer;">
+            <div class="col-lg-3 col-md-4 col-6" style="cursor: pointer;" onclick="setProductID(${rel.id})">
                 <div class="card mb-4 shadow-sm custom-card">
-                    <img class="bd-placeholder-img card-img-top" src="${rel.image}" alt="${rel.name}">
+                    <img class="img-fluid img-thumbnail" src="${rel.image}" alt="${rel.name}">
                     <div class="card-body">
-                        <h4 class="card-title">${rel.name}</h4>
+                        <p class="card-text font-weight-bold text-center">${rel.name}</p>
                     </div>
                 </div>
             </div>
             `;
         });
-        // Buscamos el contenedor de relacionados (revisa si tiene este id o una clase)
-        let contenedorRelacionados = document.getElementById("relatedProducts") || document.querySelector(".related-products-container");
-        if (contenedorRelacionados) contenedorRelacionados.innerHTML = relacionadosHTML;
+        
+        // Lo colgamos del contenedor de imágenes o del bloque de relacionados principal
+        let contenedorRelacionados = document.getElementById("relatedProducts") || document.querySelector(".container .row:last-of-type") || document.getElementById("productImages");
+        if (contenedorRelacionados && contenedorRelacionados.id !== "productImages") {
+            contenedorRelacionados.innerHTML = relacionadosHTML;
+        } else {
+            // Si no encuentra el bloque específico, crea uno nuevo al final de las imágenes
+            let divRelacionados = document.createElement("div");
+            divRelacionados.className = "row mt-4";
+            divRelacionados.innerHTML = relacionadosHTML;
+            let section = document.querySelector("main") || document.body;
+            if (section) section.appendChild(divRelacionados);
+        }
     }
 
     // --- ACTIVAR ACCIÓN DEL BOTÓN VERDE ---
