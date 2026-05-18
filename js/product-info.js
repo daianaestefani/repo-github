@@ -1,6 +1,20 @@
 let currentProductInfo = {};
 let currentComments = [];
 
+// Función auxiliar para corregir las rutas de las imágenes rotas locales
+function corregirRutaImagen(url) {
+    if (!url) return "https://japdevdep.github.io/ecommerce-api/img/vehicle-placeholder.png";
+    // Si la imagen ya es una URL completa de internet, la dejamos igual
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+        return url;
+    }
+    // Si la ruta empieza con "img/", la redirigimos al servidor oficial de JAP
+    if (url.startsWith("img/")) {
+        return "https://japdevdep.github.io/ecommerce-api/" + url;
+    }
+    return "https://japdevdep.github.io/ecommerce-api/img/" + url;
+}
+
 // 1. FUNCIÓN PARA MOSTRAR LA INFORMACIÓN PRINCIPAL Y PRODUCTOS RELACIONADOS
 function showProductInfo(productData) {
     let nameHTML = document.getElementById("productName");
@@ -25,40 +39,43 @@ function showProductInfo(productData) {
         `;
     }
 
-    // CORRECCIÓN DEL CARRUSEL DE IMÁGENES
+    // CARGAR IMÁGENES EN EL CARRUSEL DE BOOTSTRAP
     if (productData.images && productData.images.length > 0) {
         let carouselHTML = "";
         productData.images.forEach((imgSrc, index) => {
-            // La primera imagen DEBE llevar la clase 'active' para que Bootstrap la muestre
             let activeClass = index === 0 ? "active" : "";
+            // Corregimos la ruta antes de meterla en el HTML
+            let rutaLimpia = corregirRutaImagen(imgSrc);
+            
             carouselHTML += `
             <div class="carousel-item ${activeClass}">
-                <img src="${imgSrc}" class="d-block w-100 rounded" alt="Imagen del producto" style="max-height: 400px; object-fit: contain;">
+                <img src="${rutaLimpia}" class="d-block w-100 rounded" alt="Imagen del producto" style="max-height: 400px; object-fit: contain;">
             </div>`;
         });
         
-        // El contenedor en tu HTML tiene el ID 'productImages'
         let contenedorCarrusel = document.getElementById("productImages");
         if (contenedorCarrusel) {
             contenedorCarrusel.innerHTML = carouselHTML;
         }
     }
 
-    // CORRECCIÓN DE PRODUCTOS RELACIONADOS
+    // CARGAR PRODUCTOS RELACIONADOS HORIZONTALES
     let relacionados = productData.relatedProducts || productData.RelatedProducts || [];
     let relacionadosHTML = "";
     
     if (relacionados.length > 0) {
         relacionados.forEach(rel => {
-            // Validamos todas las variables posibles de imagen que manda la API de JAP
-            let itemImg = rel.image || rel.imgSrc || rel.src || "img/vehicle-placeholder.png";
+            let itemImg = rel.image || rel.imgSrc || rel.src || "";
             let itemName = rel.name || "Producto Relacionado";
             let itemId = rel.id || localStorage.getItem("prodID");
+            
+            // Corregimos la ruta de la imagen del producto relacionado
+            let rutaRelacionadoLimpia = corregirRutaImagen(itemImg);
 
             relacionadosHTML += `
             <div class="col-6 col-md-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
                 <div class="card h-100 shadow-sm custom-card text-center bg-light p-2">
-                    <img class="img-fluid card-img-top rounded mb-2" src="${itemImg}" alt="${itemName}" style="height: 120px; object-fit: cover;" onerror="this.src='img/vehicle-placeholder.png'">
+                    <img class="img-fluid card-img-top rounded mb-2" src="${rutaRelacionadoLimpia}" alt="${itemName}" style="height: 120px; object-fit: cover;">
                     <div class="p-1">
                         <span class="d-block text-dark small font-weight-bold fw-bold">${itemName}</span>
                     </div>
@@ -74,7 +91,7 @@ function showProductInfo(productData) {
         contenedorRelacionados.innerHTML = relacionadosHTML;
     }
 
-    // ACCIÓN DEL BOTÓN VERDE DEL CARRITO
+    // ACCIÓN DEL BOTÓN DEL CARRITO
     let botonCarrito = document.getElementById("btn-agregar-carrito");
     if (botonCarrito) {
         botonCarrito.addEventListener("click", function() {
@@ -95,7 +112,7 @@ function showProductInfo(productData) {
     }
 }
 
-// 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS CON ESTRELLAS
+// 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS
 function showComments(commentsArray) {
     let htmlContentToAppend = "";
     if (!commentsArray || commentsArray.length === 0) {
