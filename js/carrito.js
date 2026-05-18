@@ -41,9 +41,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     </div> `;                   
          } //CIERRO  for     
      } //CIERRO  if (resultObj.status === "ok")            
-        document.getElementById("contenidoArticulos").innerHTML = contenidoHTML;
+      
+      document.getElementById("contenidoArticulos").innerHTML = contenidoHTML;
   }) //getJSONData(CART_BUY_TOTAL).then(function(resultObj)
-
+// --- CONECTAR EL BOTÓN VERDE CON TU FUNCIÓN MOSTRAR ---
+    // 1. Traemos los productos reales que el usuario guardó al hacer clic en "Agregar al carrito"
+    let productosGuardados = JSON.parse(localStorage.getItem("carritoCompras")) || [];
+    
+    // 2. Si el usuario guardó algo, se lo sumamos a la lista del carrito para que se muestre en tu tabla
+    if (productosGuardados.length > 0) {
+        // Combinamos lo que traiga el JSON del curso con lo que guardó el usuario
+        contenidoCarrito = contenidoCarrito.concat(productosGuardados);
+    }
+    
+    // 3. Volvemos a llamar a TU función mostrar con la lista actualizada
+    mostrar(contenidoCarrito);
+    // ------------------------------------------------------
 });
 
 //borrar todos los productos de la tabla
