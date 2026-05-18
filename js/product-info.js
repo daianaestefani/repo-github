@@ -25,7 +25,7 @@ function showProductInfo(productData) {
         `;
     }
 
-    // CARGAR IMÁGENES
+    // CARGAR IMÁGENES ILUSTRATIVAS
     let imagenesHTML = "";
     let carouselHTML = "";
     if (productData.images && productData.images.length > 0) {
@@ -48,7 +48,7 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS
+    // CARGAR PRODUCTOS RELACIONADOS (Corregido para JAP)
     let relacionadosHTML = "";
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
         productData.relatedProducts.forEach(rel => {
@@ -62,8 +62,12 @@ function showProductInfo(productData) {
                 </div>
             </div>`;
         });
-        let contenedorRelacionados = document.getElementById("relatedProducts") || document.querySelector(".related-products-container");
-        if (contenedorRelacionados) contenedorRelacionados.innerHTML = relacionadosHTML;
+        
+        // Intentamos buscar "relatedProducts", y si no, buscamos el bloque justo abajo del título "Productos relacionados"
+        let contenedorRelacionados = document.getElementById("relatedProducts") || document.querySelector(".container .row:last-of-type");
+        if (contenedorRelacionados) {
+            contenedorRelacionados.innerHTML = relacionadosHTML;
+        }
     }
 
     // ACCIÓN DEL BOTÓN VERDE
@@ -87,13 +91,12 @@ function showProductInfo(productData) {
     }
 }
 
-// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS Y LAS ESTRELLAS
+// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS REALES Y LAS ESTRELLAS
 function showComments(commentsArray) {
     let htmlContentToAppend = "";
     
     commentsArray.forEach(comment => {
         let estrellas = "";
-        // Armamos las 5 estrellas (pintadas según el puntaje)
         for (let i = 1; i <= 5; i++) {
             if (i <= comment.score) {
                 estrellas += `<span class="fa fa-star checked" style="color: orange;"></span>`;
@@ -103,7 +106,7 @@ function showComments(commentsArray) {
         }
 
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+        <div class="list-group-item list-group-item-action mb-2 shadow-sm">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1"><strong>${comment.user}</strong></h5>
                 <small class="text-muted">${comment.dateTime}</small>
@@ -113,16 +116,15 @@ function showComments(commentsArray) {
         </div>`;
     });
 
-    // Revisa si en tu HTML el contenedor de comentarios se llama "productComments"
-    let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios");
+    // Se inyecta en el contenedor de los comentarios del HTML
+    let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios") || document.querySelector(".list-group");
     if (contenedorComentarios) {
         contenedorComentarios.innerHTML = htmlContentToAppend;
     }
 }
 
-// 3. EVENTO PRINCIPAL: LLAMA AL PRODUCTO Y A SUS COMENTARIOS
+// 3. EVENTO PRINCIPAL
 document.addEventListener("DOMContentLoaded", function(e) {
-    // Pedimos la info del producto
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentProductInfo = resultObj.data;
@@ -130,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }
     });
 
-    // Pedimos los comentarios del producto
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentComments = resultObj.data;
