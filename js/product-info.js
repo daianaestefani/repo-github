@@ -48,12 +48,11 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (Formato nativo de objetos de JAP)
+    // CARGAR PRODUCTOS RELACIONADOS
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
         let relacionadosHTML = "";
         
         productData.relatedProducts.forEach(rel => {
-            // Evaluamos las propiedades exactas que JAP envía en su JSON de entrega
             let itemImg = rel.imgSrc || rel.image || rel.src || "";
             let itemName = rel.name || "Producto Relacionado";
             let itemId = rel.id || localStorage.getItem("prodID");
@@ -75,11 +74,12 @@ function showProductInfo(productData) {
         }
     }
 
-    // ACCIÓN DEL BOTÓN VERDE
+    // ACCIÓN DEL BOTÓN VERDE (Guarda el producto seleccionado en el localStorage)
     let botonCarrito = document.getElementById("btn-agregar-carrito");
     if (botonCarrito) {
         botonCarrito.addEventListener("click", function() {
             let carrito = JSON.parse(localStorage.getItem("carritoCompras")) || [];
+            
             let nuevoProducto = {
                 id: productData.id || 1,
                 name: productData.name,
@@ -88,40 +88,55 @@ function showProductInfo(productData) {
                 src: productData.images && productData.images[0] ? productData.images[0] : "",
                 unitCost: productData.cost
             };
+            
             let existe = carrito.find(item => item.name === nuevoProducto.name);
-            if (existe) { existe.count++; } else { carrito.push(nuevoProducto); }
+            if (existe) {
+                existe.count++;
+            } else {
+                carrito.push(nuevoProducto);
+            }
+            
             localStorage.setItem("carritoCompras", JSON.stringify(carrito));
             alert("¡" + productData.name + " agregado al carrito con éxito!");
         });
     }
 }
 
-// 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS
+// 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS REALES
 function showComments(commentsArray) {
     let htmlContentToAppend = "";
     
-    commentsArray.forEach(comment => {
-        let estrellas = "";
-        for (let i = 1; i <= 5; i++) {
-            if (i <= comment.score) {
-                estrellas += `<span class="fa fa-star checked" style="color: orange;"></span>`;
-            } else {
-                estrellas += `<span class="fa fa-star" style="color: grey;"></span>`;
+    if (!commentsArray || commentsArray.length === 0) {
+        htmlContentToAppend = `<p class="text-muted">No hay comentarios para este producto aún.</p>`;
+    } else {
+        commentsArray.forEach(comment => {
+            let estrellas = "";
+            for (let i = 1; i <= 5; i++) {
+                if (i <= comment.score) {
+                    estrellas += `<span class="fa fa-star checked" style="color: orange;"></span>`;
+                } else {
+                    estrellas += `<span class="fa fa-star" style="color: grey;"></span>`;
+                }
             }
-        }
 
-        htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action p-3 mb-2 shadow-sm" style="display: block; clear: both; width: 100%;">
-            <div class="d-flex w-100 justify-content-between align-items-center mb-1">
-                <h6 class="mb-0"><strong>${comment.user}</strong></h6>
-                <small class="text-muted">${comment.dateTime}</small>
-            </div>
-            <p class="mb-2 text-secondary small">${comment.description}</p>
-            <div>${estrellas}</div>
-        </div>`;
-    });
+            htmlContentToAppend += `
+            <div class="list-group-item list-group-item-action p-3 mb-2 shadow-sm" style="display: block; clear: both; width: 100%;">
+                <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                    <h6 class="mb-0"><strong>${comment.user || comment.usuario}</strong></h6>
+                    <small class="text-muted">${comment.dateTime || comment.time}</small>
+                </div>
+                <p class="mb-2 text-secondary small">${comment.description || comment.description}</p>
+                <div>${estrellas}</div>
+            </div>`;
+        });
+    }
 
-    let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios");
+    // Buscamos todos los IDs posibles que JAP suele estructurar en el HTML
+    let contenedorComentarios = document.getElementById("productComments") 
+                                || document.getElementById("comentarios") 
+                                || document.getElementById("comments-list")
+                                || document.getElementById("comentarios-container");
+                                
     if (contenedorComentarios) {
         contenedorComentarios.innerHTML = htmlContentToAppend;
     }
