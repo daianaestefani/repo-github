@@ -48,24 +48,22 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (Corregido con el formato exacto del array de JAP)
-    // En el JSON original, relacionados es una lista de números de ID, y los datos se sacan de otra variable global de productos.
-    // Si tu array ya trae los objetos, JAP usa 'imgSrc' (o 'image') y 'name'. Vamos a poner ambos por seguridad:
+    // CARGAR PRODUCTOS RELACIONADOS (Compatibilidad total con JAP)
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
-        let relacionadosHTML = `<div class="row w-100">`; // Forzamos una fila de Bootstrap nueva
+        let relacionadosHTML = `<div class="row w-100 mx-0">`; // Forzamos fila limpia de Bootstrap
         
-        productData.relatedProducts.forEach(relIndex => {
-            // Evaluamos si el dato viene como objeto directo o si mapea propiedades de JAP
-            let itemImg = relIndex.imgSrc || relIndex.image || relIndex.src || "";
-            let itemName = relIndex.name || relIndex.description || "Producto Relacionado";
-            let itemId = relIndex.id || relIndex;
+        productData.relatedProducts.forEach(rel => {
+            // Buscamos cualquier variante de nombre que envíe el JSON de Ceibal (imgSrc, image o src)
+            let itemImg = rel.imgSrc || rel.image || rel.src || "";
+            let itemName = rel.name || rel.description || "Producto Relacionado";
+            let itemId = rel.id || rel;
 
             relacionadosHTML += `
-            <div class="col-md-4 col-sm-6 mb-4" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
-                <div class="card h-100 shadow-sm custom-card">
-                    <img class="card-img-top img-fluid" src="${itemImg}" alt="${itemName}">
-                    <div class="card-body text-center p-2">
-                        <h6 class="card-title font-weight-bold mb-0">${itemName}</h6>
+            <div class="col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
+                <div class="card h-100 shadow-sm">
+                    <img class="card-img-top img-fluid" src="${itemImg}" alt="${itemName}" onerror="this.src='img/vehicle-placeholder.png'">
+                    <div class="card-body p-2 text-center">
+                        <p class="card-text font-weight-bold small mb-0">${itemName}</p>
                     </div>
                 </div>
             </div>`;
@@ -100,9 +98,9 @@ function showProductInfo(productData) {
     }
 }
 
-// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS
+// 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS
 function showComments(commentsArray) {
-    let htmlContentToAppend = `<div class="row w-100 mx-0">`; // Abrimos fila limpia
+    let htmlContentToAppend = `<div class="row w-100 mx-0">`;
     
     commentsArray.forEach(comment => {
         let estrellas = "";
@@ -114,9 +112,8 @@ function showComments(commentsArray) {
             }
         }
 
-        // col-12 obliga a que ocupen TODO el ancho y vayan estrictamente uno abajo del otro
         htmlContentToAppend += `
-        <div class="col-12 mb-3">
+        <div class="col-12 mb-2">
             <div class="list-group-item list-group-item-action p-3 shadow-sm">
                 <div class="d-flex w-100 justify-content-between align-items-center mb-1">
                     <h6 class="mb-0"><strong>${comment.user}</strong></h6>
@@ -136,19 +133,23 @@ function showComments(commentsArray) {
     }
 }
 
-// 3. EVENTO PRINCIPAL
+// 3. EVENTO PRINCIPAL (Asegura la carga limpia desde las constantes globales de JAP)
 document.addEventListener("DOMContentLoaded", function(e) {
-    getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
-        if (resultObj.status === "ok") {
-            currentProductInfo = resultObj.data;
-            showProductInfo(currentProductInfo);
-        }
-    });
+    if (typeof PRODUCT_INFO_URL !== 'undefined') {
+        getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
+            if (resultObj.status === "ok") {
+                currentProductInfo = resultObj.data;
+                showProductInfo(currentProductInfo);
+            }
+        });
+    }
 
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
-        if (resultObj.status === "ok") {
-            currentComments = resultObj.data;
-            showComments(currentComments);
-        }
-    });
+    if (typeof PRODUCT_INFO_COMMENTS_URL !== 'undefined') {
+        getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
+            if (resultObj.status === "ok") {
+                currentComments = resultObj.data;
+                showComments(currentComments);
+            }
+        });
+    }
 });
