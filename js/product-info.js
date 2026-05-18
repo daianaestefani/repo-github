@@ -26,9 +26,9 @@ function showProductInfo(productData) {
     }
 
     // CARGAR IMÁGENES ILUSTRATIVAS
-    let imagenesHTML = "";
-    let carouselHTML = "";
     if (productData.images && productData.images.length > 0) {
+        let imagenesHTML = "";
+        let carouselHTML = "";
         productData.images.forEach((imgSrc, index) => {
             imagenesHTML += `
             <div class="col-lg-3 col-md-4 col-6">
@@ -48,9 +48,9 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (Aislado para que no choque con nada)
-    let relacionadosHTML = "";
+    // CARGAR PRODUCTOS RELACIONADOS (Usa el ID proRelacionados de tu consola)
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
+        let relacionadosHTML = "";
         productData.relatedProducts.forEach(rel => {
             relacionadosHTML += `
             <div class="col-lg-3 col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${rel.id}); window.location='product-info.html'">
@@ -90,7 +90,7 @@ function showProductInfo(productData) {
     }
 }
 
-// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS REALES (En formato de lista vertical limpia)
+// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS EN LISTA VERTICAL LIMPIA
 function showComments(commentsArray) {
     let htmlContentToAppend = "";
     
@@ -104,27 +104,30 @@ function showComments(commentsArray) {
             }
         }
 
-        // Usamos una estructura de bloque completo (w-100) para obligar a que vayan uno abajo del otro
+        // Cada comentario se encierra en una fila completa (col-12) para que no se pongan al lado del otro
         htmlContentToAppend += `
-        <div class="w-100 list-group-item list-group-item-action mb-3 p-3 shadow-sm style="display: block; clear: both;">
-            <div class="d-flex w-100 justify-content-between align-items-center mb-1">
-                <h6 class="mb-0"><strong>${comment.user}</strong></h6>
-                <small class="text-muted">${comment.dateTime}</small>
+        <div class="row w-100 mx-0 mb-3" style="display: block; clear: both;">
+            <div class="col-12 px-0">
+                <div class="list-group-item list-group-item-action p-3 shadow-sm">
+                    <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                        <h6 class="mb-0"><strong>${comment.user}</strong></h6>
+                        <small class="text-muted">${comment.dateTime}</small>
+                    </div>
+                    <p class="mb-2 text-secondary small">${comment.description}</p>
+                    <div>${estrellas}</div>
+                </div>
             </div>
-            <p class="mb-2 text-secondary small">${comment.description}</p>
-            <div>${estrellas}</div>
         </div>`;
     });
 
-    let contenedorComentarios = document.getElementById("productComments");
+    let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios");
     if (contenedorComentarios) {
         contenedorComentarios.innerHTML = htmlContentToAppend;
     }
 }
 
-// 3. EVENTO PRINCIPAL: INDEPENDIENTE PARA CADA LLAMADA
+// 3. EVENTO PRINCIPAL: ADAPTADO PARA LAS LLAMADAS DEL CURSO
 document.addEventListener("DOMContentLoaded", function(e) {
-    // Pedir información del producto
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentProductInfo = resultObj.data;
@@ -132,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }
     });
 
-    // Pedir comentarios por separado para que si uno falla, el otro funcione igual
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentComments = resultObj.data;
