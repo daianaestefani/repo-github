@@ -1,7 +1,7 @@
 let currentProductInfo = {};
 let currentComments = [];
 
-// 1. INFORMACIÓN PRINCIPAL Y PRODUCTOS RELACIONADOS
+// 1. FUNCIÓN PARA MOSTRAR LA INFORMACIÓN PRINCIPAL Y PRODUCTOS RELACIONADOS
 function showProductInfo(productData) {
     let nameHTML = document.getElementById("productName");
     let priceHTML = document.getElementById("productPrice");
@@ -25,52 +25,46 @@ function showProductInfo(productData) {
         `;
     }
 
-    // IMÁGENES ILUSTRATIVAS
+    // CARGAR IMÁGENES ILUSTRATIVAS (CARRUSEL BOOTSTRAP)
     if (productData.images && productData.images.length > 0) {
-        let imagenesHTML = "";
         let carouselHTML = "";
         productData.images.forEach((imgSrc, index) => {
-            imagenesHTML += `
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="${imgSrc}" alt="">
-                </div>
-            </div>`;
             let activeClass = index === 0 ? "active" : "";
             carouselHTML += `
             <div class="carousel-item ${activeClass}">
-                <img src="${imgSrc}" class="d-block w-100" alt="...">
+                <img src="${imgSrc}" class="d-block w-100" alt="Imagen del producto" style="max-height: 400px; object-fit: contain;">
             </div>`;
         });
-        let contenedorImagenes = document.getElementById("productImages");
-        let contenedorCarrusel = document.getElementById("pImgCarousel");
-        if (contenedorImagenes) contenedorImagenes.innerHTML = imagenesHTML;
+        let contenedorCarrusel = document.getElementById("productImages");
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // PRODUCTOS RELACIONADOS
-    if (productData.relatedProducts && productData.relatedProducts.length > 0) {
+    // CARGAR PRODUCTOS RELACIONADOS (En tarjetas horizontales independientes)
+    let relacionados = productData.relatedProducts || productData.RelatedProducts || [];
+    if (relacionados.length > 0) {
         let relacionadosHTML = "";
-        productData.relatedProducts.forEach(rel => {
+        
+        relacionados.forEach(rel => {
             let itemImg = rel.imgSrc || rel.image || rel.src || "";
             let itemName = rel.name || "Producto Relacionado";
             let itemId = rel.id || localStorage.getItem("prodID");
 
             relacionadosHTML += `
-            <div class="col-lg-3 col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
-                <div class="card h-100 shadow-sm custom-card">
-                    <img class="img-fluid card-img-top" src="${itemImg}" alt="${itemName}">
-                    <div class="card-body p-2">
-                        <p class="card-text font-weight-bold text-center small mb-0 text-dark">${itemName}</p>
+            <div class="col-6 col-md-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
+                <div class="card h-100 shadow-sm custom-card text-center bg-light p-2">
+                    <img class="img-fluid card-img-top rounded mb-2" src="${itemImg}" alt="${itemName}" style="height: 120px; object-fit: cover;">
+                    <div class="p-1">
+                        <span class="d-block text-dark small font-weight-bold fw-bold">${itemName}</span>
                     </div>
                 </div>
             </div>`;
         });
+        
         let contenedorRelacionados = document.getElementById("proRelacionados");
         if (contenedorRelacionados) contenedorRelacionados.innerHTML = relacionadosHTML;
     }
 
-    // ACCIÓN DEL BOTÓN VERDE (GUARDA EN LOCALSTORAGE)
+    // ACCIÓN DEL BOTÓN VERDE DEL CARRITO
     let botonCarrito = document.getElementById("btn-agregar-carrito");
     if (botonCarrito) {
         botonCarrito.addEventListener("click", function() {
@@ -91,33 +85,34 @@ function showProductInfo(productData) {
     }
 }
 
-// 2. MOSTRAR COMENTARIOS EN LISTA VERTICAL
+// 2. FUNCIÓN PARA MOSTRAR LOS COMENTARIOS CON ESTRELLAS
 function showComments(commentsArray) {
     let htmlContentToAppend = "";
     if (!commentsArray || commentsArray.length === 0) {
-        htmlContentToAppend = `<p class="text-muted">No hay comentarios aún.</p>`;
+        htmlContentToAppend = `<p class="text-muted p-3">No hay comentarios aún.</p>`;
     } else {
         commentsArray.forEach(comment => {
             let estrellas = "";
+            let score = comment.score || 0;
             for (let i = 1; i <= 5; i++) {
-                estrellas += `<span class="fa fa-star" style="color: ${i <= comment.score ? 'orange' : 'grey'};"></span>`;
+                estrellas += `<span class="fa fa-star" style="color: ${i <= score ? 'orange' : 'grey'}; margin-right: 2px;"></span>`;
             }
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action p-3 mb-2 shadow-sm" style="display: block; clear: both; width: 100%;">
+            <div class="list-group-item list-group-item-action p-3 mb-2 border rounded shadow-sm bg-light">
                 <div class="d-flex w-100 justify-content-between align-items-center mb-1">
-                    <h6 class="mb-0"><strong>${comment.user}</strong></h6>
+                    <h6 class="mb-0 text-primary"><strong>${comment.user}</strong></h6>
                     <small class="text-muted">${comment.dateTime}</small>
                 </div>
-                <p class="mb-2 text-secondary small">${comment.description}</p>
+                <p class="mb-2 text-dark small">${comment.description}</p>
                 <div>${estrellas}</div>
             </div>`;
         });
     }
-    let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios") || document.getElementById("comments-list");
+    let contenedorComentarios = document.getElementById("productComments");
     if (contenedorComentarios) contenedorComentarios.innerHTML = htmlContentToAppend;
 }
 
-// 3. CARGA PRINCIPAL
+// 3. CARGA PRINCIPAL DE DATOS ASÍNCRONOS
 document.addEventListener("DOMContentLoaded", function(e) {
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
