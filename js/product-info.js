@@ -48,20 +48,30 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (Usa el ID proRelacionados de tu consola)
+    // CARGAR PRODUCTOS RELACIONADOS (Corregido con el formato exacto del array de JAP)
+    // En el JSON original, relacionados es una lista de números de ID, y los datos se sacan de otra variable global de productos.
+    // Si tu array ya trae los objetos, JAP usa 'imgSrc' (o 'image') y 'name'. Vamos a poner ambos por seguridad:
     if (productData.relatedProducts && productData.relatedProducts.length > 0) {
-        let relacionadosHTML = "";
-        productData.relatedProducts.forEach(rel => {
+        let relacionadosHTML = `<div class="row w-100">`; // Forzamos una fila de Bootstrap nueva
+        
+        productData.relatedProducts.forEach(relIndex => {
+            // Evaluamos si el dato viene como objeto directo o si mapea propiedades de JAP
+            let itemImg = relIndex.imgSrc || relIndex.image || relIndex.src || "";
+            let itemName = relIndex.name || relIndex.description || "Producto Relacionado";
+            let itemId = relIndex.id || relIndex;
+
             relacionadosHTML += `
-            <div class="col-lg-3 col-md-4 col-6 mb-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${rel.id}); window.location='product-info.html'">
+            <div class="col-md-4 col-sm-6 mb-4" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
                 <div class="card h-100 shadow-sm custom-card">
-                    <img class="img-fluid card-img-top" src="${rel.image}" alt="${rel.name}">
-                    <div class="card-body p-2">
-                        <p class="card-text font-weight-bold text-center small mb-0">${rel.name}</p>
+                    <img class="card-img-top img-fluid" src="${itemImg}" alt="${itemName}">
+                    <div class="card-body text-center p-2">
+                        <h6 class="card-title font-weight-bold mb-0">${itemName}</h6>
                     </div>
                 </div>
             </div>`;
         });
+        
+        relacionadosHTML += `</div>`;
         
         let contenedorRelacionados = document.getElementById("proRelacionados");
         if (contenedorRelacionados) {
@@ -90,9 +100,9 @@ function showProductInfo(productData) {
     }
 }
 
-// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS EN LISTA VERTICAL LIMPIA
+// 2. FUNCIÓN PARA DIBUJAR LOS COMENTARIOS
 function showComments(commentsArray) {
-    let htmlContentToAppend = "";
+    let htmlContentToAppend = `<div class="row w-100 mx-0">`; // Abrimos fila limpia
     
     commentsArray.forEach(comment => {
         let estrellas = "";
@@ -104,21 +114,21 @@ function showComments(commentsArray) {
             }
         }
 
-        // Cada comentario se encierra en una fila completa (col-12) para que no se pongan al lado del otro
+        // col-12 obliga a que ocupen TODO el ancho y vayan estrictamente uno abajo del otro
         htmlContentToAppend += `
-        <div class="row w-100 mx-0 mb-3" style="display: block; clear: both;">
-            <div class="col-12 px-0">
-                <div class="list-group-item list-group-item-action p-3 shadow-sm">
-                    <div class="d-flex w-100 justify-content-between align-items-center mb-1">
-                        <h6 class="mb-0"><strong>${comment.user}</strong></h6>
-                        <small class="text-muted">${comment.dateTime}</small>
-                    </div>
-                    <p class="mb-2 text-secondary small">${comment.description}</p>
-                    <div>${estrellas}</div>
+        <div class="col-12 mb-3">
+            <div class="list-group-item list-group-item-action p-3 shadow-sm">
+                <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                    <h6 class="mb-0"><strong>${comment.user}</strong></h6>
+                    <small class="text-muted">${comment.dateTime}</small>
                 </div>
+                <p class="mb-2 text-secondary small">${comment.description}</p>
+                <div>${estrellas}</div>
             </div>
         </div>`;
     });
+
+    htmlContentToAppend += `</div>`;
 
     let contenedorComentarios = document.getElementById("productComments") || document.getElementById("comentarios");
     if (contenedorComentarios) {
@@ -126,7 +136,7 @@ function showComments(commentsArray) {
     }
 }
 
-// 3. EVENTO PRINCIPAL: ADAPTADO PARA LAS LLAMADAS DEL CURSO
+// 3. EVENTO PRINCIPAL
 document.addEventListener("DOMContentLoaded", function(e) {
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
