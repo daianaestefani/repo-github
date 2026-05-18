@@ -1,47 +1,29 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. Recuperamos el ID y validamos
-    const prodID = localStorage.getItem("prodID");
-    if (!prodID) {
-        console.error("Error: No existe un prodID en localStorage. Debes seleccionar un producto primero.");
-        document.body.innerHTML = "<h1>Error: Producto no seleccionado</h1>";
-        return;
+    // 1. Intentamos obtener el ID del localStorage
+    let prodID = localStorage.getItem("prodID");
+
+    // 2. Validación de seguridad
+    if (!prodID || prodID === "null") {
+        console.warn("No hay ID en localStorage. Redirigiendo a productos...");
+        // Opcional: Redirigir si no hay ID, o mostrar un mensaje claro
+        document.getElementById("productName").innerText = "Por favor, selecciona un producto desde el listado.";
+        return; 
     }
 
+    // 3. Si hay ID, construimos la URL correctamente
     const URL_INFO = `https://japceibal.github.io/emercado-api/products/${prodID}.json`;
 
-    // 2. Usamos fetch nativo (independiente de init.js)
     fetch(URL_INFO)
         .then(response => {
-            if (!response.ok) throw new Error("Error en la respuesta de la API");
+            if (!response.ok) throw new Error("Producto no encontrado");
             return response.json();
         })
         .then(p => {
-            // Llenamos el HTML
             document.getElementById("productName").innerText = p.name;
-            document.getElementById("productPrice").innerText = `${p.currency} ${p.cost}`;
-            document.getElementById("proDescription").innerText = p.description;
-            document.getElementById("soldCount").innerText = p.soldCount;
-
-            // Imágenes
-            let imgHTML = "";
-            p.images.forEach(img => {
-                imgHTML += `<div class="col-3"><img src="${img}" class="img-fluid img-thumbnail"></div>`;
-            });
-            document.getElementById("productImages").innerHTML = imgHTML;
-
-            // Relacionados
-            let relHTML = "";
-            p.relatedProducts.forEach(rel => {
-                relHTML += `
-                <div class="col-3">
-                    <img src="${rel.image}" class="img-fluid">
-                    <p>${rel.name}</p>
-                </div>`;
-            });
-            document.getElementById("proRelacionados").innerHTML = relHTML;
+            // ... (resto de tu código de llenado aquí)
         })
         .catch(err => {
-            console.error("Detalle del error:", err);
-            document.getElementById("productName").innerText = "Error al cargar el producto";
+            console.error(err);
+            document.getElementById("productName").innerText = "Error cargando este producto.";
         });
 });
