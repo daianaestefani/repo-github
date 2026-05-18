@@ -1,6 +1,6 @@
 
 
-var productinfo = {}; //creo conjunto productInfo para acceder a la informacion de productos...
+var productinfo = {}; //creo conjunto productinfo para acceder a la informacion de productos...
 
 var coments ={}; //cargar los comentarios
 
@@ -64,11 +64,10 @@ document.addEventListener("DOMContentLoaded", function(e){
             proDescripHTML.innerHTML = productinfo.description; //descripcion/comentario
             soldCountHTML.innerHTML = productinfo.soldCount;    //cantidad
             prodCategHTML.innerHTML = productinfo.category;     //categoria          
-// --- CÓDIGO PARA EL BOTÓN DE AGREGAR AL CARRITO ---
-            // 1. Buscamos el contenedor donde queremos poner el botón y le metemos el diseño
-            let contenedorBoton = document.getElementById("proDescripHTML") || proDescripHTML;
-            if(contenedorBoton) {
-                contenedorBoton.innerHTML += `
+// --- CÓDIGO DIRECTO PARA EL BOTÓN DE AGREGAR AL CARRITO ---
+            // 1. Inyectamos el botón abajo de la descripción
+            if (prodDescripHTML) {
+                prodDescripHTML.innerHTML += `
                     <br><br>
                     <button id="btn-agregar-carrito" class="btn btn-success btn-lg mt-3">
                         <i class="fas fa-shopping-cart"></i> Agregar al carrito
@@ -76,39 +75,37 @@ document.addEventListener("DOMContentLoaded", function(e){
                 `;
             }
 
-            // 2. Le damos la función para que guarde el producto cuando hagan clic
-            setTimeout(() => {
-                let boton = document.getElementById("btn-agregar-carrito");
-                if (boton) {
-                    boton.addEventListener("click", function() {
-                        // Traemos lo que ya haya en el carrito o creamos una lista vacía
-                        let carrito = JSON.parse(localStorage.getItem("carritoCompras")) || [];
-                        
-                        // Armamos el objeto con los datos de tu variable 'productinfo'
-                        let productoParaAgregar = {
-                            id: productinfo.id || 1, // Usa el id del producto
-                            name: productinfo.name,
-                            count: 1, // Empieza con 1 cantidad
-                            unitCurrency: productinfo.currency,
-                            src: productinfo.images[0], // Toma la primera foto
-                            unitCost: productinfo.cost
-                        };
-                        
-                        // Si el producto ya está en el carrito, le suma 1 a la cantidad
-                        let existe = carrito.find(item => item.name === productoParaAgregar.name);
-                        if (existe) {
-                            existe.count++;
-                        } else {
-                            carrito.push(productoParaAgregar);
-                        }
-                        
-                        // Guardamos todo de vuelta en la memoria del navegador
-                        localStorage.setItem("carritoCompras", JSON.stringify(carrito));
-                        alert("¡Producto agregado al carrito con éxito!");
-                    });
-                }
-            }, 500);
-            // --------------------------------------------------
+            // 2. Le asignamos la función de guardar inmediatamente usando tus variables directas
+            let botonCarrito = document.getElementById("btn-agregar-carrito");
+            if (botonCarrito) {
+                botonCarrito.addEventListener("click", function() {
+                    // Traemos lo que ya haya en el carrito o creamos una lista vacía
+                    let carrito = JSON.parse(localStorage.getItem("carritoCompras")) || [];
+                    
+                    // Armamos el objeto usando la variable exacta que ya te funciona en pantalla
+                    let productoParaAgregar = {
+                        id: productInfo.id || 1,
+                        name: productInfo.name,
+                        count: 1,
+                        unitCurrency: productInfo.currency,
+                        src: productInfo.images && productInfo.images[0] ? productInfo.images[0] : "",
+                        unitCost: productInfo.cost
+                    };
+                    
+                    // Si el producto ya está, le suma 1 a la cantidad, si no, lo agrega
+                    let existe = carrito.find(item => item.name === productoParaAgregar.name);
+                    if (existe) {
+                        existe.count++;
+                    } else {
+                        carrito.push(productoParaAgregar);
+                    }
+                    
+                    // Guardamos en la memoria del navegador
+                    localStorage.setItem("carritoCompras", JSON.stringify(carrito));
+                    alert("¡" + productInfo.name + " agregado al carrito con éxito!");
+                });
+            }
+            // -----------------------------------------------------------
             showImGallery(productinfo.images);            //Muestro las imagenes en forma de galería            //showImGallery(productinfo.relatedProducts);
 
            //cargo los productos relacionados
