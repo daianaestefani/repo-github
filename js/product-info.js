@@ -25,28 +25,33 @@ function showProductInfo(productData) {
         `;
     }
 
-    // CARGAR IMÁGENES ILUSTRATIVAS (CARRUSEL BOOTSTRAP)
+    // CORRECCIÓN DEL CARRUSEL DE IMÁGENES
     if (productData.images && productData.images.length > 0) {
         let carouselHTML = "";
         productData.images.forEach((imgSrc, index) => {
+            // La primera imagen DEBE llevar la clase 'active' para que Bootstrap la muestre
             let activeClass = index === 0 ? "active" : "";
             carouselHTML += `
             <div class="carousel-item ${activeClass}">
-                <img src="${imgSrc}" class="d-block w-100" alt="Imagen del producto" style="max-height: 400px; object-fit: contain;">
+                <img src="${imgSrc}" class="d-block w-100 rounded" alt="Imagen del producto" style="max-height: 400px; object-fit: contain;">
             </div>`;
         });
+        
+        // El contenedor en tu HTML tiene el ID 'productImages'
         let contenedorCarrusel = document.getElementById("productImages");
-        if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
+        if (contenedorCarrusel) {
+            contenedorCarrusel.innerHTML = carouselHTML;
+        }
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (Validando todas las estructuras posibles de imágenes)
+    // CORRECCIÓN DE PRODUCTOS RELACIONADOS
     let relacionados = productData.relatedProducts || productData.RelatedProducts || [];
+    let relacionadosHTML = "";
+    
     if (relacionados.length > 0) {
-        let relacionadosHTML = "";
-        
         relacionados.forEach(rel => {
-            // Buscamos la imagen en cualquiera de los formatos que use el JSON (image, imgSrc o src)
-            let itemImg = rel.image || rel.imgSrc || rel.src || "";
+            // Validamos todas las variables posibles de imagen que manda la API de JAP
+            let itemImg = rel.image || rel.imgSrc || rel.src || "img/vehicle-placeholder.png";
             let itemName = rel.name || "Producto Relacionado";
             let itemId = rel.id || localStorage.getItem("prodID");
 
@@ -60,9 +65,13 @@ function showProductInfo(productData) {
                 </div>
             </div>`;
         });
-        
-        let contenedorRelacionados = document.getElementById("proRelacionados");
-        if (contenedorRelacionados) contenedorRelacionados.innerHTML = relacionadosHTML;
+    } else {
+        relacionadosHTML = `<p class="text-muted p-3">No hay productos relacionados disponibles.</p>`;
+    }
+    
+    let contenedorRelacionados = document.getElementById("proRelacionados");
+    if (contenedorRelacionados) {
+        contenedorRelacionados.innerHTML = relacionadosHTML;
     }
 
     // ACCIÓN DEL BOTÓN VERDE DEL CARRITO
@@ -90,7 +99,7 @@ function showProductInfo(productData) {
 function showComments(commentsArray) {
     let htmlContentToAppend = "";
     if (!commentsArray || commentsArray.length === 0) {
-        htmlContentToAppend = `<p class="text-muted p-3">No hay comentarios aún.</p>`;
+        htmlContentToAppend = `<p class="text-muted p-3">No hay opiniones para este producto aún.</p>`;
     } else {
         commentsArray.forEach(comment => {
             let estrellas = "";
@@ -110,7 +119,9 @@ function showComments(commentsArray) {
         });
     }
     let contenedorComentarios = document.getElementById("productComments");
-    if (contenedorComentarios) contenedorComentarios.innerHTML = htmlContentToAppend;
+    if (contenedorComentarios) {
+        contenedorComentarios.innerHTML = htmlContentToAppend;
+    }
 }
 
 // 3. CARGA PRINCIPAL DE DATOS ASÍNCRONOS
