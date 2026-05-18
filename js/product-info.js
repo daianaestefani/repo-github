@@ -39,20 +39,21 @@ function showProductInfo(productData) {
         if (contenedorCarrusel) contenedorCarrusel.innerHTML = carouselHTML;
     }
 
-    // CARGAR PRODUCTOS RELACIONADOS (En tarjetas horizontales independientes)
+    // CARGAR PRODUCTOS RELACIONADOS (Validando todas las estructuras posibles de imágenes)
     let relacionados = productData.relatedProducts || productData.RelatedProducts || [];
     if (relacionados.length > 0) {
         let relacionadosHTML = "";
         
         relacionados.forEach(rel => {
-            let itemImg = rel.imgSrc || rel.image || rel.src || "";
+            // Buscamos la imagen en cualquiera de los formatos que use el JSON (image, imgSrc o src)
+            let itemImg = rel.image || rel.imgSrc || rel.src || "";
             let itemName = rel.name || "Producto Relacionado";
             let itemId = rel.id || localStorage.getItem("prodID");
 
             relacionadosHTML += `
             <div class="col-6 col-md-3" style="cursor: pointer;" onclick="localStorage.setItem('prodID', ${itemId}); window.location='product-info.html'">
                 <div class="card h-100 shadow-sm custom-card text-center bg-light p-2">
-                    <img class="img-fluid card-img-top rounded mb-2" src="${itemImg}" alt="${itemName}" style="height: 120px; object-fit: cover;">
+                    <img class="img-fluid card-img-top rounded mb-2" src="${itemImg}" alt="${itemName}" style="height: 120px; object-fit: cover;" onerror="this.src='img/vehicle-placeholder.png'">
                     <div class="p-1">
                         <span class="d-block text-dark small font-weight-bold fw-bold">${itemName}</span>
                     </div>
