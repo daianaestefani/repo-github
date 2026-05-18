@@ -4,16 +4,15 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+  <title>eMercado - Información de Producto</title>
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/custom.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-light">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -26,82 +25,67 @@
           <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
           <li class="nav-item"><a class="nav-link" href="products.html">Productos</a></li>
           <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
-          <li class="nav-item" id="user-nav-item">
-            <a class="nav-link text-info" href="cart.html" id="user-display"><i class="fas fa-shopping-cart"></i> Mi Carrito</a>
-          </li>
+          <li class="nav-item"><a class="nav-link text-info" href="cart.html"><i class="fas fa-shopping-cart"></i> Mi Carrito</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <main class="pb-5 container">
-    <div class="text-center p-4">
-      <h2 id="productName" class="display-4 font-weight-bold text-dark">Cargando producto...</h2>
-      <p class="lead">Verás aquí la información detallada del artículo seleccionado.</p>
-      <hr>
-    </div>
-
-    <div class="row m-0 p-3 bg-white rounded shadow-sm">
-      <div class="col-md-7">
-        <h4 class="mb-3"><strong>Precio:</strong></h4>
-        <p class="lead text-success"><span id="productMoneda"></span> <span id="productPrice"></span></p>
-
-        <h4 class="mt-4 mb-2"><strong>Descripción:</strong></h4>
-        <p id="proDescripHTML" class="text-muted text-justify"></p>
-
-        <h4 class="mt-4"><strong>Categoría:</strong></h4>
-        <p id="prodCateg" class="badge bg-secondary p-2"></p>
-
-        <h4 class="mt-3"><strong>Cantidad de vendidos:</strong></h4>
-        <p id="soldCount" class="text-info font-weight-bold"></p>
-      </div>
-
-      <div class="col-md-5 mt-3 mt-md-0">
-        <div id="pImgCarousel" class="carousel slide border rounded shadow-sm" data-bs-ride="carousel">
-          <div class="carousel-inner" id="productImages">
-            </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#pImgCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#pImgCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-          </button>
+  <main class="container my-5">
+    <div class="bg-white p-4 rounded shadow-sm mb-4">
+      <div class="row">
+        <div class="col-md-7">
+          <h2 id="productName" class="fw-bold mb-3">Cargando producto...</h2>
+          <hr>
+          <p class="mb-1"><strong>Precio:</strong></p>
+          <h4 class="text-success mb-3"><span id="productMoneda"></span> <span id="productPrice"></span></h4>
+          
+          <p class="mb-1"><strong>Descripción:</strong></p>
+          <p id="proDescripHTML" class="text-muted"></p>
+          
+          <p class="mb-1 mt-3"><strong>Categoría:</strong></p>
+          <span id="prodCateg" class="badge bg-secondary p-2 mb-3"></span>
+          
+          <p class="mb-1"><strong>Cantidad de vendidos:</strong></p>
+          <p id="soldCount" class="fw-bold text-info"></p>
+        </div>
+        
+        <div class="col-md-5 mt-4 mt-md-0">
+          <div id="pImgCarousel" class="carousel slide border rounded shadow-sm bg-white" data-bs-ride="carousel">
+            <div class="carousel-inner" id="productImages">
+              </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#pImgCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#pImgCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-5 p-3 bg-white rounded shadow-sm">
-      <h3 class="mb-4 text-secondary border-bottom pb-2"><i class="fas fa-exchange-alt"></i> Productos Relacionados</h3>
-      <div class="row w-100 mx-0" id="proRelacionados">
+    <div class="bg-white p-4 rounded shadow-sm mb-4">
+      <h5 class="mb-3 text-muted border-bottom pb-2"><i class="fas fa-boxes"></i> Productos Relacionados</h5>
+      <div class="row g-3" id="proRelacionados">
         </div>
     </div>
 
-    <div class="mt-5 p-3 bg-white rounded shadow-sm">
-      <h3 class="mb-4 text-secondary border-bottom pb-2"><i class="far fa-comments"></i> Opiniones de compradores</h3>
-      <div class="list-group w-100 mx-0" id="productComments">
+    <div class="bg-white p-4 rounded shadow-sm">
+      <h5 class="mb-3 text-muted border-bottom pb-2"><i class="far fa-comments"></i> Opiniones de compradores</h5>
+      <div class="list-group" id="productComments">
         </div>
     </div>
   </main>
 
-  <footer class="text-muted text-small bg-light border-top p-3 text-center w-100">
+  <footer class="text-muted bg-white border-top p-3 text-center w-100 mt-5">
     <div class="container">
-      <p class="float-end"><a href="#">Volver arriba</a></p>
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
     </div>
   </footer>
 
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div><div></div><div></div><div></div>
-    </div>
-  </div>
-
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
-  
-  <script src="js/product-info.js?v=2.5"></script>
+  <script src="js/product-info.js?v=5.0"></script>
 </body>
-
 </html>
