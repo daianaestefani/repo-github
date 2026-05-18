@@ -1,92 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
+<h2 id="productName"></h2>
+<p>Precio: <span id="productMoneda"></span> <span id="productPrice"></span></p>
+<p id="proDescription"></p>
+<p id="soldCount"></p>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Información de Producto</title>
+<div id="productImages" class="row"></div>
+<div id="proRelacionados" class="row"></div>
+<div id="productComments" class="list-group"></div>
 
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-</head>
-
-<body class="bg-light">
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
-          <li class="nav-item"><a class="nav-link" href="products.html">Productos</a></li>
-          <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
-          <li class="nav-item"><a class="nav-link text-info" href="cart.html"><i class="fas fa-shopping-cart"></i> Mi Carrito</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container my-5">
-    <div class="bg-white p-4 rounded shadow-sm mb-4">
-      <div class="row">
-        <div class="col-md-7">
-          <h2 id="productName" class="fw-bold mb-3">Cargando producto...</h2>
-          <hr>
-          <p class="mb-1"><strong>Precio:</strong></p>
-          <h4 class="text-success mb-3"><span id="productMoneda"></span> <span id="productPrice"></span></h4>
-          
-          <p class="mb-1"><strong>Descripción:</strong></p>
-          <p id="proDescripHTML" class="text-muted"></p>
-          
-          <p class="mb-1 mt-3"><strong>Categoría:</strong></p>
-          <span id="prodCateg" class="badge bg-secondary p-2 mb-3"></span>
-          
-          <p class="mb-1"><strong>Cantidad de vendidos:</strong></p>
-          <p id="soldCount" class="fw-bold text-info"></p>
-        </div>
-        
-        <div class="col-md-5 mt-4 mt-md-0">
-          <div id="pImgCarousel" class="carousel slide border rounded shadow-sm bg-white" data-bs-ride="carousel">
-            <div class="carousel-inner" id="productImages">
-              </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#pImgCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#pImgCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-white p-4 rounded shadow-sm mb-4">
-      <h5 class="mb-3 text-muted border-bottom pb-2"><i class="fas fa-boxes"></i> Productos Relacionados</h5>
-      <div class="row g-3" id="proRelacionados">
-        </div>
-    </div>
-
-    <div class="bg-white p-4 rounded shadow-sm">
-      <h5 class="mb-3 text-muted border-bottom pb-2"><i class="far fa-comments"></i> Opiniones de compradores</h5>
-      <div class="list-group" id="productComments">
-        </div>
-    </div>
-  </main>
-
-  <footer class="text-muted bg-white border-top p-3 text-center w-100 mt-5">
-    <div class="container">
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
-    </div>
-  </footer>
-
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/product-info.js?v=6.0"></script>
-</body>
-</html>
+<script src="js/init.js"></script>
+<script src="js/product-info.js"></script>
