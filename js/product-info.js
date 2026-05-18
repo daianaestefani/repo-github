@@ -17,11 +17,12 @@ function showProductInfo(productInfo) {
     if (soldCountHTML) soldCountHTML.innerHTML = productInfo.soldCount;
     if (prodCategHTML) prodCategHTML.innerHTML = productInfo.category;
 
-    // --- AQUÍ SE INYECTA EL BOTÓN VERDE ---
-    if (proDescripHTML) {
-        proDescripHTML.innerHTML += `
-            <br><br>
-            <button id="btn-agregar-carrito" class="btn btn-success btn-lg mt-3">
+// --- AQUÍ SE INYECTA EL BOTÓN VERDE (Corregido) ---
+    let contenedorBoton = document.getElementById("productName");
+    if (contenedorBoton) {
+        contenedorBoton.innerHTML += `
+            <br>
+            <button id="btn-agregar-carrito" class="btn btn-success btn-lg mt-3" style="display: inline-block;">
                 <i class="fas fa-shopping-cart"></i> Agregar al carrito
             </button>
         `;
